@@ -1,0 +1,259 @@
+<section id="skills" class="skills">
+				<div class="skill-content">
+					<div class="section-heading text-center">
+						<h2>skills</h2>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="single-skill-content">
+									<div class="barWrapper">
+
+										<i style="font-size: 64px;" class="devicon-react-original-wordmark colored"></i>
+
+										  
+										<span class="progressText">adobe photoshop</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+												<div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
+													  
+												</div>
+											</div>
+											<h3>90%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+									<div class="barWrapper">
+										<span class="progressText">adobe illustrator</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+											   <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="10" aria-valuemax="100" style="">
+												    
+											   </div>
+											</div>
+											<h3>85%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+									<div class="barWrapper">
+										<span class="progressText">adobe after effects</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+											   <div class="progress-bar" role="progressbar" aria-valuenow="97" aria-valuemin="10" aria-valuemax="100" style="">
+												   
+											   </div>
+											</div>
+											<h3>97%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+									<div class="barWrapper">
+										<span class="progressText">sketch</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+											   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
+												    
+											   </div>
+											</div>
+											<h3>90%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="single-skill-content">
+									<div class="barWrapper">
+										<span class="progressText">html 5</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+												<div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
+													
+												</div>
+											</div>
+											<h3>90%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+									<div class="barWrapper">
+										<span class="progressText">css 3 animation</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+											   <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="10" aria-valuemax="100" style="">
+												    
+											   </div>
+											</div>
+											<h3>85%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+									<div class="barWrapper">
+										<span class="progressText">communication</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+											   <div class="progress-bar" role="progressbar" aria-valuenow="97" aria-valuemin="10" aria-valuemax="100" style="">
+												   
+											   </div>
+											</div>
+											<h3>97%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+									<div class="barWrapper">
+										<span class="progressText"> creativity</span>
+										<div class="single-progress-txt">
+											<div class="progress ">
+											   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
+												    
+											   </div>
+											</div>
+											<h3>90%</h3>	
+										</div>
+									</div><!-- /.barWrapper -->
+								</div>
+							</div>
+						</div><!-- /.row -->
+					</div>	<!-- /.container -->		
+				</div><!-- /.skill-content-->
+
+		</section>/.skills
+
+
+
+
+
+
+
+
+
+
+
+
+			<!--education start -->
+		<section id="education" class="education">
+			<div class="section-heading text-center">
+				<h2>education</h2>
+			</div>
+			<div class="container">
+				<div class="education-horizontal-timeline mx-auto">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="single-horizontal-timeline">
+								<div class="experience-time">
+									<h2>2018 - 2022</h2>
+									<h3>Bachelor <span>of </span> computer science</h3>
+								</div><!--/.experience-time-->
+								<div class="timeline-horizontal-border">
+									<i class="fa fa-circle" aria-hidden="true"></i>
+									<span class="single-timeline-horizontal"></span>
+								</div>
+								<div class="timeline">
+									<div class="timeline-content">
+										<h4 class="title">
+											Vellore Insitute of Technology, Vellore
+										</h4>
+										<h5>Vellore, India</h5>
+										<p class="description">
+										</p>
+									</div><!--/.timeline-content-->
+								</div><!--/.timeline-->
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="single-horizontal-timeline">
+								<div class="experience-time">
+									<h2>2022 - 2023</h2>
+									<h3>Master <span>of </span> computer science</h3>
+								</div><!--/.experience-time-->
+								<div class="timeline-horizontal-border">
+									<i class="fa fa-circle" aria-hidden="true"></i>
+									<span class="single-timeline-horizontal"></span>
+								</div>
+								<div class="timeline">
+									<div class="timeline-content">
+										<h4 class="title">
+											University of California Irvine 
+										</h4>
+										<h5>Irvine, USA</h5>
+										<p class="description">
+										</p>
+									</div><!--/.timeline-content-->
+								</div><!--/.timeline-->
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+		</section><!--/.education-->
+		<!--education end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!--profiles start -->
+			<section id="profiles" class="profiles">
+				<div class="profiles-details">
+					<div class="section-heading text-center">
+						<h2>profiles</h2>
+					</div>
+					<div class="container">
+						<div class="profiles-content">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="single-profile">
+										<div class="profile-txt">
+											<a href=""><i class="flaticon-themeforest"></i></a>
+											<div class="profile-icon-name">Resume</div>
+										</div>
+										<div class="single-profile-overlay">
+											<div class="profile-txt">
+												<a href=""><i class="flaticon-themeforest"></i></a>
+												<div class="profile-icon-name">Resume</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="single-profile">
+										<div class="profile-txt">
+											<a href=""><i class="flaticon-dribbble"></i></a>
+											<div class="profile-icon-name">LinkedIn</div>
+										</div>
+										<div class="single-profile-overlay">
+											<div class="profile-txt">
+												<a href=""><i class="flaticon-linkedin"></i></a>
+												<div class="profile-icon-name">LinkedIn</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-sm-4">
+									<div class="single-profile profile-no-border">
+										<div class="profile-txt">
+											<a href=""><i class="flaticon-github-logo"></i></a>
+											<div class="profile-icon-name">github</div>
+										</div>
+										<div class="single-profile-overlay">
+											<div class="profile-txt">
+												<a href=""><i class="flaticon-github-logo"></i></a>
+												<div class="profile-icon-name">github</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+	
+			</section><!--/.profiles-->
+			<!--profiles end -->
