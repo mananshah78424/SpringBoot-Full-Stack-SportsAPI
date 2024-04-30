@@ -1,0 +1,2389 @@
+{
+    "detected_products" : [            
+            {
+                "signature" : 100428,
+                "sig_name" : "Xprotect",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "version" : "2171",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100428,
+                                    "timestamp" : "1695274563",
+                                    "timing" : 5
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 3,
+                                    "timestamp" : "1695274563",
+                                    "signature" : 100428,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/System/Library/PrivateFrameworks/XprotectFramework.framework/Versions/A/XPCServices/",
+                                    "directories" : [
+                                            "/System/Library/PrivateFrameworks/XprotectFramework.framework/Versions/A/XPCServices/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/System/Library/PrivateFrameworks/XprotectFramework.framework/Versions/Current/XPCServices/XprotectService.xpc/Contents/MacOS/XprotectService",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100428,
+                                    "timestamp" : "1695274563",
+                                    "timing" : 1
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100428,
+                                    "timestamp" : "1695274563",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 3,
+                                    "timestamp" : "1695274563",
+                                    "signature" : 100428,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/System/Library/PrivateFrameworks/XprotectFramework.framework/Versions/Current/XPCServices/XprotectService.xpc/Contents/MacOS/XprotectService",
+                                                "status" : "signed"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetRealTimeProtectionState",
+                            "result" : {
+                                    "timing" : 19,
+                                    "timestamp" : "1695274563",
+                                    "signature" : 100428,
+                                    "enabled" : true,
+                                    "code" : 0,
+                                    "method" : 1000,
+                                    "details" : {
+                                            "antimalware" : true
+                                        }
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetDefinitionState",
+                            "result" : {
+                                    "timing" : 63,
+                                    "signature" : 100428,
+                                    "timestamp" : "1695274563",
+                                    "is_recent" : false,
+                                    "code" : 0,
+                                    "method" : 1001,
+                                    "definitions" : [                                            
+                                            {
+                                                "type" : "antimalware",
+                                                "version" : "111",
+                                                "source_time" : "1694841123",
+                                                "name" : "Xprotect",
+                                                "last_update" : "1694841123"
+                                            }
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 3,
+                                    "timestamp" : "1695274563",
+                                    "signature" : 100483,
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "version" : "1.80.0",
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/Users/mananshah/Downloads/"
+                                        ],
+                                    "main" : "/Users/mananshah/Downloads/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100483,
+                                    "timestamp" : "1695274563",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 1,
+                                    "timestamp" : "1695274563",
+                                    "signature" : 100483,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/Users/mananshah/Downloads/Visual Studio Code.app/Contents/MacOS/Electron"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274563",
+                                    "signature" : 100483,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [                                            
+                                            {
+                                                "status" : "signed",
+                                                "file" : "/Users/mananshah/Downloads/Visual Studio Code.app/Contents/MacOS/Electron"
+                                            }
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100483,
+                                    "timestamp" : "1695274563",
+                                    "timing" : 75
+                                },
+                            "method_name" : "IsAuthentic"
+                        }
+                    ],
+                "sig_name" : "Visual Studio Code",
+                "signature" : 100483
+            },            
+            {
+                "signature" : 100284,
+                "sig_name" : "Java",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "n/a",
+                                            "bitness" : 0
+                                        },
+                                    "version" : "15.0.3",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100284,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 16
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 5,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100284,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/System/Library/Frameworks/",
+                                    "directories" : [
+                                            "/System/Library/Frameworks/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/usr/bin/java",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100284,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100284,
+                                    "timestamp" : "1695274564",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 2,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100284,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/usr/bin/java",
+                                                "status" : "signed"
+                                            }
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100141,
+                "sig_name" : "Gatekeeper",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "version" : "13.0",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100141,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100141,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/System/Library/PreferencePanes/",
+                                    "directories" : [
+                                            "/System/Library/PreferencePanes/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/System/Applications/System Settings.app/Contents/MacOS/System Settings",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100141,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 1
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100141,
+                                    "timestamp" : "1695274564",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100141,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetRealTimeProtectionState",
+                            "result" : {
+                                    "timing" : 3,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100141,
+                                    "enabled" : true,
+                                    "code" : 0,
+                                    "method" : 1000,
+                                    "details" : {
+                                            "antivirus" : true,
+                                            "antispyware" : true
+                                        }
+                                }
+                        }
+                    ]
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 7,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100339,
+                                    "language" : {
+                                            "code" : "n/a",
+                                            "name" : "n/a"
+                                        },
+                                    "version" : "3.10.10",
+                                    "architecture" : {
+                                            "bitness" : 64,
+                                            "name" : "arm64"
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/Library/Frameworks/"
+                                        ],
+                                    "main" : "/Library/Frameworks/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100339,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 3
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100339,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/usr/local/bin/python3"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100339,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [                                            
+                                            {
+                                                "status" : "signed",
+                                                "file" : "/usr/local/bin/python3"
+                                            }
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100339,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 2
+                                },
+                            "method_name" : "IsAuthentic"
+                        }
+                    ],
+                "sig_name" : "Python",
+                "signature" : 100339
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100192,
+                                    "language" : {
+                                            "code" : "n/a",
+                                            "name" : "n/a"
+                                        },
+                                    "version" : "3.0",
+                                    "architecture" : {
+                                            "bitness" : 64,
+                                            "name" : "arm64"
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/System/Applications/"
+                                        ],
+                                    "main" : "/System/Applications/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100192,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 3,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100192,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/System/Applications/App Store.app/Contents/MacOS/App Store"
+                                            },                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/usr/sbin/softwareupdate"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100192,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [                                            
+                                            {
+                                                "status" : "signed",
+                                                "file" : "/usr/sbin/softwareupdate"
+                                            }
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100192,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 4
+                                },
+                            "method_name" : "IsAuthentic"
+                        },                        
+                        {
+                            "result" : {
+                                    "method" : 1012,
+                                    "code" : 0,
+                                    "enabled" : true,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100192,
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetAgentState"
+                        }
+                    ],
+                "sig_name" : "Software Update",
+                "signature" : 100192
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 18,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100395,
+                                    "language" : {
+                                            "code" : "n/a",
+                                            "name" : "n/a"
+                                        },
+                                    "version" : "18.14.2",
+                                    "architecture" : {
+                                            "bitness" : 0,
+                                            "name" : "n/a"
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/usr/local/bin/",
+                                            "/usr/local/include/node/"
+                                        ],
+                                    "main" : "/usr/local/bin/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100395,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 59,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100395,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/usr/local/bin/node"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100395,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [                                            
+                                            {
+                                                "status" : "signed",
+                                                "file" : "/usr/local/bin/node"
+                                            }
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100395,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 80
+                                },
+                            "method_name" : "IsAuthentic"
+                        }
+                    ],
+                "sig_name" : "Node.js LTS",
+                "signature" : 100395
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100145,
+                                    "language" : {
+                                            "code" : "n/a",
+                                            "name" : "n/a"
+                                        },
+                                    "version" : "13.0",
+                                    "architecture" : {
+                                            "bitness" : 64,
+                                            "name" : "arm64"
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/System/Library/PreferencePanes/"
+                                        ],
+                                    "main" : "/System/Library/PreferencePanes/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100145,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 3,
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100145,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/System/Library/PreferencePanes/Security.prefPane/Contents/MacOS/Security"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274564",
+                                    "signature" : 100145,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100145,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 0
+                                },
+                            "method_name" : "IsAuthentic"
+                        },                        
+                        {
+                            "result" : {
+                                    "encryption_active" : true,
+                                    "locations" : [                                            
+                                            {
+                                                "type" : "physical",
+                                                "state" : "encrypted",
+                                                "encryptable" : true,
+                                                "encryption_type" : "software",
+                                                "path" : "Macintosh HD"
+                                            },                                            
+                                            {
+                                                "type" : "physical",
+                                                "state" : "encrypted",
+                                                "encryptable" : true,
+                                                "encryption_type" : "software",
+                                                "path" : "Data"
+                                            }
+                                        ],
+                                    "fully_encrypted" : true,
+                                    "support_wde" : true,
+                                    "method" : 1009,
+                                    "code" : 0,
+                                    "signature" : 100145,
+                                    "timestamp" : "1695274564",
+                                    "timing" : 1126
+                                },
+                            "method_name" : "GetEncryptionState"
+                        }
+                    ],
+                "sig_name" : "FileVault",
+                "signature" : 100145
+            },            
+            {
+                "signature" : 100004,
+                "sig_name" : "Google Chrome",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "version" : "116.0.5845.187",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100004,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 4
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100004,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/Applications/",
+                                    "directories" : [
+                                            "/Applications/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            },                                            
+                                            {
+                                                "path" : "/Users/mananshah/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle/Contents/Resources/GoogleSoftwareUpdateAgent.app/Contents/MacOS/GoogleSoftwareUpdateAgent",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100004,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 1
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100004,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 17,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100004,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                                                "status" : "signed"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetAntiphishingState",
+                            "result" : {
+                                    "timing" : 26,
+                                    "signature" : 100004,
+                                    "timestamp" : "1695274565",
+                                    "enabled" : true,
+                                    "code" : 0,
+                                    "method" : 1010
+                                }
+                        },                        
+                        {
+                            "method_name" : "IsDefaultBrowser",
+                            "result" : {
+                                    "timing" : 3,
+                                    "code" : 0,
+                                    "method" : 1011,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100004,
+                                    "is_default" : true
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetPlugins",
+                            "result" : {
+                                    "timing" : 79,
+                                    "code" : 0,
+                                    "method" : 2000,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100004,
+                                    "plugins" : [                                            
+                                            {
+                                                "name" : "Google Docs Offline",
+                                                "type" : "extension",
+                                                "version" : "1.66.0"
+                                            },                                            
+                                            {
+                                                "version" : "4.5.0",
+                                                "type" : "extension",
+                                                "name" : "Netflix Party is now Teleparty"
+                                            },                                            
+                                            {
+                                                "name" : "Honey: Automatic Coupons & Rewards",
+                                                "type" : "extension",
+                                                "version" : "16.2.7"
+                                            },                                            
+                                            {
+                                                "name" : "Dark Theme for Google Chrome",
+                                                "type" : "extension",
+                                                "version" : "1.0.6.0"
+                                            },                                            
+                                            {
+                                                "version" : "3.0.0",
+                                                "type" : "extension",
+                                                "name" : "SQLite Manager for Google Chromeâ¢"
+                                            },                                            
+                                            {
+                                                "version" : "4.1.3",
+                                                "type" : "extension",
+                                                "name" : "Ahorcado"
+                                            },                                            
+                                            {
+                                                "version" : "1.0.0.6",
+                                                "type" : "extension",
+                                                "name" : "Chrome Web Store Payments"
+                                            },                                            
+                                            {
+                                                "version" : "1.4.07",
+                                                "type" : "extension",
+                                                "name" : "Web Paint"
+                                            }
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100254,
+                "sig_name" : "Messages",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "n/a",
+                                            "bitness" : 0
+                                        },
+                                    "version" : "14.0",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100254,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 4
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 1,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100254,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/System/Applications/",
+                                    "directories" : [
+                                            "/System/Applications/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/System/Applications/Messages.app/Contents/MacOS/Messages",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100254,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 1
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100254,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 9,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100254,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/System/Applications/Messages.app/Contents/MacOS/Messages",
+                                                "status" : "signed"
+                                            }
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100189,
+                "sig_name" : "Mac OS X Builtin Firewall",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "version" : "13.0",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100189,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100189,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/System/Library/PreferencePanes/",
+                                    "directories" : [
+                                            "/System/Library/PreferencePanes/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/System/Applications/System Settings.app/Contents/MacOS/System Settings",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100189,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 1
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100189,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100189,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetFirewallState",
+                            "result" : {
+                                    "timing" : 0,
+                                    "signature" : 100189,
+                                    "timestamp" : "1695274565",
+                                    "enabled" : false,
+                                    "code" : 0,
+                                    "method" : 1007
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100450,
+                "sig_name" : "Spotify",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "bitness" : 64,
+                                            "name" : "arm64"
+                                        },
+                                    "version" : "1.2.5.1006.g22820f93",
+                                    "language" : {
+                                            "code" : "n/a",
+                                            "name" : "n/a"
+                                        },
+                                    "signature" : 100450,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 4
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100450,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/Applications/",
+                                    "directories" : [
+                                            "/Applications/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/Applications/Spotify.app/Contents/MacOS/Spotify",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100450,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 7
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100450,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 93,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100450,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/Applications/Spotify.app/Contents/MacOS/Spotify",
+                                                "status" : "signed"
+                                            }
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100190,
+                "sig_name" : "Safari",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "version" : "16.1 (18614.2.9.1.12)",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100190,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 4
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 4,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100190,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/Applications/",
+                                    "directories" : [
+                                            "/Applications/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/Applications/Safari.app/Contents/MacOS/Safari",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100190,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 1
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100190,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 67,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100190,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/Applications/Safari.app/Contents/MacOS/Safari",
+                                                "status" : "signed"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetAntiphishingState",
+                            "result" : {
+                                    "timing" : 1,
+                                    "signature" : 100190,
+                                    "timestamp" : "1695274565",
+                                    "enabled" : true,
+                                    "code" : 0,
+                                    "method" : 1010
+                                }
+                        },                        
+                        {
+                            "method_name" : "IsDefaultBrowser",
+                            "result" : {
+                                    "timing" : 4,
+                                    "code" : 0,
+                                    "method" : 1011,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100190,
+                                    "is_default" : false
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetPlugins",
+                            "result" : {
+                                    "timing" : 147,
+                                    "code" : 0,
+                                    "method" : 2000,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100190,
+                                    "plugins" : [
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100424,
+                "sig_name" : "iCloud",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "n/a",
+                                            "bitness" : 0
+                                        },
+                                    "version" : "13.0",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100424,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 5
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 1,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100424,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/System/Library/PreferencePanes/",
+                                    "directories" : [
+                                            "/System/Library/PreferencePanes/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/System/Library/Preferences/ProtectedCloudStorage/Identities/com.apple.icloud.searchparty.plist",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100424,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100424,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100424,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100448,
+                "sig_name" : "Packet Filter",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "version" : "13.0",
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "signature" : 100448,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 1
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100448,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/sbin/",
+                                    "directories" : [
+                                            "/sbin/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/System/Library/LaunchDaemons/com.apple.pfctl.plist",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100448,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100448,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 1,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100448,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : false,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/System/Library/LaunchDaemons/com.apple.pfctl.plist",
+                                                "status" : "unsigned"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetFirewallState",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -22,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:208",
+                                                            "code" : -22,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_nutjob.cpp:294",
+                                                                        "code" : -22,
+                                                                        "message" : "Failed to get stack error from scripting engine"
+                                                                    },                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_scripting.cpp:346",
+                                                                        "code" : -22
+                                                                    },                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_utils_component_manager.cpp:243",
+                                                                        "code" : -22
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_ACCESS_DENIED",
+                                    "description" : "Defines an error when the access is denied for the invocation call requested.",
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100448,
+                                    "timing" : 0,
+                                    "code" : -22,
+                                    "method" : 1007
+                                }
+                        }
+                    ]
+            },            
+            {
+                "signature" : 100275,
+                "sig_name" : "QuickTime Player",
+                "methods" : [                        
+                        {
+                            "result" : {
+                                    "method" : 100,
+                                    "code" : 0,
+                                    "architecture" : {
+                                            "bitness" : 64,
+                                            "name" : "arm64"
+                                        },
+                                    "version" : "10.5",
+                                    "language" : {
+                                            "code" : "n/a",
+                                            "name" : "n/a"
+                                        },
+                                    "signature" : 100275,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 5
+                                },
+                            "method_name" : "GetVersion"
+                        },                        
+                        {
+                            "method_name" : "GetInstallationDirectories",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100275,
+                                    "code" : 0,
+                                    "method" : 104,
+                                    "main" : "/System/Applications/",
+                                    "directories" : [
+                                            "/System/Applications/"
+                                        ]
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "components" : [                                            
+                                            {
+                                                "path" : "/System/Applications/QuickTime Player.app/Contents/MacOS/QuickTime Player",
+                                                "version" : "N/A",
+                                                "description" : "N/A"
+                                            }
+                                        ],
+                                    "method" : 105,
+                                    "code" : 0,
+                                    "signature" : 100275,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 4
+                                },
+                            "method_name" : "GetComponents"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 106,
+                                    "code" : -11,
+                                    "timing" : 0,
+                                    "signature" : 100275,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "code" : -11,
+                                                                        "returned_at" : "wa_impl_common.cpp:919"
+                                                                    }
+                                                                ],
+                                                            "code" : -11,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -11
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetUninstallString"
+                        },                        
+                        {
+                            "method_name" : "IsAuthentic",
+                            "result" : {
+                                    "timing" : 5,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100275,
+                                    "code" : 0,
+                                    "method" : 108,
+                                    "authentic" : true,
+                                    "details" : [                                            
+                                            {
+                                                "file" : "/System/Applications/QuickTime Player.app/Contents/MacOS/QuickTime Player",
+                                                "status" : "signed"
+                                            }
+                                        ]
+                                }
+                        }
+                    ]
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 1,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100282,
+                                    "language" : {
+                                            "code" : "n/a",
+                                            "name" : "n/a"
+                                        },
+                                    "version" : "5.13.7",
+                                    "architecture" : {
+                                            "bitness" : 64,
+                                            "name" : "x86_64"
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/Applications/"
+                                        ],
+                                    "main" : "/Applications/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100282,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100282,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/Applications/zoom.us.app/Contents/MacOS/zoom.us"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100282,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [                                            
+                                            {
+                                                "status" : "signed",
+                                                "file" : "/Applications/zoom.us.app/Contents/MacOS/zoom.us"
+                                            }
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100282,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 52
+                                },
+                            "method_name" : "IsAuthentic"
+                        }
+                    ],
+                "sig_name" : "Zoom",
+                "signature" : 100282
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 5,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100191,
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "version" : "1.3",
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/System/Applications/"
+                                        ],
+                                    "main" : "/System/Applications/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100191,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 1,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100191,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/System/Applications/Time Machine.app/Contents/MacOS/Time Machine"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100191,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100191,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 0
+                                },
+                            "method_name" : "IsAuthentic"
+                        },                        
+                        {
+                            "error" : {
+                                    "method" : 1008,
+                                    "code" : -28,
+                                    "timing" : 0,
+                                    "signature" : 100191,
+                                    "timestamp" : "1695274565",
+                                    "description" : "Defines an error when an object is not found. This can be objects held internally, or objects on the endpoint, such as files, backup times, etc.",
+                                    "define" : "WAAPI_ERROR_NOT_FOUND",
+                                    "errors" : [                                            
+                                            {
+                                                "errors" : [                                                        
+                                                        {
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "message" : "File exists, but could not be opened.",
+                                                                        "code" : -22,
+                                                                        "returned_at" : "wa_utils_file.cpp:285"
+                                                                    },                                                                    
+                                                                    {
+                                                                        "code" : -22,
+                                                                        "returned_at" : "wa_utils_file.cpp:231"
+                                                                    },                                                                    
+                                                                    {
+                                                                        "code" : -22,
+                                                                        "returned_at" : "wa_squirrel_utils.h:188"
+                                                                    },                                                                    
+                                                                    {
+                                                                        "message" : "Failed to get stack error from scripting engine",
+                                                                        "code" : -28,
+                                                                        "returned_at" : "wa_nutjob.cpp:294"
+                                                                    },                                                                    
+                                                                    {
+                                                                        "code" : -28,
+                                                                        "returned_at" : "wa_impl_scripting.cpp:346"
+                                                                    },                                                                    
+                                                                    {
+                                                                        "code" : -28,
+                                                                        "returned_at" : "wa_utils_component_manager.cpp:243"
+                                                                    }
+                                                                ],
+                                                            "code" : -28,
+                                                            "returned_at" : "wa_api_dispatcher.cpp:208"
+                                                        }
+                                                    ],
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "code" : -28
+                                            }
+                                        ]
+                                },
+                            "method_name" : "GetBackupState"
+                        }
+                    ],
+                "sig_name" : "Time Machine",
+                "signature" : 100191
+            },            
+            {
+                "methods" : [                        
+                        {
+                            "method_name" : "GetVersion",
+                            "result" : {
+                                    "timing" : 4,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100218,
+                                    "language" : {
+                                            "name" : "n/a",
+                                            "code" : "n/a"
+                                        },
+                                    "version" : "4.10.07061",
+                                    "architecture" : {
+                                            "name" : "arm64",
+                                            "bitness" : 64
+                                        },
+                                    "code" : 0,
+                                    "method" : 100
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "directories" : [
+                                            "/Applications/Cisco/"
+                                        ],
+                                    "main" : "/Applications/Cisco/",
+                                    "method" : 104,
+                                    "code" : 0,
+                                    "signature" : 100218,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 0
+                                },
+                            "method_name" : "GetInstallationDirectories"
+                        },                        
+                        {
+                            "method_name" : "GetComponents",
+                            "result" : {
+                                    "timing" : 0,
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100218,
+                                    "code" : 0,
+                                    "method" : 105,
+                                    "components" : [                                            
+                                            {
+                                                "description" : "N/A",
+                                                "version" : "N/A",
+                                                "path" : "/Applications/Cisco/Cisco AnyConnect Secure Mobility Client.app/Contents/MacOS/Cisco AnyConnect Secure Mobility Client"
+                                            }
+                                        ]
+                                }
+                        },                        
+                        {
+                            "method_name" : "GetUninstallString",
+                            "error" : {
+                                    "errors" : [                                            
+                                            {
+                                                "code" : -11,
+                                                "method" : "dispatcher.dispatch( wjIn, wjOut )",
+                                                "called_at" : "wa_api.cpp:1201",
+                                                "errors" : [                                                        
+                                                        {
+                                                            "returned_at" : "wa_api_dispatcher.cpp:219",
+                                                            "code" : -11,
+                                                            "errors" : [                                                                    
+                                                                    {
+                                                                        "returned_at" : "wa_impl_common.cpp:919",
+                                                                        "code" : -11
+                                                                    }
+                                                                ]
+                                                        }
+                                                    ]
+                                            }
+                                        ],
+                                    "define" : "WAAPI_ERROR_COMPONENT_METHOD_NOT_SUPPORTED",
+                                    "description" : "Defines an error when a method call was made on a component that does not support it.",
+                                    "timestamp" : "1695274565",
+                                    "signature" : 100218,
+                                    "timing" : 0,
+                                    "code" : -11,
+                                    "method" : 106
+                                }
+                        },                        
+                        {
+                            "result" : {
+                                    "details" : [                                            
+                                            {
+                                                "status" : "signed",
+                                                "file" : "/Applications/Cisco/Cisco AnyConnect Secure Mobility Client.app/Contents/MacOS/Cisco AnyConnect Secure Mobility Client"
+                                            }
+                                        ],
+                                    "authentic" : true,
+                                    "method" : 108,
+                                    "code" : 0,
+                                    "signature" : 100218,
+                                    "timestamp" : "1695274565",
+                                    "timing" : 11
+                                },
+                            "method_name" : "IsAuthentic"
+                        }
+                    ],
+                "sig_name" : "Cisco AnyConnect Secure Mobility Client",
+                "signature" : 100218
+            }
+        ],
+    "system_info" : {
+            "device_identity" : "BACC33AF1DEE5DB8B68CCEA1F8FA3754",
+            "domain" : ".",
+            "protected" : true,
+            "protected_info" : "2",
+            "username" : "mananshah",
+            "os" : {
+                    "name" : "macOS Ventura",
+                    "version" : "13.0",
+                    "os_type" : 4,
+                    "computer_type" : "unknown",
+                    "architecture" : "64-bit",
+                    "os_language" : "English (United States)"
+                }
+        },
+    "config" : {
+            "configs" : [                    
+                    {
+                        "version" : "4.3.2995.0",
+                        "code" : 2,
+                        "module" : "libwacollector.dylib",
+                        "timing" : 1
+                    },                    
+                    {
+                        "version" : "4.3.2995.0",
+                        "code" : 0,
+                        "module" : "libwalocal.dylib",
+                        "timing" : 0
+                    },                    
+                    {
+                        "uri_prefix" : "api",
+                        "caching" : true,
+                        "database_location" : "/opt/cisco/hostscan/lib64/",
+                        "online_mode" : false,
+                        "target_metascan_server" : "",
+                        "silent_mode" : false,
+                        "server_name" : "gearssdk.opswat.com",
+                        "proxy_type" : "ProxyReg",
+                        "proxy_port" : 0,
+                        "code" : 0,
+                        "server_port" : 443,
+                        "enable_pretty_print" : true,
+                        "server_timeout" : 30,
+                        "utils_version" : "4.3.2995.0",
+                        "low_resource_setup" : false,
+                        "cache_lifetime" : -1,
+                        "json_io_validation" : false,
+                        "version" : "4.3.2995.0",
+                        "timing" : 3,
+                        "license_update" : false,
+                        "console_debug" : false,
+                        "service_mode" : false,
+                        "proxy_name" : "",
+                        "secure_cache" : false,
+                        "mockup_mode" : false,
+                        "async_api_mode" : 2,
+                        "restrict_bundle_search" : "",
+                        "proxy_autologon_policy" : "medium",
+                        "support_nextgen_tool" : false,
+                        "component_location" : "/opt/cisco/hostscan/lib64/",
+                        "deployment_location" : "/opt/cisco/hostscan/lib64/",
+                        "license_location" : "/opt/cisco/hostscan/lib64/",
+                        "cache_location" : "/opt/cisco/hostscan/lib64/",
+                        "resource_version" : "4.3.2995.0",
+                        "module" : "libwaapi.dylib",
+                        "api_location" : "/opt/cisco/hostscan/lib64/libwaapi.dylib",
+                        "release_date" : "2023.04.06.0049"
+                    }
+                ],
+            "errors" : [                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwadlp.dylib",
+                        "code" : -7
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwanetscan.dylib",
+                        "code" : -8
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwaaddon.dylib",
+                        "code" : -9
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwaadbrowser.dylib",
+                        "code" : -8
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwaremoval.dylib",
+                        "code" : -9
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwadriver.dylib",
+                        "code" : -9
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwavmodapi.dylib",
+                        "code" : -8
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwadeviceinfo.dylib",
+                        "code" : -9
+                    },                    
+                    {
+                        "timing" : 0,
+                        "module" : "libwainfection.dylib",
+                        "code" : -8
+                    }
+                ]
+        }
+}
