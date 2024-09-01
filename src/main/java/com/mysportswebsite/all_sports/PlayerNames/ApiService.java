@@ -1,10 +1,7 @@
 package com.mysportswebsite.all_sports.PlayerNames;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysportswebsite.all_sports.PlayerNames.Classes.ApiResponse;
-import com.mysportswebsite.all_sports.PlayerNames.Classes.Player;
-import com.mysportswebsite.all_sports.PlayerNames.Classes.PlayerAndStatisticsResponseItem;
-import com.mysportswebsite.all_sports.PlayerNames.Classes.PlayerStatistics;
+import com.mysportswebsite.all_sports.PlayerNames.Classes.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,8 +22,8 @@ public class ApiService {
         this.objectMapper = objectMapper;
     }
 
-    public ApiResponse fetchPlayerNamesAndStatistics(){
-        String url="https://v3.football.api-sports.io/players?league=39&season=2024";
+    public ApiResponse fetchPlayerNamesAndStatistics(int league, int season, int page){
+        String url=String.format("https://v3.football.api-sports.io/players?league=%d&&season=%d&page=%d", league,season,page);
         String apiKey="cb63e8e6c573b3b80dc3501a1b90740c";
         HttpHeaders headers=new HttpHeaders();
         headers.set("x-apisports-key", apiKey);
@@ -42,12 +39,41 @@ public class ApiService {
         }
     }
 
-    public List<PlayerAndStatisticsResponseItem> processPlayerAndStatistics(){
-        ApiResponse apiResponse=fetchPlayerNamesAndStatistics();
+    public List<PlayerAndStatisticsResponseItem> getAllPlayers(int league, int season){
+        return fetchAllPlayers(league,season,1,new ArrayList<>());
+    }
+
+    public List<PlayerAndStatisticsResponseItem> fetchAllPlayers(int league, int season, int page, List<PlayerAndStatisticsResponseItem> allPlayers ){
+        ApiResponse apiResponse=fetchPlayerNamesAndStatistics(league,season,page);
         List<PlayerAndStatisticsResponseItem> results=new ArrayList<>();
         if (apiResponse!=null){
             List<PlayerAndStatisticsResponseItem> responseItems=apiResponse.getResponse();
-            for(PlayerAndStatisticsResponseItem item: responseItems){
+            if(responseItems!=null){
+                allPlayers.addAll(responseItems);
+                Paging paging=apiResponse.getPaging();
+                System.out.println(paging.getTotal());
+                if(paging!=null && paging.getCurrent()<paging.getTotal()){
+                    if(paging.getCurrent()%2==1){
+                        try{
+                            Thread.sleep(7000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    System.out.println("Done with page: "+ paging.getCurrent());
+                    return fetchAllPlayers(league,season,paging.getCurrent()+1,allPlayers);
+                }
+            }
+
+
+        }
+        return allPlayers;
+    }
+
+    public List<PlayerAndStatisticsResponseItem> processPlayerStatistics(List<PlayerAndStatisticsResponseItem> allPlayers){
+        List<PlayerAndStatisticsResponseItem> results=new ArrayList<>();
+        for (PlayerAndStatisticsResponseItem item: allPlayers){
                 Player player=item.getPlayer();
                 List<PlayerStatistics> playerStatisticsList = new ArrayList<>();
                 for (PlayerStatistics stats : item.getStatistics()) {
@@ -57,15 +83,10 @@ public class ApiService {
                     playerStatistics.setLeague(stats.getLeague());
                     playerStatisticsList.add(playerStatistics);
                 }
-                System.out.println(playerStatisticsList);
                 results.add(new PlayerAndStatisticsResponseItem(player,playerStatisticsList));
-            }
-            return results;
 
         }
+        return results;
 
-        else{
-            return null;
-        }
     }
 }

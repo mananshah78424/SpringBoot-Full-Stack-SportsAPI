@@ -6,7 +6,7 @@ import java.util.List;
 public class ApiResponse {
     private String get;
     private Parameters parameters;
-    private List<Object> errors;
+    private Object errors;
     private int results;
     private com.mysportswebsite.all_sports.PlayerNames.Classes.Paging paging;
     private List<PlayerAndStatisticsResponseItem> response;
@@ -30,11 +30,11 @@ public class ApiResponse {
         this.parameters = parameters;
     }
 
-    public List<Object> getErrors() {
+    public Object getErrors() {
         return errors;
     }
 
-    public void setErrors(List<Object> errors) {
+    public void setErrors(Object errors) {
         this.errors = errors;
     }
 
