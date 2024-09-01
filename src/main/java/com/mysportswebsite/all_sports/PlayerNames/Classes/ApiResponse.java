@@ -9,7 +9,7 @@ public class ApiResponse {
     private List<Object> errors;
     private int results;
     private com.mysportswebsite.all_sports.PlayerNames.Classes.Paging paging;
-    private List<PlayerAndStatistics> response;
+    private List<PlayerAndStatisticsResponseItem> response;
 
     public ApiResponse() {
     }
@@ -54,11 +54,11 @@ public class ApiResponse {
         this.paging = paging;
     }
 
-    public List<PlayerAndStatistics> getResponse() {
+    public List<PlayerAndStatisticsResponseItem> getResponse() {
         return response;
     }
 
-    public void setResponse(List<PlayerAndStatistics> response) {
+    public void setResponse(List<PlayerAndStatisticsResponseItem> response) {
         this.response = response;
     }
 }

@@ -28,7 +28,7 @@ public class PlayerStatistics {
         this.league = league;
     }
 
-    public  static class Team{
+    public static class Team{
         private int id;
         private String name;
         private String logo;

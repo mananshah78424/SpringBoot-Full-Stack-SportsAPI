@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("teamService")
 public class ApiService {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
