@@ -1,4 +1,4 @@
-import { MainStandingsResponse } from "@/types/soccer/standingTypes";
+import { MainStandingsResponse } from "@/src/types/soccer/standingTypes";
 import axios from "axios";
 const API_BASE_URL = process.env.NEXT_PUBLIC_SOCCER_API;
 console.log(API_BASE_URL);

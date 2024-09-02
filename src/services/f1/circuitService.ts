@@ -1,4 +1,4 @@
-import { MainCircuitResponse } from "@/types/f1/circuitTypes";
+import { MainCircuitResponse } from "@/src/types/f1/circuitTypes";
 import axios from "axios";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_F1_API;

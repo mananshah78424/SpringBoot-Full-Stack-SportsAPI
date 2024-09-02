@@ -1,5 +1,5 @@
-import { fetchCircuits } from "@/services/f1/circuitService";
-import { Circuit } from "@/types/f1/circuitTypes";
+import { fetchCircuits } from "@/src/services/f1/circuitService";
+import { Circuit } from "@/src/types/f1/circuitTypes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";

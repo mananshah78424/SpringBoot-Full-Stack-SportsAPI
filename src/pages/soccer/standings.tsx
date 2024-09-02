@@ -1,5 +1,5 @@
-import { fetchStandings } from "@/services/soccer/standingsService";
-import { LeagueResponse } from "@/types/soccer/standingTypes";
+import { fetchStandings } from "@/src/services/soccer/standingsService";
+import { LeagueResponse } from "@/src/types/soccer/standingTypes";
 import { useEffect, useState } from "react";
 
 const StandingsPage = () => {
