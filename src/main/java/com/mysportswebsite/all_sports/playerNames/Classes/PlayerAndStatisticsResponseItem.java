@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.PlayerNames.Classes;
+package com.mysportswebsite.all_sports.playerNames.Classes;
 
 import java.util.List;
 

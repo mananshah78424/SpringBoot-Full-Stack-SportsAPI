@@ -1,6 +1,6 @@
-package com.mysportswebsite.all_sports.PlayerNames;
+package com.mysportswebsite.all_sports.playerNames;
 
-import com.mysportswebsite.all_sports.PlayerNames.Classes.PlayerAndStatisticsResponseItem;
+import com.mysportswebsite.all_sports.playerNames.Classes.PlayerAndStatisticsResponseItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +10,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="api/v1")
-public class ApiController {
+public class PlayersController {
 
-    private final ApiService apiService;
+    private final PlayersService apiService;
 
     @Autowired
-    public ApiController(ApiService apiService) {
+    public PlayersController(PlayersService apiService) {
         this.apiService = apiService;
     }
 

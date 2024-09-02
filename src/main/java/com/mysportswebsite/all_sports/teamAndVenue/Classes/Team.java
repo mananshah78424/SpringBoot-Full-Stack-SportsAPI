@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.TeamAndVenue.Classes;
+package com.mysportswebsite.all_sports.teamAndVenue.Classes;
 
 public class Team {
     private int id;
@@ -48,6 +48,17 @@ public class Team {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", founded=" + founded +
+                ", logo='" + logo + '\'' +
+                '}';
     }
 }
 

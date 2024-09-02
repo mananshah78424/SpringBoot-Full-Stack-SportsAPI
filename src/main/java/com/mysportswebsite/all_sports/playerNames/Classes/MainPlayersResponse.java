@@ -1,17 +1,17 @@
-package com.mysportswebsite.all_sports.PlayerNames.Classes;
+package com.mysportswebsite.all_sports.playerNames.Classes;
 
 
 import java.util.List;
 
-public class ApiResponse {
+public class MainPlayersResponse {
     private String get;
     private Parameters parameters;
     private Object errors;
     private int results;
-    private com.mysportswebsite.all_sports.PlayerNames.Classes.Paging paging;
+    private com.mysportswebsite.all_sports.playerNames.Classes.Paging paging;
     private List<PlayerAndStatisticsResponseItem> response;
 
-    public ApiResponse() {
+    public MainPlayersResponse() {
     }
 
     public String getGet() {

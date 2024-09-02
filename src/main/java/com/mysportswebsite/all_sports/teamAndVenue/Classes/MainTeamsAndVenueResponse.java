@@ -1,9 +1,9 @@
-package com.mysportswebsite.all_sports.TeamAndVenue.Classes;
+package com.mysportswebsite.all_sports.teamAndVenue.Classes;
 
 
 import java.util.List;
 
-public class ApiResponse {
+public class MainTeamsAndVenueResponse {
     private String get;
     private Parameters parameters;
     private List<Object> errors;
@@ -11,7 +11,7 @@ public class ApiResponse {
     private Paging paging;
     private List<TeamsAndVenuesResponseItem> response;
 
-    public ApiResponse() {
+    public MainTeamsAndVenueResponse() {
     }
 
     public String getGet() {
@@ -60,6 +60,18 @@ public class ApiResponse {
 
     public void setResponse(List<TeamsAndVenuesResponseItem> response) {
         this.response = response;
+    }
+
+    @Override
+    public String toString() {
+        return "MainTeamsAndVenueResponse{" +
+                "get='" + get + '\'' +
+                ", parameters=" + parameters +
+                ", errors=" + errors +
+                ", results=" + results +
+                ", paging=" + paging +
+                ", response=" + response +
+                '}';
     }
 }
 

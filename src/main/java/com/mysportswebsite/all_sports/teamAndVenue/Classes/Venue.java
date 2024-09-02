@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.TeamAndVenue.Classes;
+package com.mysportswebsite.all_sports.teamAndVenue.Classes;
 
 public class Venue {
     private int id;
@@ -66,5 +66,18 @@ public class Venue {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Venue{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", capacity=" + capacity +
+                ", surface='" + surface + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

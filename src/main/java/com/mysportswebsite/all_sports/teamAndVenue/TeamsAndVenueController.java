@@ -1,6 +1,6 @@
-package com.mysportswebsite.all_sports.TeamAndVenue;
+package com.mysportswebsite.all_sports.teamAndVenue;
 
-import com.mysportswebsite.all_sports.TeamAndVenue.Classes.TeamsAndVenuesResponseItem;
+import com.mysportswebsite.all_sports.teamAndVenue.Classes.TeamsAndVenuesResponseItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +12,11 @@ import java.util.List;
 @Controller("teamController")
 @RestController
 @RequestMapping(path="/api/v1")
-public class ApiController {
-    private final ApiService apiService;
+public class TeamsAndVenueController {
+    private final TeamsAndVenueService apiService;
 
     @Autowired
-    public ApiController(ApiService apiService) {
+    public TeamsAndVenueController(TeamsAndVenueService apiService) {
         this.apiService = apiService;
     }
 

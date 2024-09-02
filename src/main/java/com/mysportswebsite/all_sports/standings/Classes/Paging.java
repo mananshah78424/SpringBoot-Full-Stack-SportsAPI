@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.TeamAndVenue.Classes;
+package com.mysportswebsite.all_sports.standings.Classes;
 
 public class Paging {
     private int current;
@@ -21,5 +21,13 @@ public class Paging {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Paging{" +
+                "current=" + current +
+                ", total=" + total +
+                '}';
     }
 }

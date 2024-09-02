@@ -1,7 +1,7 @@
-package com.mysportswebsite.all_sports.PlayerNames;
+package com.mysportswebsite.all_sports.playerNames;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysportswebsite.all_sports.PlayerNames.Classes.*;
+import com.mysportswebsite.all_sports.playerNames.Classes.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,16 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("playerService")
-public class ApiService {
+public class PlayersService {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 
-    public ApiService(RestTemplate restTemplate, ObjectMapper objectMapper) {
+    public PlayersService(RestTemplate restTemplate, ObjectMapper objectMapper) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
     }
 
-    public ApiResponse fetchPlayerNamesAndStatistics(int league, int season, int page){
+    public MainPlayersResponse fetchPlayerNamesAndStatistics(int league, int season, int page){
         String url=String.format("https://v3.football.api-sports.io/players?league=%d&&season=%d&page=%d", league,season,page);
         String apiKey="cb63e8e6c573b3b80dc3501a1b90740c";
         HttpHeaders headers=new HttpHeaders();
@@ -31,7 +31,7 @@ public class ApiService {
         try{
             ResponseEntity<String> response=restTemplate.exchange(url, HttpMethod.GET,entity,String.class);
             // The readValue method is used to convert JSON data into a Java object.
-            return objectMapper.readValue(response.getBody(),ApiResponse.class);
+            return objectMapper.readValue(response.getBody(), MainPlayersResponse.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ public class ApiService {
     }
 
     public List<PlayerAndStatisticsResponseItem> fetchAllPlayers(int league, int season, int page, List<PlayerAndStatisticsResponseItem> allPlayers ){
-        ApiResponse apiResponse=fetchPlayerNamesAndStatistics(league,season,page);
+        MainPlayersResponse apiResponse=fetchPlayerNamesAndStatistics(league,season,page);
         List<PlayerAndStatisticsResponseItem> results=new ArrayList<>();
         if (apiResponse!=null){
             List<PlayerAndStatisticsResponseItem> responseItems=apiResponse.getResponse();

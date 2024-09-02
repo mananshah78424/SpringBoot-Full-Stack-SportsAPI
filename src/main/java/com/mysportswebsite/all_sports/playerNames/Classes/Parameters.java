@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.PlayerNames.Classes;
+package com.mysportswebsite.all_sports.playerNames.Classes;
 
 public class Parameters {
     private int league;
@@ -21,5 +21,13 @@ public class Parameters {
 
     public void setSeasons(int seasons) {
         this.seasons = seasons;
+    }
+
+    @Override
+    public String toString() {
+        return "Parameters{" +
+                "league=" + league +
+                ", seasons=" + seasons +
+                '}';
     }
 }

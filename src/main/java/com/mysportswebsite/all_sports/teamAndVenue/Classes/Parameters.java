@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.TeamAndVenue.Classes;
+package com.mysportswebsite.all_sports.teamAndVenue.Classes;
 
 public class Parameters {
     private int league;

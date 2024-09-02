@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.TeamAndVenue.Classes;
+package com.mysportswebsite.all_sports.teamAndVenue.Classes;
 
 public class TeamsAndVenuesResponseItem {
     private Team team;
@@ -23,5 +23,13 @@ public class TeamsAndVenuesResponseItem {
 
     public void setVenue(Venue venue) {
         this.venue = venue;
+    }
+
+    @Override
+    public String toString() {
+        return "TeamsAndVenuesResponseItem{" +
+                "team=" + team +
+                ", venue=" + venue +
+                '}';
     }
 }
