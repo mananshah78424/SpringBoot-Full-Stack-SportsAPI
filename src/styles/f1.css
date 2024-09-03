@@ -1,0 +1,32 @@
+.f1-nav-primary {
+  background: #e10600;
+  overflow: auto;
+  line-height: normal;
+}
+
+.f1-nav-width {
+  max-width: 1320px;
+  margin: auto;
+}
+
+.f1-logo {
+}
+.f1-primary-links {
+}
+
+.f1-option-bar {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 0.625rem;
+  padding-left: 0.625rem;
+}
+
+.p-normal {
+  padding: 1.25rem;
+}
+
+.f1-ranking-option {
+  gap: 0.125rem;
+  overflow-y: auto;
+  max-height: 7.5em;
+}

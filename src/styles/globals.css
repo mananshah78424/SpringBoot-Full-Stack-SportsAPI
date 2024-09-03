@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  overscroll-behavior: none;
+}
+
+@font-face {
+  font-family: AtomicFormulaOne;
+  src: url(/mysports/src/styles/assets/media/1f75a4dd429d77b6-s.p.woff2)
+    format("woff2");
+  font-display: swap;
+  font-weight: 700; /* Adjust this as needed */
+  font-style: bold; /* Adjust this as needed */
+}
+
+.font-formulaOne {
+  font-family: AtomicFormulaOne; /* Fallback fonts */
+  font-size: 24px; /* Increase font size */
+  letter-spacing: 2px; /* Add gap between letters */
+}

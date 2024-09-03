@@ -1,11 +1,14 @@
 import React from "react";
-import Sidebar from "./Sidebar";
+import "../styles/f1.css";
+import F1Navbar from "./f1Navbar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex">
-      <Sidebar />
+    <>
+      <F1Navbar></F1Navbar>
       <div>{children}</div>
-    </div>
+    </>
   );
-}
+};
+
+export default Layout;
