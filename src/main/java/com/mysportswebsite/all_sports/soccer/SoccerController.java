@@ -2,6 +2,7 @@ package com.mysportswebsite.all_sports.soccer;
 
 
 import com.mysportswebsite.all_sports.f1.Classes.TeamResponse;
+import com.mysportswebsite.all_sports.soccer.Classes.FixtureResponse;
 import com.mysportswebsite.all_sports.soccer.Classes.StandingResponse;
 import com.mysportswebsite.all_sports.soccer.Classes.TeamStatisticsResponse;
 import com.mysportswebsite.all_sports.soccer.Classes.TeamsResponse;
@@ -59,5 +60,28 @@ public class SoccerController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Team you entered could not be found!");
         }
 
+    }
+
+
+    // Fixtures
+    @GetMapping("/fixtures")
+    public FixtureResponse getFixtures(
+            @RequestParam(value = "season", required = false) Integer season,
+            @RequestParam(value = "league", required = false) Integer league,
+            @RequestParam(value = "live", required = false) String live,
+            @RequestParam(value = "date", required = false) String date,
+            @RequestParam(value = "team", required = false) String team,
+            @RequestParam(value = "round", required = false) String round,
+            @RequestParam(value = "timezone", required = false) String timezone
+    ) {
+        season=(season!=null)? season : 2024;
+        league=(league!=null)? league:39;
+        Integer teamID = null;
+        Map<String,Integer> teamMap= soccerService.fetchIdsAndTeamName(season,league);
+
+        if(team!=null){
+            teamID=teamMap.get(team);
+        }
+        return soccerService.getFixtures(season, league, live, date, teamID, round, timezone);
     }
 }

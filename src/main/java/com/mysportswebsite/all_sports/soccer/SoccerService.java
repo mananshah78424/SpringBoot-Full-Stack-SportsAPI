@@ -3,6 +3,7 @@ package com.mysportswebsite.all_sports.soccer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysportswebsite.all_sports.f1.Classes.DriverResponse;
 import com.mysportswebsite.all_sports.f1.Classes.TeamResponse;
+import com.mysportswebsite.all_sports.soccer.Classes.FixtureResponse;
 import com.mysportswebsite.all_sports.soccer.Classes.StandingResponse;
 import com.mysportswebsite.all_sports.soccer.Classes.TeamStatisticsResponse;
 import com.mysportswebsite.all_sports.soccer.Classes.TeamsResponse;
@@ -54,8 +55,45 @@ public class SoccerService {
         return fetchAndParse(url, TeamStatisticsResponse.class);
     }
 
-    // General
 
+    public FixtureResponse getFixtures(Integer season, Integer league, String live, String date, Integer teamID, String round, String timezone) {
+        StringBuilder urlBuilder = new StringBuilder("https://v3.football.api-sports.io/fixtures?");
+
+        // Append parameters if they are provided
+        if (season != null) {
+            urlBuilder.append("season=").append(season).append("&");
+        }
+        if (league != null) {
+            urlBuilder.append("league=").append(league).append("&");
+        }
+        if (live != null) {
+            urlBuilder.append("live=").append(live).append("&");
+        }
+        if (date != null) {
+            urlBuilder.append("date=").append(date).append("&");
+        }
+        if (teamID != null) {
+            urlBuilder.append("team=").append(teamID).append("&");
+        }
+        if (round != null) {
+            urlBuilder.append("round=").append(round).append("&");
+        }
+        if (timezone != null) {
+            urlBuilder.append("timezone=").append(timezone).append("&");
+        }
+
+        // Remove the last '&' if any
+        String url = urlBuilder.toString();
+        System.out.println(url);
+        if (url.endsWith("&")) {
+            url = url.substring(0, url.length() - 1);
+        }
+
+        // Call the fetchAndParse method to get the fixture response
+        return fetchAndParse(url, FixtureResponse.class);
+    }
+
+    // General
     private <T> T fetchAndParse(String url, Class<T> responseType) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-apisports-key", apiKey);
@@ -63,15 +101,7 @@ public class SoccerService {
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-            String responseBody=response.getBody();
-            System.out.println(responseBody);
-            if(responseBody.startsWith("[")){
-                return objectMapper.readValue(responseBody,
-                        objectMapper.getTypeFactory().constructCollectionType(List.class, responseType));
-            }else{
-                return objectMapper.readValue(response.getBody(), responseType);
-
-            }
+            return objectMapper.readValue(response.getBody(), responseType);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -80,6 +110,8 @@ public class SoccerService {
     }
 
 
+
+    // Fetch ids and team name for stats
     public Map<String,Integer> fetchIdsAndTeamName(Integer season, Integer leagueId) {
         TeamsResponse teamsResponse=getTeams(season);
         List<TeamsResponse.Response> teams=teamsResponse.getResponse();
@@ -90,11 +122,6 @@ public class SoccerService {
                 Integer teamId=teamData.getTeam().getId();
                 String teamName=teamData.getTeam().getName();
                 teamMap.put(teamName,teamId);
-//                System.out.println(teamId);
-//                TeamStatisticsResponse teamStatisticsResponse=getTeamStatistics(teamId,season,leagueId);
-//                System.out.println(teamStatisticsResponse);
-//                allTeamStatistics.add(teamStatisticsResponse);
-
             }
         }
         return teamMap;
