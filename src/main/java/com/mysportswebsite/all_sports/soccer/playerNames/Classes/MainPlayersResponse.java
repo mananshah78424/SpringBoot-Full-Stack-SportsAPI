@@ -1,17 +1,17 @@
-package com.mysportswebsite.all_sports.teamAndVenue.Classes;
+package com.mysportswebsite.all_sports.soccer.playerNames.Classes;
 
 
 import java.util.List;
 
-public class MainTeamsAndVenueResponse {
+public class MainPlayersResponse {
     private String get;
     private Parameters parameters;
-    private List<Object> errors;
+    private Object errors;
     private int results;
     private Paging paging;
-    private List<TeamsAndVenuesResponseItem> response;
+    private List<PlayerAndStatisticsResponseItem> response;
 
-    public MainTeamsAndVenueResponse() {
+    public MainPlayersResponse() {
     }
 
     public String getGet() {
@@ -30,11 +30,11 @@ public class MainTeamsAndVenueResponse {
         this.parameters = parameters;
     }
 
-    public List<Object> getErrors() {
+    public Object getErrors() {
         return errors;
     }
 
-    public void setErrors(List<Object> errors) {
+    public void setErrors(Object errors) {
         this.errors = errors;
     }
 
@@ -54,24 +54,11 @@ public class MainTeamsAndVenueResponse {
         this.paging = paging;
     }
 
-    public List<TeamsAndVenuesResponseItem> getResponse() {
+    public List<PlayerAndStatisticsResponseItem> getResponse() {
         return response;
     }
 
-    public void setResponse(List<TeamsAndVenuesResponseItem> response) {
+    public void setResponse(List<PlayerAndStatisticsResponseItem> response) {
         this.response = response;
     }
-
-    @Override
-    public String toString() {
-        return "MainTeamsAndVenueResponse{" +
-                "get='" + get + '\'' +
-                ", parameters=" + parameters +
-                ", errors=" + errors +
-                ", results=" + results +
-                ", paging=" + paging +
-                ", response=" + response +
-                '}';
-    }
 }
-

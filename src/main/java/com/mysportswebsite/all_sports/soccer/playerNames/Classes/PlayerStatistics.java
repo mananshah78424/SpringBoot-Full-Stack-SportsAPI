@@ -1,4 +1,4 @@
-package com.mysportswebsite.all_sports.playerNames.Classes;
+package com.mysportswebsite.all_sports.soccer.playerNames.Classes;
 
 public class PlayerStatistics {
     private Team team;

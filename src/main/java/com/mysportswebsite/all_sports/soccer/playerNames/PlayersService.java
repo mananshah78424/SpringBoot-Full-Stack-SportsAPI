@@ -1,7 +1,8 @@
-package com.mysportswebsite.all_sports.playerNames;
+package com.mysportswebsite.all_sports.soccer.playerNames;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysportswebsite.all_sports.playerNames.Classes.*;
+import com.mysportswebsite.all_sports.soccer.playerNames.Classes.*;
+import com.mysportswebsite.all_sports.soccer.playerNames.Classes.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
