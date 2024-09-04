@@ -16,7 +16,10 @@ public class RaceResponse {
     public static class Race{
         private int id;
         private Competition competition;
+
+        @JsonProperty("circuit")
         private CircuitDetails circuitDetails;
+
         private int season;
 
         @JsonProperty("laps")
@@ -25,6 +28,8 @@ public class RaceResponse {
         private String type;
         private String distance;
         private String status;
+        private String date;
+        private String timezone;
 
         @Data
         @JsonIgnoreProperties(ignoreUnknown = true)
