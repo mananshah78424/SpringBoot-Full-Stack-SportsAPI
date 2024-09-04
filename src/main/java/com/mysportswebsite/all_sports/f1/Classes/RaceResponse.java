@@ -4,16 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RaceResponse {
+public class RaceResponse implements Serializable {
     private List<Race> response;
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Race{
+    public static class Race implements Serializable{
         private int id;
         private Competition competition;
 
@@ -33,7 +34,7 @@ public class RaceResponse {
 
         @Data
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Competition{
+        public static class Competition implements  Serializable{
             private String name;
             private Location location;
 
@@ -47,14 +48,14 @@ public class RaceResponse {
 
         @Data
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class CircuitDetails{
+        public static class CircuitDetails implements Serializable{
             private String name;
             private String image;
         }
 
         @Data
         @JsonIgnoreProperties(ignoreUnknown = true)
-        private static class Laps{
+        private static class Laps implements Serializable{
             private Integer total;
         }
 

@@ -5,6 +5,7 @@ import com.mysportswebsite.all_sports.f1.Classes.DriverResponse;
 import com.mysportswebsite.all_sports.f1.Classes.RaceResponse;
 import com.mysportswebsite.all_sports.f1.Classes.TeamResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,20 +23,27 @@ public class f1Controller {
 
 
     // Rankings
-
     @GetMapping("/rankings/{type}")
-    public Object getRankings(
+    public ResponseEntity<Object> getRankings(
             @PathVariable String type,
             @RequestParam(required = false) Integer season
-    ){
-        season=(season!=null)?season:2024;
+    ) {
+        season = (season != null) ? season : 2024;
+
+        Object response;
+        String cacheKey;
+
         if ("drivers".equalsIgnoreCase(type)) {
-            return f1Service.getDriverRankings(season);
+            cacheKey = "driver-rankings-season-" + season;
+            response = f1Service.getDriverRankings(season);
         } else if ("teams".equalsIgnoreCase(type)) {
-            return f1Service.getTeamRankings(season);
+            cacheKey = "team-rankings-season-" + season;
+            response = f1Service.getTeamRankings(season);
         } else {
-            return "Invalid type. Please specify 'drivers' or 'teams'.";
+            return ResponseEntity.badRequest().body("Invalid type. Please specify 'drivers' or 'teams'.");
         }
+
+        return ResponseEntity.ok(response);
     }
 
 

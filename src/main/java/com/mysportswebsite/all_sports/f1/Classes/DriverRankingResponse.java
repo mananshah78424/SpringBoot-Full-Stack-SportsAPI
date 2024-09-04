@@ -3,16 +3,17 @@ package com.mysportswebsite.all_sports.f1.Classes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DriverRankingResponse {
+public class DriverRankingResponse implements Serializable {
     private List<DriverRanking> response;
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class DriverRanking {
+    public static class DriverRanking implements Serializable {
         private int position;
         private Driver driver;
         private Team team;
@@ -23,7 +24,7 @@ public class DriverRankingResponse {
 
         @Data
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Driver {
+        public static class Driver implements Serializable {
             private int id;
             private String name;
             private String abbr;
@@ -33,7 +34,7 @@ public class DriverRankingResponse {
 
         @Data
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Team {
+        public static class Team implements Serializable{
             private int id;
             private String name;
             private String logo;

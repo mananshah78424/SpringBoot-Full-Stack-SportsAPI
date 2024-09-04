@@ -1,9 +1,10 @@
 package com.mysportswebsite.all_sports.f1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysportswebsite.all_sports.RedisService;
 import com.mysportswebsite.all_sports.f1.Classes.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,89 +20,149 @@ public class f1Service {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+    private final RedisService redisService;
 
     @Autowired
-    public f1Service(RestTemplate restTemplate, ObjectMapper objectMapper) {
+    public f1Service(RestTemplate restTemplate, ObjectMapper objectMapper, RedisService redisService) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
+        this.redisService = redisService;
     }
 
+    // Circuits
+    public CircuitResponse getCircuits() {
+        long startTime = System.currentTimeMillis();
 
-    //Circuits
-    public CircuitResponse getCircuits(){
-        String url = String.format("https://v1.formula-1.api-sports.io/circuits");
-        return fetchAndParse(url,CircuitResponse.class);
+        String cacheKey = "circuits";
+        CircuitResponse cachedResponse = redisService.get(cacheKey, CircuitResponse.class);
+
+        if (cachedResponse != null) {
+            System.out.println("Key for: " + cacheKey + " found!");
+            return cachedResponse;
+        } else {
+            System.out.println("Creating redis key for: " + cacheKey);
+            String url = "https://v1.formula-1.api-sports.io/circuits";
+            CircuitResponse response = fetchAndParse(url, CircuitResponse.class);
+            redisService.set(cacheKey, response);
+            return response;
+        }
     }
 
     // Races
-    public RaceResponse getRaces(Integer season, Integer next, String timezone, String type){
-        StringBuilder urlBuilder=new StringBuilder("https://v1.formula-1.api-sports.io/races?");
-        if(season!=null){
+    public RaceResponse getRaces(Integer season, Integer next, String timezone, String type) {
+        long startTime = System.currentTimeMillis();
+
+        StringBuilder urlBuilder = new StringBuilder("https://v1.formula-1.api-sports.io/races?");
+        if (season != null) {
             urlBuilder.append("season=").append(season).append("&");
         }
-        if(timezone!=null && !timezone.isEmpty()){
+        if (timezone != null && !timezone.isEmpty()) {
             urlBuilder.append("timezone=").append(timezone).append("&");
         }
-        if(type!=null && !type.isEmpty()){
+        if (type != null && !type.isEmpty()) {
             urlBuilder.append("type=").append(type).append("&");
         }
-        if(next!=null){
+        if (next != null) {
             urlBuilder.append("next=").append(next).append("&");
         }
         String url = urlBuilder.toString();
         if (url.endsWith("&")) {
             url = url.substring(0, url.length() - 1);
         }
-        return fetchAndParse(url, RaceResponse.class);
+
+        String cacheKey = "races" + url;
+        RaceResponse cachedResponse = redisService.get(cacheKey, RaceResponse.class);
+
+        if (cachedResponse != null) {
+            System.out.println("Key for: " + cacheKey + " found!");
+            return cachedResponse;
+        } else {
+            System.out.println("Creating redis key for: " + cacheKey);
+            RaceResponse response = fetchAndParse(url, RaceResponse.class);
+            redisService.set(cacheKey, response);
+            return response;
+        }
     }
-
-
 
     // Rankings
-    public Object getDriverRankings(int season) {
-        String url = String.format("https://v1.formula-1.api-sports.io/rankings/drivers?season=%d", season);
-        return fetchAndParse(url, DriverRankingResponse.class);
+    public DriverRankingResponse getDriverRankings(int season) {
+        long startTime = System.currentTimeMillis();
+
+        String cacheKey = "driver-rankings-season-" + season;
+        DriverRankingResponse cachedResponse = redisService.get(cacheKey, DriverRankingResponse.class);
+
+        if (cachedResponse != null) {
+            System.out.println("Key for: " + cacheKey + " found!");
+            return cachedResponse;
+        } else {
+            String url = String.format("https://v1.formula-1.api-sports.io/rankings/drivers?season=%d", season);
+            DriverRankingResponse response = fetchAndParse(url, DriverRankingResponse.class);
+            redisService.set(cacheKey, response);
+            return response;
+        }
     }
 
-    public Object getTeamRankings(int season) {
-        String url = String.format("https://v1.formula-1.api-sports.io/rankings/teams?season=%d", season);
-        return fetchAndParse(url, TeamRankingResponse.class);
-    }
+    public TeamRankingResponse getTeamRankings(int season) {
+        long startTime = System.currentTimeMillis();
 
+        String cacheKey = "team-rankings-season-" + season;
+        TeamRankingResponse cachedResponse = redisService.get(cacheKey, TeamRankingResponse.class);
+
+        if (cachedResponse != null) {
+            System.out.println("Key for: " + cacheKey + " found!");
+            return cachedResponse;
+        } else {
+            String url = String.format("https://v1.formula-1.api-sports.io/rankings/teams?season=%d", season);
+            TeamRankingResponse response = fetchAndParse(url, TeamRankingResponse.class);
+            redisService.set(cacheKey, response);
+            return response;
+        }
+    }
 
     // Teams
-    public TeamResponse getTeams(){
-        String url=String.format("https://v1.formula-1.api-sports.io/teams");
-        return fetchAndParse(url, TeamResponse.class);
-    }
+    public TeamResponse getTeams() {
+        String cacheKey = "teams";
+        TeamResponse cachedResponse = redisService.get(cacheKey, TeamResponse.class);
 
+        if (cachedResponse != null) {
+            return cachedResponse;
+        } else {
+            String url = "https://v1.formula-1.api-sports.io/teams";
+            TeamResponse response = fetchAndParse(url, TeamResponse.class);
+            redisService.set(cacheKey, response);
+            return response;
+        }
+    }
 
     // Driver
-    public DriverResponse getDriver(String search){
-        String url=String.format("https://v1.formula-1.api-sports.io/drivers?search=%s",search);
-        return fetchAndParse(url, DriverResponse.class);
+    public DriverResponse getDriver(String search) {
+        String cacheKey = "driver-search-" + search;
+        DriverResponse cachedResponse = redisService.get(cacheKey, DriverResponse.class);
+
+        if (cachedResponse != null) {
+            return cachedResponse;
+        } else {
+            String url = String.format("https://v1.formula-1.api-sports.io/drivers?search=%s", search);
+            DriverResponse response = fetchAndParse(url, DriverResponse.class);
+            redisService.set(cacheKey, response);
+            return response;
+        }
     }
 
-
-    //General
-
+    // General
     private <T> T fetchAndParse(String url, Class<T> responseType) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-apisports-key", apiKey);
         HttpEntity<String> entity = new HttpEntity<>(headers);
-
         try {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
             return objectMapper.readValue(response.getBody(), responseType);
         } catch (Exception e) {
             e.printStackTrace();
-            if(responseType==DriverResponse.class){
+            if (responseType == DriverResponse.class) {
                 throw new IllegalArgumentException("Could not find this driver!");
             }
             throw new RuntimeException("Error processing API response", e);
         }
     }
-
-
-
 }

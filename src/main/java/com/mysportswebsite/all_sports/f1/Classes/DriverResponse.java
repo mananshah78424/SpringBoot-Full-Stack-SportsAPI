@@ -4,16 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DriverResponse {
+public class DriverResponse implements Serializable {
     private List<Driver> response;
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Driver{
+    public static class Driver implements Serializable{
         private int id;
         private String name;
         private String image;
