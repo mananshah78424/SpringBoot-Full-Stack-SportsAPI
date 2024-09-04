@@ -1,5 +1,6 @@
 import { MainCircuitResponse } from "@/src/types/f1/circuitTypes";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
+import { RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
 import { TeamRankingResponse } from "@/src/types/f1/teamStandingTypes";
 import axios from "axios";
 
@@ -47,6 +48,24 @@ export const fetchTeamsRankings = async (
     return response.data;
   } catch (error) {
     console.error("Error fetching driver standings");
+    throw error;
+  }
+};
+
+//Fetch fixtures
+export const fetchFixtures = async (
+  season: number,
+  raceType?: RaceType
+): Promise<RaceResponse> => {
+  try {
+    const response = await axios.get<RaceResponse>(
+      `${API_BASE_URL}/races?season=${season}${
+        raceType ? `&type=${raceType}` : ""
+      }`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching race fixtures");
     throw error;
   }
 };
