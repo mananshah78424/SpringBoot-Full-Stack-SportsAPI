@@ -1,3 +1,4 @@
+import F1PageHeading from "@/src/components/f1Heading";
 import Layout from "@/src/components/Layout";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
 import { TeamRankingResponse } from "@/src/types/f1/teamStandingTypes";
@@ -8,6 +9,7 @@ const Rankings: React.FC = () => {
     "teams"
   );
   const [season, setSeason] = useState<number>(2024);
+  const [title, setTitle] = useState<string>("2024 Team Standings");
   const [data, setData] = useState<
     TeamRankingResponse | DriverRankingResponse | null
   >(null);
@@ -20,17 +22,19 @@ const Rankings: React.FC = () => {
   //       setData(null);
   //       if (rankingsType === "teams") {
   //         const result = await fetchTeamsRankings(season);
+  //         setTitle(`${season} Teams Standings`);
+
   //         console.log(result);
 
   //         setData(result);
   //       } else {
   //         const result = await fetchDriverRankings(season);
   //         console.log(result);
-
+  //         setTitle(`${season} Driver Standings`);
   //         setData(result);
   //       }
   //     } catch (err) {
-  //       setError("Error fetching rankings");
+  //       setError("Sorry could not find any rankings for this year. ");
   //     }
   //   };
   //   fetchData();
@@ -86,120 +90,113 @@ const Rankings: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="f1-option-bar container mt-6 text-[50px] font-thin">
-            {rankingsType === "drivers" ? (
-              <p> {season} Driver Standings </p>
-            ) : (
-              <p> {season} Teams Standings </p>
-            )}
-          </div>
+            <F1PageHeading title={title}></F1PageHeading>
 
-          <hr />
-          {error && <p className="text-red-500">{error}</p>}
+            <hr />
+            {error && <p className="text-red-500">{error}</p>}
 
-          <div className="flex-1 lg:overflow-y-auto lg:pb-16 min-h-screen text-white container f1-option-bar">
-            {/* Display the data in a table with zebra stripes */}
-            {data && (
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 mt-4">
-                  <thead className="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
-                        Position
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
-                        Image
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
-                        Name
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
-                        Points
-                      </th>
-                      {rankingsType === "drivers" && (
-                        <>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
-                            Wins
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
-                            Behind
-                          </th>
-                        </>
-                      )}
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {rankingsType === "drivers" &&
-                      (data as DriverRankingResponse).response.map(
-                        (ranking, index) => (
-                          <tr
-                            key={index}
-                            className={
-                              index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                            }
-                          >
-                            <td className="px-6 py-4 whitespace-nowrap text-black">
-                              {ranking.position}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                              {ranking.driver && ranking.driver.image && (
+            <div className="flex-1 lg:overflow-y-auto lg:pb-16 min-h-screen text-white container f1-option-bar mt-5">
+              {/* Display the data in a table with zebra stripes */}
+              {data && (
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200 mt-4">
+                    <thead className="bg-gray-50 border-b border-gray-200">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
+                          Position
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
+                          Image
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
+                          Name
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
+                          Points
+                        </th>
+                        {rankingsType === "drivers" && (
+                          <>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
+                              Wins
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-t-0 border-l-0 border-r-0">
+                              Behind
+                            </th>
+                          </>
+                        )}
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {rankingsType === "drivers" &&
+                        (data as DriverRankingResponse).response.map(
+                          (ranking, index) => (
+                            <tr
+                              key={index}
+                              className={
+                                index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                              }
+                            >
+                              <td className="px-6 py-4 whitespace-nowrap text-black">
+                                {ranking.position}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                {ranking.driver && ranking.driver.image && (
+                                  <img
+                                    src={ranking.driver.image}
+                                    alt={`${ranking.driver.name}'s image`}
+                                    className="w-12 h-12 object-cover rounded-full"
+                                  />
+                                )}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {ranking.driver && ranking.driver.name}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {ranking.points}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {ranking.wins}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {ranking.behind ?? "N/A"}
+                              </td>
+                            </tr>
+                          )
+                        )}
+                      {rankingsType === "teams" &&
+                        (data as TeamRankingResponse).response.map(
+                          (ranking, index) => (
+                            <tr
+                              key={index}
+                              className={
+                                index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                              }
+                            >
+                              <td className="px-6 py-4 whitespace-nowrap text-black">
+                                {ranking.position}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 <img
-                                  src={ranking.driver.image}
-                                  alt={`${ranking.driver.name}'s image`}
-                                  className="w-12 h-12 object-cover rounded-full"
+                                  src={ranking.team.logo}
+                                  alt={`${ranking.team.name} logo`}
+                                  className="w-12 h-12 object-cover"
                                 />
-                              )}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {ranking.driver && ranking.driver.name}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {ranking.points}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {ranking.wins}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {ranking.behind ?? "N/A"}
-                            </td>
-                          </tr>
-                        )
-                      )}
-                    {rankingsType === "teams" &&
-                      (data as TeamRankingResponse).response.map(
-                        (ranking, index) => (
-                          <tr
-                            key={index}
-                            className={
-                              index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                            }
-                          >
-                            <td className="px-6 py-4 whitespace-nowrap text-black">
-                              {ranking.position}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                              <img
-                                src={ranking.team.logo}
-                                alt={`${ranking.team.name} logo`}
-                                className="w-12 h-12 object-cover"
-                              />
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {ranking.team.name}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {ranking.points}
-                            </td>
-                          </tr>
-                        )
-                      )}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-          {/* {data && (
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {ranking.team.name}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {ranking.points}
+                              </td>
+                            </tr>
+                          )
+                        )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+            {/* {data && (
           <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {rankingsType === "drivers" &&
               (data as DriverRankingResponse).response.map((ranking, index) => (
@@ -257,6 +254,7 @@ const Rankings: React.FC = () => {
               ))}
           </div>
         )} */}
+          </div>
         </div>
       </div>
     </Layout>

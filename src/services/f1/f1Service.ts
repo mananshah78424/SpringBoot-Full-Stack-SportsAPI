@@ -30,6 +30,8 @@ export const fetchDriverRankings = async (
     const response = await axios.get<DriverRankingResponse>(
       `${API_BASE_URL}/rankings/drivers?season=${season}`
     );
+    console.log("Done returning driver data with length: ");
+
     return response.data;
   } catch (error) {
     console.error("Error fetching driver standings");
