@@ -1,4 +1,4 @@
-import F1PageHeading from "@/src/components/f1Heading";
+import F1PageHeading from "@/src/components/f1/f1Heading";
 import Layout from "@/src/components/Layout";
 import { Circuit } from "@/src/types/f1/circuitTypes";
 
@@ -21,7 +21,10 @@ const CircuitsPage: React.FC<CircuitsPageProps> = ({ circuits, error }) => {
       <div className="flex flex-col mx-auto px-4 sm:px-6 lg:px-8 mt-5">
         <div className="min-h-screen mt-4">
           <div className="f1-option-bar container">
-            <F1PageHeading title="Circuits"></F1PageHeading>
+            <F1PageHeading
+              title="Circuits"
+              subtitle="2024 FIA FORMULA ONE WORLD CHAMPIONSHIP™ CIRCUITs"
+            ></F1PageHeading>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-10">
               {circuits &&
                 circuits.map((circuit, index) => {

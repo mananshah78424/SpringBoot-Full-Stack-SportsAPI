@@ -1,4 +1,4 @@
-import F1PageHeading from "@/src/components/f1Heading";
+import F1PageHeading from "@/src/components/f1/f1Heading";
 import Layout from "@/src/components/Layout";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
 import { TeamRankingResponse } from "@/src/types/f1/teamStandingTypes";
@@ -90,7 +90,10 @@ const Rankings: React.FC = () => {
                 </div>
               </div>
             </div>
-            <F1PageHeading title={title}></F1PageHeading>
+            <F1PageHeading
+              title={title}
+              subtitle="2024 FIA FORMULA ONE WORLD CHAMPIONSHIP™ RANKINGS"
+            ></F1PageHeading>
 
             <hr />
             {error && <p className="text-red-500">{error}</p>}

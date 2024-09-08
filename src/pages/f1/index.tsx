@@ -1,9 +1,13 @@
 import Layout from "@/src/components/Layout";
-import { fetchDriverRankings } from "@/src/services/f1/f1Service";
+import Banner1 from "@/src/images/Banner1.avif";
+import {
+  fetchDriverRankings,
+  fetchFixtures,
+} from "@/src/services/f1/f1Service";
 import { DriverRanking } from "@/src/types/f1/driverStandingTypes";
+import { Race, RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import MainScreenImage from "../../images/f1-main-screen.webp";
 import standingBg from "../../images/standing-bg.png";
 import "../../styles/f1.css";
 
@@ -17,6 +21,8 @@ export default function Index({}: Props) {
   const [topTenDrivers, setTopTenDrivers] = useState<DriverRanking[] | null>(
     null
   );
+  const [fixtures, setFixtures] = useState<RaceResponse | null>(null);
+  const [nextRace, setNextRace] = useState<Race | null>(null);
   const [error, setError] = useState<string | null>(null);
   const season = 2024;
 
@@ -39,6 +45,34 @@ export default function Index({}: Props) {
       }
     };
     fetchData();
+
+    const getFixtures = async () => {
+      if (season) {
+        setError(null);
+        try {
+          const data = await fetchFixtures(season, RaceType.RACE);
+          const scheduledRaces = data.response.filter(
+            (race) => race.status === "Scheduled"
+          );
+
+          const nextRace = scheduledRaces.reduce((closestRace, currentRace) => {
+            const closestRaceDate = new Date(closestRace.date);
+            const currentRaceDate = new Date(currentRace.date);
+            return currentRaceDate < closestRaceDate
+              ? currentRace
+              : closestRace;
+          });
+          console.log(nextRace);
+
+          setNextRace(nextRace);
+        } catch (error) {
+          setError("Failed to fetch race fixtures");
+        } finally {
+        }
+      }
+    };
+
+    getFixtures();
   }, [season]);
 
   return (
@@ -48,7 +82,7 @@ export default function Index({}: Props) {
           <div className="mx-auto flex">
             <div className="container h-full align-center flex mx-auto justify-center rounded-lg shadow-lg">
               <Image
-                src={MainScreenImage}
+                src={Banner1}
                 layout="responsive"
                 width={800}
                 height={100}
@@ -58,6 +92,11 @@ export default function Index({}: Props) {
             </div>
           </div>
 
+          <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full">
+            <div className="h-full flex flex-col gap-xs justify-center items-center w-[32rem]">
+              <div className="flex flex-col items-center gap-xs text-center"></div>
+            </div>
+          </div>
           <div
             className="mx-auto container mt-6 relative before:absolute before:top-0 before:left-0 before:bg-driverStandingHome before:bg-center before:bg-cover before:w-full before:h-64 before:h-80 bg-grey-20 react-tabs__tab-panel--selected"
             style={{
@@ -68,7 +107,7 @@ export default function Index({}: Props) {
               <h2 className="f1-heading-wide text-branding-white tracking-normal font-normal non-italic text-fs-25px leading-tight normal-case text-center px-xs font-formulaOneWide">
                 Driver Standings
               </h2>
-              <div className="grid gap-normal w-full sm:pt-[5rem] lg:pt-[10rem] px-36">
+              <div className="grid gap-normal w-full sm:pt-[5rem] lg:pt-[16rem] px-36">
                 <div className="grid grid-cols-[5fr_5fr_5fr] items-end gap-s">
                   {topThreeDrivers &&
                     topThreeDrivers.map((driver, index) => {
@@ -163,7 +202,7 @@ export default function Index({}: Props) {
               </div>
             </div>
           </div>
-          <div className="mx-auto container mt-4 text-white">
+          <div className="mx-auto container mt-4 text-white pb-10">
             {topTenDrivers &&
               topTenDrivers.map((driver, index) => {
                 const [firstName, lastName] = driver.driver.name.split(" ");
