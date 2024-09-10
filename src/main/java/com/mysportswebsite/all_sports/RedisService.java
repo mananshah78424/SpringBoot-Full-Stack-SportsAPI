@@ -2,8 +2,8 @@ package com.mysportswebsite.all_sports;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -38,14 +38,13 @@ public class RedisService {
         redisTemplate.opsForValue().set(key, value);
     }
 
-    public boolean checkHealth() {
-        try {
-            return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
-                connection.ping(); // A simple operation to check Redis health
-                return true;
-            });
+    public boolean ping() {
+        try (RedisConnection connection = redisTemplate.getConnectionFactory().getConnection()) {
+            connection.ping(); // Ping Redis server
+            System.out.println("REDIS CONENCTED");
+            return true;
         } catch (Exception e) {
-            // Log the exception if necessary
+            System.out.println("REDIS NOT CONNECTED");
             return false;
         }
     }
