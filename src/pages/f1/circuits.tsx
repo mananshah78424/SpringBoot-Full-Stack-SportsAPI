@@ -1,6 +1,7 @@
 import F1PageHeading from "@/src/components/f1/f1Heading";
 import Layout from "@/src/components/Layout";
 import { Circuit } from "@/src/types/f1/circuitTypes";
+import Link from "next/link";
 
 interface CircuitsPageProps {
   circuits: Circuit[];
@@ -50,7 +51,7 @@ const CircuitsPage: React.FC<CircuitsPageProps> = ({ circuits, error }) => {
                   // console.log(imageLink);
 
                   return (
-                    <a
+                    <Link
                       key={index}
                       className="outline outline-offset-4 outline-brand-black group outline-0 focus-visible:outline-2"
                       href=""
@@ -108,7 +109,7 @@ const CircuitsPage: React.FC<CircuitsPageProps> = ({ circuits, error }) => {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   );
                 })}
             </div>

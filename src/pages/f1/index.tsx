@@ -7,6 +7,7 @@ import {
 import { DriverRanking } from "@/src/types/f1/driverStandingTypes";
 import { Race, RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import standingBg from "../../images/standing-bg.png";
 import "../../styles/f1.css";
@@ -112,9 +113,9 @@ export default function Index({}: Props) {
 
               <div className="flex flex-col items-center gap-xs text-center pb-4">
                 <span className="f1-heading tracking-normal text-fs-18px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-brand-white max-w-[70%]">
-                  <a href="/">
+                  <Link href="/">
                     {`FORMULA 1 QATAR AIRWAYS ${nextRace?.competition.name} 2024`}
-                  </a>
+                  </Link>
                 </span>
                 <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-grey-60 pb-xs pt-2">
                   {nextRace?.date
@@ -126,7 +127,7 @@ export default function Index({}: Props) {
                 <img className="h-[10rem]" src={nextRace?.circuit.image}></img>
               </div>
               <div className="pb-xs">
-                <a
+                <Link
                   className="grid grid-flow-col auto-cols-max rounded-5 cursor-pointer items-center transition-colors duration-200 font-titillium font-[600] w-full min-w-max laptop:w-auto laptop:text-center laptop:auto-cols-auto focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[3px] focus-visible:outline-carbonBlack disabled:pointer-events-none disabled:opacity-75 disabled:cursor-default text-12 px-[15px] gap-[8px] h-[39px] bg-tranparent text-white uppercase border-[1px] shadow-innerBlack transition-shadow duration-200 laptop:!shadow-white laptop:hover:shadow-inner border-brand-white focus-visible:!outline-brand-white"
                   data-event="homeRaceCalenderCardViewSchedule"
                   href="/f1/fixtures"
@@ -134,7 +135,7 @@ export default function Index({}: Props) {
                   <span className="font-titillium leading-none  text-12">
                     View Schedule
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -176,7 +177,7 @@ export default function Index({}: Props) {
 
                       const driverClass = index === 1 ? "col-start-2" : "";
                       return (
-                        <a
+                        <Link
                           key={index}
                           className={driverClass}
                           data-event="seasonResultsHome"
@@ -236,7 +237,7 @@ export default function Index({}: Props) {
                             </figcaption>
                             <p className="text-black">{driver.position}</p>
                           </figure>
-                        </a>
+                        </Link>
                       );
                     })}
                 </div>

@@ -1,5 +1,6 @@
 import Layout from "@/src/components/Layout";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const DriverCard: React.FC = () => {
@@ -54,7 +55,7 @@ const DriverCard: React.FC = () => {
                   console.log(imageLink);
 
                   return (
-                    <a
+                    <Link
                       key={index}
                       className="outline outline-offset-4 outline-brand-black group outline-0 focus-visible:outline-2"
                       href="/en/drivers/max-verstappen"
@@ -110,7 +111,7 @@ const DriverCard: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   );
                 })}
             </div>
