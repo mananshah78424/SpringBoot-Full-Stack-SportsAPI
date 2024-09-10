@@ -3,6 +3,7 @@ package com.mysportswebsite.all_sports;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -35,5 +36,17 @@ public class RedisService {
 
     public void set(String key, Serializable value) {
         redisTemplate.opsForValue().set(key, value);
+    }
+
+    public boolean checkHealth() {
+        try {
+            return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
+                connection.ping(); // A simple operation to check Redis health
+                return true;
+            });
+        } catch (Exception e) {
+            // Log the exception if necessary
+            return false;
+        }
     }
 }

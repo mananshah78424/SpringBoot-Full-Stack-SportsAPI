@@ -29,29 +29,37 @@ public class f1Service {
         this.redisService = redisService;
     }
 
+    private boolean isRedisAvailable() {
+        try {
+            redisService.checkHealth();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     // Circuits
     public CircuitResponse getCircuits() {
-        long startTime = System.currentTimeMillis();
-
         String cacheKey = "circuits";
-        CircuitResponse cachedResponse = redisService.get(cacheKey, CircuitResponse.class);
+        if (isRedisAvailable()) {
+            CircuitResponse cachedResponse = redisService.get(cacheKey, CircuitResponse.class);
 
-        if (cachedResponse != null) {
-            System.out.println("Key for: " + cacheKey + " found!");
-            return cachedResponse;
-        } else {
+            if (cachedResponse != null) {
+                System.out.println("Key for: " + cacheKey + " found in Redis!");
+                return cachedResponse;
+            }
             System.out.println("Creating redis key for: " + cacheKey);
-            String url = "https://v1.formula-1.api-sports.io/circuits";
-            CircuitResponse response = fetchAndParse(url, CircuitResponse.class);
+            CircuitResponse response = fetchAndParse("https://v1.formula-1.api-sports.io/circuits", CircuitResponse.class);
             redisService.set(cacheKey, response);
             return response;
+        } else {
+            System.out.println("Redis not available, fetching data directly.");
+            return fetchAndParse("https://v1.formula-1.api-sports.io/circuits", CircuitResponse.class);
         }
     }
 
     // Races
     public RaceResponse getRaces(Integer season, Integer next, String timezone, String type) {
-        long startTime = System.currentTimeMillis();
-
         StringBuilder urlBuilder = new StringBuilder("https://v1.formula-1.api-sports.io/races?");
         if (season != null) {
             urlBuilder.append("season=").append(season).append("&");
@@ -71,81 +79,97 @@ public class f1Service {
         }
 
         String cacheKey = "races" + url;
-        RaceResponse cachedResponse = redisService.get(cacheKey, RaceResponse.class);
+        if (isRedisAvailable()) {
+            RaceResponse cachedResponse = redisService.get(cacheKey, RaceResponse.class);
 
-        if (cachedResponse != null) {
-            System.out.println("Key for: " + cacheKey + " found!");
-            return cachedResponse;
-        } else {
+            if (cachedResponse != null) {
+                System.out.println("Key for: " + cacheKey + " found in Redis!");
+                return cachedResponse;
+            }
             System.out.println("Creating redis key for: " + cacheKey);
             RaceResponse response = fetchAndParse(url, RaceResponse.class);
             redisService.set(cacheKey, response);
             return response;
+        } else {
+            System.out.println("Redis not available, fetching data directly.");
+            return fetchAndParse(url, RaceResponse.class);
         }
     }
 
     // Rankings
     public DriverRankingResponse getDriverRankings(int season) {
-        long startTime = System.currentTimeMillis();
-
         String cacheKey = "driver-rankings-season-" + season;
-        DriverRankingResponse cachedResponse = redisService.get(cacheKey, DriverRankingResponse.class);
+        if (isRedisAvailable()) {
+            DriverRankingResponse cachedResponse = redisService.get(cacheKey, DriverRankingResponse.class);
 
-        if (cachedResponse != null) {
-            System.out.println("Key for: " + cacheKey + " found!");
-            return cachedResponse;
-        } else {
-            String url = String.format("https://v1.formula-1.api-sports.io/rankings/drivers?season=%d", season);
-            DriverRankingResponse response = fetchAndParse(url, DriverRankingResponse.class);
+            if (cachedResponse != null) {
+                System.out.println("Key for: " + cacheKey + " found in Redis!");
+                return cachedResponse;
+            }
+            System.out.println("Creating redis key for: " + cacheKey);
+            DriverRankingResponse response = fetchAndParse(String.format("https://v1.formula-1.api-sports.io/rankings/drivers?season=%d", season), DriverRankingResponse.class);
             redisService.set(cacheKey, response);
             return response;
+        } else {
+            System.out.println("Redis not available, fetching data directly.");
+            return fetchAndParse(String.format("https://v1.formula-1.api-sports.io/rankings/drivers?season=%d", season), DriverRankingResponse.class);
         }
     }
 
     public TeamRankingResponse getTeamRankings(int season) {
-        long startTime = System.currentTimeMillis();
-
         String cacheKey = "team-rankings-season-" + season;
-        TeamRankingResponse cachedResponse = redisService.get(cacheKey, TeamRankingResponse.class);
+        if (isRedisAvailable()) {
+            TeamRankingResponse cachedResponse = redisService.get(cacheKey, TeamRankingResponse.class);
 
-        if (cachedResponse != null) {
-            System.out.println("Key for: " + cacheKey + " found!");
-            return cachedResponse;
-        } else {
-            String url = String.format("https://v1.formula-1.api-sports.io/rankings/teams?season=%d", season);
-            TeamRankingResponse response = fetchAndParse(url, TeamRankingResponse.class);
+            if (cachedResponse != null) {
+                System.out.println("Key for: " + cacheKey + " found in Redis!");
+                return cachedResponse;
+            }
+            System.out.println("Creating redis key for: " + cacheKey);
+            TeamRankingResponse response = fetchAndParse(String.format("https://v1.formula-1.api-sports.io/rankings/teams?season=%d", season), TeamRankingResponse.class);
             redisService.set(cacheKey, response);
             return response;
+        } else {
+            System.out.println("Redis not available, fetching data directly.");
+            return fetchAndParse(String.format("https://v1.formula-1.api-sports.io/rankings/teams?season=%d", season), TeamRankingResponse.class);
         }
     }
 
     // Teams
     public TeamResponse getTeams() {
         String cacheKey = "teams";
-        TeamResponse cachedResponse = redisService.get(cacheKey, TeamResponse.class);
+        if (isRedisAvailable()) {
+            TeamResponse cachedResponse = redisService.get(cacheKey, TeamResponse.class);
 
-        if (cachedResponse != null) {
-            return cachedResponse;
-        } else {
-            String url = "https://v1.formula-1.api-sports.io/teams";
-            TeamResponse response = fetchAndParse(url, TeamResponse.class);
+            if (cachedResponse != null) {
+                return cachedResponse;
+            }
+            System.out.println("Creating redis key for: " + cacheKey);
+            TeamResponse response = fetchAndParse("https://v1.formula-1.api-sports.io/teams", TeamResponse.class);
             redisService.set(cacheKey, response);
             return response;
+        } else {
+            System.out.println("Redis not available, fetching data directly.");
+            return fetchAndParse("https://v1.formula-1.api-sports.io/teams", TeamResponse.class);
         }
     }
 
     // Driver
     public DriverResponse getDriver(String search) {
         String cacheKey = "driver-search-" + search;
-        DriverResponse cachedResponse = redisService.get(cacheKey, DriverResponse.class);
+        if (isRedisAvailable()) {
+            DriverResponse cachedResponse = redisService.get(cacheKey, DriverResponse.class);
 
-        if (cachedResponse != null) {
-            return cachedResponse;
-        } else {
-            String url = String.format("https://v1.formula-1.api-sports.io/drivers?search=%s", search);
-            DriverResponse response = fetchAndParse(url, DriverResponse.class);
+            if (cachedResponse != null) {
+                return cachedResponse;
+            }
+            System.out.println("Creating redis key for: " + cacheKey);
+            DriverResponse response = fetchAndParse(String.format("https://v1.formula-1.api-sports.io/drivers?search=%s", search), DriverResponse.class);
             redisService.set(cacheKey, response);
             return response;
+        } else {
+            System.out.println("Redis not available, fetching data directly.");
+            return fetchAndParse(String.format("https://v1.formula-1.api-sports.io/drivers?search=%s", search), DriverResponse.class);
         }
     }
 

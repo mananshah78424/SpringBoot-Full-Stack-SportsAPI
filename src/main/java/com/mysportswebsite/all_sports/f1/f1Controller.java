@@ -64,6 +64,7 @@ public class f1Controller {
     //Circuits
     @GetMapping("/circuits")
     public CircuitResponse getCircuits(){
+        System.out.println("Truing to find circuits call!");
         return f1Service.getCircuits();
     }
 
