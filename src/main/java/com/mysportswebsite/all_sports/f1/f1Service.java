@@ -31,9 +31,11 @@ public class f1Service {
 
     // Circuits
     public CircuitResponse getCircuits() {
+        System.out.println("Getting circuits");
         String cacheKey = "circuits";
         try {
             CircuitResponse cachedResponse = redisService.get(cacheKey, CircuitResponse.class);
+            System.out.println("Got cachedReponse, checking");
             if (cachedResponse != null) {
                 System.out.println("Key for: " + cacheKey + " found!");
                 return cachedResponse;

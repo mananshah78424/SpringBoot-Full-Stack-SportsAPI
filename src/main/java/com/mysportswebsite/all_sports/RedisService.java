@@ -23,7 +23,7 @@ public class RedisService {
     }
 
     public <T> T get(String key, Class<T> type) {
-        System.out.println("Tryung to get value");
+        System.out.println("Trying to get value");
         try {
             Object value = redisTemplate.opsForValue().get(key);
             if (value == null) {
