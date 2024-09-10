@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://frontend-code--mysportslist.netlify.app"})
 @RestController
 @RequestMapping("/api/f1")
 public class f1Controller {
