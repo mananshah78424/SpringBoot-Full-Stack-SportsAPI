@@ -1,8 +1,10 @@
 package com.mysportswebsite.all_sports;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import java.io.Serializable;
 
 @Service
 public class RedisService {
+
+    private static final Logger logger = LoggerFactory.getLogger(RedisService.class);
 
     private final RedisTemplate<String, Object> redisTemplate;
     private final ObjectMapper objectMapper;
@@ -23,29 +27,28 @@ public class RedisService {
     }
 
     public <T> T get(String key, Class<T> type) {
-        Object value = redisTemplate.opsForValue().get(key);
-        if (value == null) {
-            return null;
-        }
         try {
+            Object value = redisTemplate.opsForValue().get(key);
+            if (value == null) {
+                return null;
+            }
             return objectMapper.convertValue(value, type);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Failed to deserialize from Redis", e);
+        } catch (RedisConnectionFailureException e) {
+            logger.warn("Redis connection failed during get operation, key: {}", key, e);
+            return null; // Return null if Redis connection fails
+        } catch (Exception e) {
+            logger.error("Unexpected error during get operation, key: {}", key, e);
+            return null; // Return null if an unexpected error occurs
         }
     }
 
     public void set(String key, Serializable value) {
-        redisTemplate.opsForValue().set(key, value);
-    }
-
-    public boolean ping() {
-        try (RedisConnection connection = redisTemplate.getConnectionFactory().getConnection()) {
-            connection.ping(); // Ping Redis server
-            System.out.println("REDIS CONENCTED");
-            return true;
+        try {
+            redisTemplate.opsForValue().set(key, value);
+        } catch (RedisConnectionFailureException e) {
+            logger.warn("Redis connection failed during set operation, key: {}", key, e);
         } catch (Exception e) {
-            System.out.println("REDIS NOT CONNECTED");
-            return false;
+            logger.error("Unexpected error during set operation, key: {}", key, e);
         }
     }
 }
