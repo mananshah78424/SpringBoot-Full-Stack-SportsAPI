@@ -10,9 +10,9 @@ const F1Navbar: React.FC = () => {
       <nav className="m-auto w-full grid grid-cols-globalNavMobile lg:grid-cols-globalNavDesktop max-w-[1320px] h-full lg:px-[10px]">
         <nav className="f1-logo">
           <span>
-            <a href="/f1">
+            <Link href="/f1">
               <Image src={MyIcon} width={200} height={200} alt="F1 logo" />
-            </a>
+            </Link>
           </span>
         </nav>
         <ul className="flex flex-row w-full h-full text-white">

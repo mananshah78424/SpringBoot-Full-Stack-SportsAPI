@@ -92,9 +92,50 @@ export default function Index({}: Props) {
             </div>
           </div>
 
-          <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full">
-            <div className="h-full flex flex-col gap-xs justify-center items-center w-[32rem]">
-              <div className="flex flex-col items-center gap-xs text-center"></div>
+          <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full bg-brand-carbonBlack pt-2">
+            <div className="h-full flex flex-col gap-xs justify-center items-center w-[32rem] mx-auto p-4">
+              <div className="flex flex-col items-center gap-xs transition duration-500 text-center group-hover:text-white p-4">
+                <img
+                  alt="Azerbaijan"
+                  src={`https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Flags%2016x9/${nextRace?.competition.location.country
+                    .replace(/\s+/g, "-")
+                    .toLowerCase()}-flag.png`}
+                  className="f1-c-image h-8 rounded-xxs inline"
+                  draggable="false"
+                />
+                <div className="flex min-h-6 items-center mt-4">
+                  <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-grey-60">
+                    {nextRace?.competition.location.country}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-xs text-center pb-4">
+                <span className="f1-heading tracking-normal text-fs-18px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-brand-white max-w-[70%]">
+                  <a href="/">
+                    {`FORMULA 1 QATAR AIRWAYS ${nextRace?.competition.name} 2024`}
+                  </a>
+                </span>
+                <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-grey-60 pb-xs pt-2">
+                  {nextRace?.date
+                    ? new Date(nextRace.date).toISOString().split("T")[0]
+                    : "Date not available"}
+                </span>
+              </div>
+              <div className="w-full p-4 flex justify-center items-center mb-3">
+                <img className="h-[10rem]" src={nextRace?.circuit.image}></img>
+              </div>
+              <div className="pb-xs">
+                <a
+                  className="grid grid-flow-col auto-cols-max rounded-5 cursor-pointer items-center transition-colors duration-200 font-titillium font-[600] w-full min-w-max laptop:w-auto laptop:text-center laptop:auto-cols-auto focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[3px] focus-visible:outline-carbonBlack disabled:pointer-events-none disabled:opacity-75 disabled:cursor-default text-12 px-[15px] gap-[8px] h-[39px] bg-tranparent text-white uppercase border-[1px] shadow-innerBlack transition-shadow duration-200 laptop:!shadow-white laptop:hover:shadow-inner border-brand-white focus-visible:!outline-brand-white"
+                  data-event="homeRaceCalenderCardViewSchedule"
+                  href="/f1/fixtures"
+                >
+                  <span className="font-titillium leading-none  text-12">
+                    View Schedule
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
           <div

@@ -587,3 +587,17 @@ a {
 .leading-tight {
   line-height: 1.25;
 }
+.font-bold {
+  font-weight: 700;
+}
+.text-fs-18px {
+  font-size: 1.125rem;
+}
+.text-grey-60 {
+  --tw-text-opacity: 1;
+  color: rgb(148 148 152 / var(--tw-text-opacity));
+}
+.bg-brand-carbonBlack {
+  --tw-bg-opacity: 1;
+  background-color: rgb(21 21 30 / var(--tw-bg-opacity));
+}

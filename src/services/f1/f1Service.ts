@@ -4,7 +4,10 @@ import { RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
 import { TeamRankingResponse } from "@/src/types/f1/teamStandingTypes";
 import axios from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_F1_API;
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_F1_API // Production URL from environment variables
+    : "http://localhost:8080/api/f1"; // Local development URL
 console.log(API_BASE_URL);
 
 //Fetch circuits
