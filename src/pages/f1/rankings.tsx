@@ -1,8 +1,12 @@
 import F1PageHeading from "@/src/components/f1/f1Heading";
 import Layout from "@/src/components/Layout";
+import {
+  fetchDriverRankings,
+  fetchTeamsRankings,
+} from "@/src/services/f1/f1Service";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
 import { TeamRankingResponse } from "@/src/types/f1/teamStandingTypes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Rankings: React.FC = () => {
   const [rankingsType, setRankingsType] = useState<"drivers" | "teams">(
@@ -15,30 +19,30 @@ const Rankings: React.FC = () => {
   >(null);
   const [error, setError] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setError(null);
-  //       setData(null);
-  //       if (rankingsType === "teams") {
-  //         const result = await fetchTeamsRankings(season);
-  //         setTitle(`${season} Teams Standings`);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setError(null);
+        setData(null);
+        if (rankingsType === "teams") {
+          const result = await fetchTeamsRankings(season);
+          setTitle(`${season} Teams Standings`);
 
-  //         console.log(result);
+          console.log(result);
 
-  //         setData(result);
-  //       } else {
-  //         const result = await fetchDriverRankings(season);
-  //         console.log(result);
-  //         setTitle(`${season} Driver Standings`);
-  //         setData(result);
-  //       }
-  //     } catch (err) {
-  //       setError("Sorry could not find any rankings for this year. ");
-  //     }
-  //   };
-  //   fetchData();
-  // }, [rankingsType, season]);
+          setData(result);
+        } else {
+          const result = await fetchDriverRankings(season);
+          console.log(result);
+          setTitle(`${season} Driver Standings`);
+          setData(result);
+        }
+      } catch (err) {
+        setError("Sorry could not find any rankings for this year. ");
+      }
+    };
+    fetchData();
+  }, [rankingsType, season]);
   const years = Array.from({ length: 2024 - 1980 + 1 }, (_, i) => 2024 - i);
 
   return (

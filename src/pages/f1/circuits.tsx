@@ -1,5 +1,6 @@
 import F1PageHeading from "@/src/components/f1/f1Heading";
 import Layout from "@/src/components/Layout";
+import { fetchCircuits } from "@/src/services/f1/f1Service";
 import { Circuit } from "@/src/types/f1/circuitTypes";
 import Link from "next/link";
 
@@ -120,15 +121,15 @@ const CircuitsPage: React.FC<CircuitsPageProps> = ({ circuits, error }) => {
   );
 };
 
-// export async function getServerSideProps() {
-//   try {
-//     const data = await fetchCircuits();
-//     console.log(data);
+export async function getServerSideProps() {
+  try {
+    const data = await fetchCircuits();
+    console.log(data);
 
-//     return { props: { circuits: data.response } };
-//   } catch (error) {
-//     return { props: { error: "Failed to fetch circuits" } };
-//   }
-// }
+    return { props: { circuits: data.response } };
+  } catch (error) {
+    return { props: { error: "Failed to fetch circuits" } };
+  }
+}
 
 export default CircuitsPage;

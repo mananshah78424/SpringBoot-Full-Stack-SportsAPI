@@ -1,27 +1,28 @@
 import Layout from "@/src/components/Layout";
+import { fetchDriverRankings } from "@/src/services/f1/f1Service";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const DriverCard: React.FC = () => {
   const [drivers, setDrivers] = useState<DriverRankingResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [season, setSeason] = useState<number>(2024);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setError(null);
-  //       setDrivers(null);
-  //       const result = await fetchDriverRankings(season);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setError(null);
+        setDrivers(null);
+        const result = await fetchDriverRankings(season);
 
-  //       console.log(result);
-  //       setDrivers(result);
-  //     } catch (err) {
-  //       setError("Error fetching driver rankings");
-  //     }
-  //   };
-  //   fetchData();
-  // }, [season]);
+        console.log(result);
+        setDrivers(result);
+      } catch (err) {
+        setError("Error fetching driver rankings");
+      }
+    };
+    fetchData();
+  }, [season]);
   return (
     <Layout>
       <div className="flex flex-col mx-auto px-4 sm:px-6 lg:px-8 mt-5">
