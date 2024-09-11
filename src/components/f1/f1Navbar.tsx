@@ -1,4 +1,4 @@
-import MyIcon from "@/src/images/F1_logo.svg"; // Update this path to your icon's location
+import MyIcon from "@/public/images/F1_logo.svg"; // Update this path to your icon's location
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,16 +6,21 @@ import "../../styles/f1.css";
 
 const F1Navbar: React.FC = () => {
   return (
-    <div className="w-full hidden nav-primary lg:block bg-primary pt-[70px] pb-[20px] lg:py-0 px-[10px] lg:h-[70px] mt-10">
+    <div className="w-full hidden nav-primary lg:block bg-primary pt-[70px] pb-[20px] lg:py-0 px-[10px] lg:h-[70px] mt-4">
       <nav className="m-auto w-full grid grid-cols-globalNavMobile lg:grid-cols-globalNavDesktop max-w-[1320px] h-full lg:px-[10px]">
-        <nav className="f1-logo">
-          <span>
-            <Link href="/f1">
-              <Image src={MyIcon} width={200} height={200} alt="F1 logo" />
+        <nav className="f1-logo h-full">
+          <span className="h-full relative w-[100px]">
+            <Link href="/f1" className="h-full relative w-[100px]">
+              <Image
+                src={MyIcon}
+                fill
+                className="h-full w-full object-fill !relative"
+                alt="F1 logo"
+              />
             </Link>
           </span>
         </nav>
-        <ul className="flex flex-row w-full h-full text-white">
+        <ul className="flex flex-row w-full h-full text-white font-thin">
           <li className="w-full h-full  ">
             <div className="w-full h-full flex items-center justify-center">
               <Link href="/f1/circuits">Circuits</Link>

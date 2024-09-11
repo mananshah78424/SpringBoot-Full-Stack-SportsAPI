@@ -1,15 +1,13 @@
+import standingBg from "@/public/images/standing-bg.png";
 import Layout from "@/src/components/Layout";
-import Banner1 from "@/src/images/Banner1.avif";
 import {
   fetchDriverRankings,
   fetchFixtures,
 } from "@/src/services/f1/f1Service";
 import { DriverRanking } from "@/src/types/f1/driverStandingTypes";
 import { Race, RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import standingBg from "../../images/standing-bg.png";
 import "../../styles/f1.css";
 
 type Props = {};
@@ -25,11 +23,14 @@ export default function Index({}: Props) {
   const [fixtures, setFixtures] = useState<RaceResponse | null>(null);
   const [nextRace, setNextRace] = useState<Race | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true); // Added loading state
+
   const season = 2024;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true); // Set loading to true before fetching
         setError(null);
         const result = await fetchDriverRankings(season);
         if (result?.response) {
@@ -43,56 +44,63 @@ export default function Index({}: Props) {
         }
       } catch (err) {
         setError("Error fetching driver rankings");
+      } finally {
+        // Fetch fixtures after driver rankings
+        const getFixtures = async () => {
+          if (season) {
+            setError(null);
+            try {
+              const data = await fetchFixtures(season, RaceType.RACE);
+              const scheduledRaces = data.response.filter(
+                (race) => race.status === "Scheduled"
+              );
+
+              const nextRace = scheduledRaces.reduce(
+                (closestRace, currentRace) => {
+                  const closestRaceDate = new Date(closestRace.date);
+                  const currentRaceDate = new Date(currentRace.date);
+                  return currentRaceDate < closestRaceDate
+                    ? currentRace
+                    : closestRace;
+                }
+              );
+              console.log("Next race is", nextRace);
+
+              setNextRace(nextRace);
+            } catch (error) {
+              setError("Failed to fetch race fixtures");
+            } finally {
+              setLoading(false); // Set loading to false after fetching
+            }
+          }
+        };
+
+        getFixtures();
       }
     };
+
     fetchData();
-
-    const getFixtures = async () => {
-      if (season) {
-        setError(null);
-        try {
-          const data = await fetchFixtures(season, RaceType.RACE);
-          const scheduledRaces = data.response.filter(
-            (race) => race.status === "Scheduled"
-          );
-
-          const nextRace = scheduledRaces.reduce((closestRace, currentRace) => {
-            const closestRaceDate = new Date(closestRace.date);
-            const currentRaceDate = new Date(currentRace.date);
-            return currentRaceDate < closestRaceDate
-              ? currentRace
-              : closestRace;
-          });
-          console.log(nextRace);
-
-          setNextRace(nextRace);
-        } catch (error) {
-          setError("Failed to fetch race fixtures");
-        } finally {
-        }
-      }
-    };
-
-    getFixtures();
   }, [season]);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div
+            className="spinner-border animate-spin inline-block w-12 h-12 border-4 border-solid border-current border-t-transparent text-blue-600 rounded-full"
+            role="status"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <div className="bg-grey-20">
         <div className="container mx-auto pt-16">
-          <div className="mx-auto flex">
-            <div className="container h-full align-center flex mx-auto justify-center rounded-lg shadow-lg">
-              <Image
-                src={Banner1}
-                layout="responsive"
-                width={800}
-                height={100}
-                alt="Main screen image"
-                className="w-full object-cover"
-              />
-            </div>
-          </div>
-
           <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full bg-brand-carbonBlack pt-2">
             <div className="h-full flex flex-col gap-xs justify-center items-center w-[32rem] mx-auto p-4">
               <div className="flex flex-col items-center gap-xs transition duration-500 text-center group-hover:text-white p-4">
