@@ -74,10 +74,20 @@ public class f1Service {
     }
 
     // Driver
-    public DriverResponse getDriver(String search) {
-        String url = String.format("https://v1.formula-1.api-sports.io/drivers?search=%s", search);
+    public DriverResponse getDriver(String search, Integer id) {
+        String url;
+
+        if (search != null) {
+            url = String.format("https://v1.formula-1.api-sports.io/drivers?search=%s", search);
+        } else if (id != null) {
+            url = String.format("https://v1.formula-1.api-sports.io/drivers?id=%d", id);
+        } else {
+            throw new IllegalArgumentException("Either search or id must be provided");
+        }
+
         return fetchAndParse(url, DriverResponse.class);
     }
+
 
     // General
     private <T> T fetchAndParse(String url, Class<T> responseType) {

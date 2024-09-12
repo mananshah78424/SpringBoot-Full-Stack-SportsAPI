@@ -64,7 +64,8 @@ public class f1Controller {
     //Circuits
     @GetMapping("/circuits")
     public CircuitResponse getCircuits(){
-        System.out.println("Truing to find circuits call!");
+        System.out.println("Trying to find circuits call!");
+        System.out.println(f1Service.getCircuits());
         return f1Service.getCircuits();
     }
 
@@ -78,7 +79,10 @@ public class f1Controller {
 
     //Driver
     @GetMapping("/driver")
-    public DriverResponse getDrivers(@RequestParam(value="search", required = false) String search){
-        return f1Service.getDriver(search);
+    public DriverResponse getDrivers(
+            @RequestParam(value="search", required = false) String search,
+            @RequestParam(value = "id", required = false) Integer id
+            ){
+        return f1Service.getDriver(search,id);
     }
 }

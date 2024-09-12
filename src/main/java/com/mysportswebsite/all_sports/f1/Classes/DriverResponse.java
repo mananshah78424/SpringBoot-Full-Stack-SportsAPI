@@ -19,6 +19,7 @@ public class DriverResponse implements Serializable {
         private String name;
         private String image;
         private String nationality;
+        private Country country;
         @JsonProperty("birthdate")
         private String dob;
         @JsonProperty("world_championships")
@@ -26,6 +27,14 @@ public class DriverResponse implements Serializable {
         private int podiums;
         private double career_points;
 
+        @Data
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class Country implements Serializable{
+            private String name;
+        }
+
     }
+
+
 
 }
