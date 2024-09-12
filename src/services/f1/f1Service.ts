@@ -74,3 +74,19 @@ export const fetchFixtures = async (
     throw error;
   }
 };
+
+//Fetch Drivers
+export const fetchDrivers = async (
+  search?: String,
+  id?: number
+): Promise<any> => {
+  try {
+    const response = await axios.get<any>(
+      `${API_BASE_URL}/driver${search ? `?search=${search}` : `?id=${id}`}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching driver details");
+    throw error;
+  }
+};

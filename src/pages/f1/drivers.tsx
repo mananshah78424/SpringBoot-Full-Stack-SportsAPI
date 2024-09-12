@@ -1,5 +1,5 @@
 import Layout from "@/src/components/Layout";
-import { fetchDriverRankings } from "@/src/services/f1/f1Service";
+import { fetchDriverRankings, fetchDrivers } from "@/src/services/f1/f1Service";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -8,12 +8,33 @@ const DriverCard: React.FC = () => {
   const [drivers, setDrivers] = useState<DriverRankingResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [season, setSeason] = useState<number>(2024);
+  const driverNationality: { [key: number]: string } = {}; // Add an explicit type for the object
   useEffect(() => {
     const fetchData = async () => {
       try {
         setError(null);
         setDrivers(null);
         const result = await fetchDriverRankings(season);
+        console.log(
+          "Len of result of DriverRankings is ",
+          result.response.length
+        );
+
+        // const getDriverDetails = await fetchDrivers(undefined, 20);
+        // console.log(getDriverDetails);
+        for (const individualDriver of result.response) {
+          const driverId = individualDriver.driver.id;
+
+          const getDriverDetails = await fetchDrivers(undefined, driverId);
+          console.log(getDriverDetails, driverId);
+
+          // if (getDriverDetails && getDriverDetails.response) {
+
+          //   driverNationality[driverId] =
+          //     getDriverDetails.response[0].country.name;
+          //   console.log(driverNationality);
+          // }
+        }
 
         console.log(result);
         setDrivers(result);
@@ -34,6 +55,7 @@ const DriverCard: React.FC = () => {
             <div className="flex flex-col md:grid md:grid-cols-12 [&>*]:col-span-12 md:[&>*]:col-span-6 gap-xl lg:[&>*]:col-span-4 lg:[&>*:nth-child(-n+3)]:col-span-4 lg:[&>*:nth-child(n+4)]:col-span-3">
               {drivers &&
                 drivers.response.map((driver, index) => {
+                  // const nationalityImageLink = `https://media.formula1.com/d_default_fallback_image.png/content/dam/fom-website/flags/${}.jpg`;
                   const [firstName, lastName] = driver.driver.name.split(" ");
                   const nameForlink =
                     firstName.slice(0, 3) +
@@ -53,7 +75,6 @@ const DriverCard: React.FC = () => {
                     0,
                     1
                   )}/${nameForlink}/${imageNameForlink}`;
-                  console.log(imageLink);
 
                   return (
                     <Link

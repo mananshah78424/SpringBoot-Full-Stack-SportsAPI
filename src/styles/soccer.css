@@ -1,0 +1,46 @@
+.main-soccer-banner {
+  min-height: 10.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("https://www.premierleague.com/resources/rebrand/v7.152.2/i/elements/backgrounds/primary-bg.svg");
+  background-size: cover;
+  padding: 0 0.8rem;
+  overflow: hidden;
+  border-bottom: 0.1rem solid #fff;
+  padding-bottom: 0;
+  font-size: 0;
+}
+.soccer-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5.6rem;
+  max-width: 137.6rem;
+  width: 100%;
+  margin: auto;
+}
+.soccer-banner-title {
+  position: relative;
+  z-index: 10;
+  font-family: PremierSans-Heavy, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 3.1rem;
+  line-height: 7.3rem;
+  color: #fff;
+  margin-left: 5rem;
+}
+
+.main-soccer-banner:after {
+  content: "";
+  position: absolute;
+  width: 1800px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-image: url("https://www.premierleague.com/resources/rebrand/v7.152.2/i/elements/backgrounds/primary-graphic.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0 0;
+}

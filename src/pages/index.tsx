@@ -38,6 +38,7 @@ const Index = (props: Props) => {
                     alt="F1 image"
                     fill
                     className="h-full w-full object-fill"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
               </div>
@@ -54,7 +55,7 @@ const Index = (props: Props) => {
                 </Link>
                 <p>Soccer Stats - TBD</p>
                 <div className="flex flex-row space-x-8 mt-4">
-                  <Link href="/f1">Home</Link>
+                  <Link href="/soccer">Home</Link>
                   <Link href="/f1/drivers"></Link>
                   <Link href="/f1/rankings"></Link>
                 </div>
