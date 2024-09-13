@@ -11,7 +11,6 @@ console.log("URL is", API_BASE_URL);
 export const fetchTeams = async (): Promise<TeamsResponse> => {
   try {
     const response = await axios.get<TeamsResponse>(`${API_BASE_URL}/teams`);
-    console.log("Got the response as: ", response);
 
     return response.data;
   } catch (error) {

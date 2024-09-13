@@ -1,5 +1,6 @@
+import F1PageHeading from "@/src/components/f1/f1Heading";
 import Layout from "@/src/components/Layout";
-import { fetchDriverRankings, fetchDrivers } from "@/src/services/f1/f1Service";
+import { fetchDriverRankings } from "@/src/services/f1/f1Service";
 import { DriverRankingResponse } from "@/src/types/f1/driverStandingTypes";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -15,26 +16,26 @@ const DriverCard: React.FC = () => {
         setError(null);
         setDrivers(null);
         const result = await fetchDriverRankings(season);
-        console.log(
-          "Len of result of DriverRankings is ",
-          result.response.length
-        );
+        // console.log(
+        //   "Len of result of DriverRankings is ",
+        //   result.response.length
+        // );
 
-        // const getDriverDetails = await fetchDrivers(undefined, 20);
-        // console.log(getDriverDetails);
-        for (const individualDriver of result.response) {
-          const driverId = individualDriver.driver.id;
+        // // const getDriverDetails = await fetchDrivers(undefined, 20);
+        // // console.log(getDriverDetails);
+        // for (const individualDriver of result.response) {
+        //   const driverId = individualDriver.driver.id;
 
-          const getDriverDetails = await fetchDrivers(undefined, driverId);
-          console.log(getDriverDetails, driverId);
+        //   const getDriverDetails = await fetchDrivers(undefined, driverId);
+        //   console.log(getDriverDetails, driverId);
 
-          // if (getDriverDetails && getDriverDetails.response) {
+        //   // if (getDriverDetails && getDriverDetails.response) {
 
-          //   driverNationality[driverId] =
-          //     getDriverDetails.response[0].country.name;
-          //   console.log(driverNationality);
-          // }
-        }
+        //   //   driverNationality[driverId] =
+        //   //     getDriverDetails.response[0].country.name;
+        //   //   console.log(driverNationality);
+        //   // }
+        // }
 
         console.log(result);
         setDrivers(result);
@@ -50,13 +51,19 @@ const DriverCard: React.FC = () => {
         <div className="min-h-screen mt-4">
           <div className="f1-option-bar container">
             <div className="f1-option-bar container mt-6 text-[50px] font-thin">
-              {season} Drivers
+              <F1PageHeading title={`F1 DRIVERS ${season}`}></F1PageHeading>
             </div>
             <div className="flex flex-col md:grid md:grid-cols-12 [&>*]:col-span-12 md:[&>*]:col-span-6 gap-xl lg:[&>*]:col-span-4 lg:[&>*:nth-child(-n+3)]:col-span-4 lg:[&>*:nth-child(n+4)]:col-span-3">
               {drivers &&
                 drivers.response.map((driver, index) => {
                   // const nationalityImageLink = `https://media.formula1.com/d_default_fallback_image.png/content/dam/fom-website/flags/${}.jpg`;
                   const [firstName, lastName] = driver.driver.name.split(" ");
+                  const numberForLink = `https://media.formula1.com/d_default_fallback_image.png/content/dam/fom-website/2018-redesign-assets/drivers/number-logos/${firstName.slice(
+                    0,
+                    3
+                  )}${lastName.slice(0, 3)}01`;
+                  console.log(numberForLink);
+
                   const nameForlink =
                     firstName.slice(0, 3) +
                     lastName.slice(0, 3) +
@@ -75,12 +82,12 @@ const DriverCard: React.FC = () => {
                     0,
                     1
                   )}/${nameForlink}/${imageNameForlink}`;
-
+                  const driverLink = `https://www.formula1.com/en/drivers/${firstName.toLowerCase()}-${lastName.toLowerCase()}`;
                   return (
                     <Link
                       key={index}
                       className="outline outline-offset-4 outline-brand-black group outline-0 focus-visible:outline-2"
-                      href="/en/drivers/max-verstappen"
+                      href={driverLink}
                     >
                       <div className="border-t-double border-r-double rounded-tr-s f1-utils-inner-padding-tr--half f1-driver-listing-card border-brand-black transition-all hover:-mt-xs hover:pt-l hover:border-current text-3671C6 group-focus-visible:outline group-focus-visible:outline-3671C6 group-focus-visible:transition-all group-focus-visible:border-current">
                         <div className="flex flex-col gap-xs">
@@ -92,7 +99,7 @@ const DriverCard: React.FC = () => {
                               <p className="font-formulaOneWide tracking-normal font-normal text-[18px] leading-none">
                                 {driver.points}
                               </p>
-                              <p className="font-formulaOneWide tracking-normal font-normal text-[12px] leading-none uppercase px-xs py-micro rounded-xxs bg-brand-black text-brand-white">
+                              <p className="font-formulaOneWide tracking-normal font-normal text-[12px] leading-none uppercase py-micro rounded-xxs bg-brand-black">
                                 pts
                               </p>
                             </div>
@@ -121,8 +128,8 @@ const DriverCard: React.FC = () => {
                           </p>
                           <div className="flex items-baseline">
                             <img
-                              alt="Driver Racing Number 1"
-                              src="https://media.formula1.com/d_default_fallback_image.png/content/dam/fom-website/2018-redesign-assets/drivers/number-logos/MAXVER01.png"
+                              alt={String(driver.driver.number)}
+                              src={numberForLink}
                               className="f1-utils-square-block text-[6rem]"
                             />
                             <img

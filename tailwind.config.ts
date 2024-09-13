@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "grey-80": "rgb(56, 56, 63)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -16,6 +19,11 @@ const config: Config = {
       },
       fontFamily: {
         archivo: ["ArchivoBlack", "sans-serif"],
+        f1NavbarFont: ["FormulaNavbarFont", "sans-serif"],
+        titillium: ["Titillium", "sans-serif"],
+      },
+      fontSize: {
+        "fs-14px": ".875rem",
       },
     },
   },

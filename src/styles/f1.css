@@ -604,3 +604,17 @@ a {
 .fill-white {
   filter: invert(1) brightness(100%);
 }
+
+.transition-colors {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+/* Circuits */
+.bg-black,
+.bg-brand-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}

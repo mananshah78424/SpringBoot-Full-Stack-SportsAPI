@@ -14,11 +14,11 @@ const F1PageHeading: React.FC<F1PageHeadingProps> = ({
   responseType,
 }) => {
   return (
-    <div className="f1-container container">
+    <div className="f1-container container mb-10">
       <div className="f1-inner-wrapper flex flex-col gap-xl f1-utls-inner-padding-y">
         <div className="border-t-thick border-r-thick rounded-tr-l f1-utils-inner-padding-tr--half border-brand-black flex">
-          <div className="mb-s mb-0 w-[66%]">
-            <h1 className="f1-heading-black font-formulaOne tracking-normal font-black non-italic text-fs-32px lg:text-fs-62px leading-tight sm:leading-none">
+          <div className="mb-s mb-0">
+            <h1 className="f1-heading-black font-f1NavbarFont tracking-normal font-black non-italic text-fs-32px lg:text-fs-62px leading-tight sm:leading-none">
               {title}
             </h1>
             <p className="f1-heading tracking-normal text-fs-12px leading-tight uppercase font-normal non-italic f1-heading__body font-formulaOne">

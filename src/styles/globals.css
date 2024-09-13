@@ -10,3 +10,16 @@ body {
   font-family: "ArchivoBlack";
   src: url("/fonts/ArchivoBlack-Regular.ttf") format("truetype");
 }
+@font-face {
+  font-family: "FormulaNavbarFont";
+  src: url("/fonts/F1NavbarFont.woff2") format("woff2");
+  font-weight: 300;
+  /* font-display: swap;
+    font-weight: 700;
+    font-style: normal */
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("/fonts/Titillium.ttf") format("truetype");
+}

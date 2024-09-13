@@ -20,7 +20,7 @@ const F1Navbar: React.FC = () => {
             </Link>
           </span>
         </nav>
-        <ul className="flex flex-row w-full h-full text-white font-thin">
+        <ul className="flex flex-row w-full h-full text-white font-f1NavbarFont font-thin">
           <li className="w-full h-full  ">
             <div className="w-full h-full flex items-center justify-center">
               <Link href="/f1/circuits">Circuits</Link>

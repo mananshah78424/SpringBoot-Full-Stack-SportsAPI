@@ -148,12 +148,22 @@ const RacePage: React.FC = () => {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {fixtures.response.map((race, index) => {
                       const dateObj = new Date(race.date);
-
+                      const day = dateObj.getDate(); // Get day (1-31)
+                      const month = dateObj.toLocaleString("en-US", {
+                        month: "short",
+                      }); // Get month in letters (e.g., "January")
+                      const year = dateObj.getFullYear(); // Get full year (YYYY)
                       const date = dateObj.toISOString().split("T")[0]; // Extract date (YYYY-MM-DD)
-                      const day = dateObj.toLocaleDateString("en-US", {
+                      const dayOfWeek = dateObj.toLocaleDateString("en-US", {
                         weekday: "long",
                       }); // Get day of the week
-                      const time = dateObj.toTimeString().split(" ")[0]; // Extract time (HH:MM:SS)
+                      const time = new Intl.DateTimeFormat("en-US", {
+                        timeZone: "America/Los_Angeles", // PST time zone
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: false,
+                      }).format(dateObj); // Extract time in HH:MM:SS format
                       return (
                         <tr
                           key={race.id}
@@ -161,11 +171,23 @@ const RacePage: React.FC = () => {
                             index % 2 === 0 ? "bg-gray-50" : "bg-white"
                           }
                         >
-                          <td className="px-6 py-4 whitespace-nowrap text-black">
-                            {`${day}, ${date}, ${time} UTC`}
+                          <td className="px-6 py-4 whitespace-nowrap text-black flex flex-col">
+                            {/* {`${day}, ${date}, ${time} PST`} */}
+                            <p>{day}</p>
+                            <div className="flex flex-row gap-xxs">
+                              <p className="f1-heading-wide font-f1NavbarFont tracking-normal font-normal non-italic text-fs-12px leading-none uppercase flex items-center px-xs py-micro rounded-xxs bg-brand-black text-brand-white">
+                                <span className="whitespace-nowrap">
+                                  {month}
+                                </span>
+                              </p>
+                            </div>
+                            <p>{time}</p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-black">
-                            {race.competition.name}
+                            <p className="font-f1NavbarFont text-fs-18px leading-tight font-bold">
+                              {race.competition.location.country}
+                            </p>
+                            <p>{race.competition.name}</p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {race.circuit && (

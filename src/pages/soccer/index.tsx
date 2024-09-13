@@ -5,8 +5,8 @@ type Props = {};
 const index = (props: Props) => {
   return (
     <div className="mt-10">
-      <SoccerBanner></SoccerBanner>
-      <div className="container mx-auto">c</div>
+      <SoccerBanner title=""></SoccerBanner>
+      <div className="container mx-auto"></div>
     </div>
   );
 };

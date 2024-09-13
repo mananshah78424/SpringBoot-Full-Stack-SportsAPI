@@ -44,3 +44,14 @@
   background-size: auto;
   background-position: 0 0;
 }
+
+/* Teams */
+
+.col-12 {
+  padding: 0;
+}
+
+ol li,
+ul li {
+  list-style-type: none;
+}

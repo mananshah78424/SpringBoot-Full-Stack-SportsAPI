@@ -153,8 +153,8 @@ export default function Index({}: Props) {
               backgroundImage: `url(${standingBg.src})`,
             }}
           >
-            <div className="f1-container container relative f1-utils-flex-container items-center py-xl __variable_ada7bd">
-              <h2 className="f1-heading-wide text-branding-white tracking-normal font-normal non-italic text-fs-25px leading-tight normal-case text-center px-xs font-formulaOneWide">
+            <div className="f1-container container relative f1-utils-flex-container items-center py-xl ">
+              <h2 className="f1-heading-wide text-branding-white tracking-normal font-normal non-italic text-[5rem] leading-tight normal-case text-center px-xs font-f1NavbarFont">
                 Driver Standings
               </h2>
               <div className="grid gap-normal w-full sm:pt-[5rem] lg:pt-[16rem] px-36">
@@ -252,34 +252,28 @@ export default function Index({}: Props) {
               </div>
             </div>
           </div>
-          <div className="mx-auto container mt-4 text-white pb-10">
+          <div className="mx-auto container mt-4 text-white pb-10 px-[9rem]">
             {topTenDrivers &&
               topTenDrivers.map((driver, index) => {
                 const [firstName, lastName] = driver.driver.name.split(" ");
                 return (
                   <div
                     key={index}
-                    className="flex flex-row justify-between rounded-xxs items-center p-4 border-b bg-white text-black font-normal normal-case text-fs-17px"
+                    className="flex flex-row justify-between rounded-xxs items-center p-4 border-b bg-white text-black font-normal normal-case text-fs-14px hover:bg-grey-80  hover:text-white transition-colors"
                   >
-                    <div className="leftEnd flex flex-row">
-                      <span className="f1-heading tracking-normal text-fs-14px leading-tight normal-case font-bold non-italic f1-heading__body font-formulaOne">
+                    <div className="leftEnd flex flex-row space-x-5">
+                      <span className="f1-heading tracking-normal text-fs-14px leading-tight normal-case non-italic f1-heading__body font-formulaOne">
                         {driver.position}
-                        <span
-                          className="driverName border-teamColor border-l-4 pl-xs ml-xs"
-                          style={
-                            {
-                              "--teamColor": "#FF8000",
-                            } as React.CSSProperties
-                          }
-                        >
-                          <span className="font-normal tablet:inline">
-                            {firstName}
-                          </span>
-                          &nbsp;<span className="uppercase">{lastName}</span>
+                      </span>
+
+                      <div className="font-f1NavbarFont">
+                        <span className="font-normal tablet:inline">
+                          {firstName}
                         </span>
-                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__body text-fs-17px text-grey-70 tablet:inline-block px-xs">
-                          <small>{driver.team.name}</small>
-                        </span>
+                        &nbsp;<span className="uppercase">{lastName}</span>
+                      </div>
+                      <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__body text-fs-17px text-grey-70 tablet:inline-block px-xs">
+                        <small>{driver.team.name}</small>
                       </span>
                     </div>
                     <div className="flex items-center gap-xxs">
