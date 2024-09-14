@@ -38,6 +38,7 @@ public class SoccerService {
 
     public StandingResponse getStandings(Integer season){
         String url=String.format("https://v3.football.api-sports.io/standings?league=39&season=%d",season);
+        System.out.println(url);
         return fetchAndParse(url,StandingResponse.class);
     }
 

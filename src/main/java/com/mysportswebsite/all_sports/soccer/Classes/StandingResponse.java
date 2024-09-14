@@ -3,6 +3,7 @@ package com.mysportswebsite.all_sports.soccer.Classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -39,6 +40,8 @@ public class StandingResponse {
                 private String form;
                 private String status;
                 private String description;
+                @JsonProperty("all")
+                private Played all;
 
                 @Data
                 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -46,6 +49,28 @@ public class StandingResponse {
                     private int id;
                     private String name;
                     private String logo;
+
+                }
+
+                @Data
+                @JsonIgnoreProperties(ignoreUnknown = true)
+                public  static class Played{
+                    @JsonProperty("played")
+                    private int games_played;
+                    private int win;
+                    private int draw;
+                    private int lose;
+                    private Goals goals;
+
+                    @Data
+                    @JsonIgnoreProperties(ignoreUnknown = true)
+                    public  static class Goals{
+                        @JsonProperty("for")
+                        private int scored;
+                        @JsonProperty("against")
+                        private int allowed;
+
+                    }
 
                 }
             }
