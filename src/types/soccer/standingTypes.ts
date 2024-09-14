@@ -1,20 +1,17 @@
-export interface Paging {
-  current: number;
-  total: number;
+export interface StandingsResponse {
+  response: LeagueResponse[];
 }
-
-export interface Parameters {
-  league: string;
-  season: string;
+export interface LeagueResponse {
+  league: League;
 }
-
-export interface Team {
+export interface League {
   id: number;
   name: string;
   logo: string;
+  flag: string;
+  season: number;
+  standings: TeamStanding[][];
 }
-
-// Define the TeamStanding interface
 export interface TeamStanding {
   rank: number;
   team: Team;
@@ -24,27 +21,23 @@ export interface TeamStanding {
   form: string;
   status: string;
   description: string;
+  all: Played;
 }
 
-export interface League {
+export interface Team {
   id: number;
   name: string;
-  country: string;
   logo: string;
-  flag: string;
-  season: number;
-  standings: TeamStanding[][];
 }
 
-export interface LeagueResponse {
-  league: League;
+export interface Played {
+  played: number;
+  win: number;
+  draw: number;
+  lose: number;
+  goals: Goals;
 }
-
-export interface MainStandingsResponse {
-  get: string;
-  parameters: Parameters;
-  errors: any; // You might want to specify the type based on what errors could be
-  results: number;
-  paging: Paging;
-  response: LeagueResponse[];
+export interface Goals {
+  for: number;
+  against: number;
 }

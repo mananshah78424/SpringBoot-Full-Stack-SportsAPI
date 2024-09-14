@@ -55,3 +55,8 @@ ol li,
 ul li {
   list-style-type: none;
 }
+
+/* Standings */
+.league-table__comp-logo {
+  max-height: 3rem;
+}
