@@ -60,3 +60,53 @@ ul li {
 .league-table__comp-logo {
   max-height: 3rem;
 }
+
+.match-fixture__teams {
+  display: flex;
+  align-items: center;
+  width: 45.9rem;
+  margin-left: 3.2rem;
+  min-height: 2.5rem;
+  position: relative;
+  font-size: 0;
+}
+.match-fixture__team:first-of-type {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 7.8rem;
+}
+.match-fixture__team {
+  width: 50%;
+  padding-left: 7.8rem;
+  position: relative;
+}
+.match-fixture__team-name {
+  font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #37003c;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.04rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.match-fixture__team:first-of-type .badge {
+  right: 3.7rem;
+  top: -0.4rem;
+}
+.badge-image-container .badge-image--32 {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.match-fixture__abbr {
+  display: none;
+}
+
+.match-fixture__wrapper {
+  display: block;
+  color: #37003c;
+  text-decoration: none;
+  position: relative;
+}
