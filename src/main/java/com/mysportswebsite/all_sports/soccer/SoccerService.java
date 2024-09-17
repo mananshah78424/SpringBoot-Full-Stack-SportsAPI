@@ -3,10 +3,7 @@ package com.mysportswebsite.all_sports.soccer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysportswebsite.all_sports.f1.Classes.DriverResponse;
 import com.mysportswebsite.all_sports.f1.Classes.TeamResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.FixtureResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.StandingResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.TeamStatisticsResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.TeamsResponse;
+import com.mysportswebsite.all_sports.soccer.Classes.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -57,6 +54,8 @@ public class SoccerService {
     }
 
 
+
+    // Fixtures
     public FixtureResponse getFixtures(Integer season, Integer league, String live, String date, Integer teamID, String round, String timezone) {
         StringBuilder urlBuilder = new StringBuilder("https://v3.football.api-sports.io/fixtures?");
 
@@ -92,6 +91,12 @@ public class SoccerService {
 
         // Call the fetchAndParse method to get the fixture response
         return fetchAndParse(url, FixtureResponse.class);
+    }
+
+    // Get leagues
+    public LeaguesResponse getLeagues(){
+        String url=String.format("https://v3.football.api-sports.io/leagues");
+        return fetchAndParse(url,LeaguesResponse.class);
     }
 
     // General

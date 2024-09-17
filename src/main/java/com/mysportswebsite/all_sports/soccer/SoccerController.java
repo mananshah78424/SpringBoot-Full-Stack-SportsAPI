@@ -2,10 +2,7 @@ package com.mysportswebsite.all_sports.soccer;
 
 
 import com.mysportswebsite.all_sports.f1.Classes.TeamResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.FixtureResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.StandingResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.TeamStatisticsResponse;
-import com.mysportswebsite.all_sports.soccer.Classes.TeamsResponse;
+import com.mysportswebsite.all_sports.soccer.Classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -62,6 +59,12 @@ public class SoccerController {
 
     }
 
+
+    // Leagues
+    @GetMapping("/leagues")
+    public LeaguesResponse getLeagues(){
+        return soccerService.getLeagues();
+    }
 
     // Fixtures
     @GetMapping("/fixtures")
