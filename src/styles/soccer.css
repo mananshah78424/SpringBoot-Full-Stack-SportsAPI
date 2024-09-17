@@ -110,3 +110,12 @@ ul li {
   text-decoration: none;
   position: relative;
 }
+
+.club-card__name {
+  font-family: PremierSans-Heavy, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 2rem;
+  color: #37003c;
+  letter-spacing: -0.4px;
+}

@@ -412,6 +412,31 @@ a {
 }
 
 /* Indexpage */
+.text-fs-32px {
+  font-size: 2rem;
+}
+.border-primary {
+  --tw-border-opacity: 1;
+  border-color: rgb(225 6 0 / var(--tw-border-opacity));
+}
+
+.px-normal {
+  padding-right: 1.25rem;
+}
+.mr-l {
+  margin-right: 1.875rem;
+}
+
+.border-gray20 {
+  --tw-border-opacity: 1;
+  border-color: rgb(208 208 210 / var(--tw-border-opacity));
+}
+.border-r-double {
+  border-right-width: 0.125rem;
+}
+.border-b-double {
+  border-bottom-width: 0.125rem;
+}
 .f1-utils-flex-container {
   display: flex;
   flex-direction: column;

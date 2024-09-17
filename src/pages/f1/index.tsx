@@ -1,5 +1,6 @@
 import standingBg from "@/public/images/standing-bg.png";
 import Layout from "@/src/components/Layout";
+import Loading from "@/src/components/Loading";
 import {
   fetchDriverRankings,
   fetchFixtures,
@@ -23,9 +24,10 @@ export default function Index({}: Props) {
   const [fixtures, setFixtures] = useState<RaceResponse | null>(null);
   const [nextRace, setNextRace] = useState<Race | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true); // Added loading state
-
+  const [loading, setLoading] = useState(false); // Added loading state
+  const [circuitImage, setCircuitImage] = useState<string>();
   const season = 2024;
+  var circuitCountry;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +67,13 @@ export default function Index({}: Props) {
                 }
               );
               console.log("Next race is", nextRace);
+              circuitCountry = nextRace?.competition?.location?.country
+                ? nextRace.competition.location.country.replace(/\s+/g, "_")
+                : null;
+              setCircuitImage(
+                `https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Circuit maps 16x9/${circuitCountry}_Circuit`
+              );
+              console.log("CircuitImage is", circuitImage);
 
               setNextRace(nextRace);
             } catch (error) {
@@ -85,14 +94,7 @@ export default function Index({}: Props) {
   if (loading) {
     return (
       <Layout>
-        <div className="flex items-center justify-center min-h-screen">
-          <div
-            className="spinner-border animate-spin inline-block w-12 h-12 border-4 border-solid border-current border-t-transparent text-blue-600 rounded-full"
-            role="status"
-          >
-            <span className="sr-only">Loading...</span>
-          </div>
-        </div>
+        <Loading></Loading>
       </Layout>
     );
   }
@@ -101,7 +103,111 @@ export default function Index({}: Props) {
     <Layout>
       <div className="bg-grey-20">
         <div className="container mx-auto pt-16">
-          <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full bg-brand-carbonBlack pt-2">
+          <h1 className="font-f1NavbarFont text-[5rem] mb-4">Next Race</h1>
+          <fieldset className="border-t-thick border-r-thick rounded-tr-l f1-utils-inner-padding-tr--half relative border-primary pt-normal pr-normal">
+            <legend className="mr-l px-normal">
+              <div className="flex items-center">
+                <img
+                  alt="saudi-arabia-flag.png"
+                  src={`https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Flags%2016x9/${nextRace?.competition.location.country
+                    .replace(/\s+/g, "-")
+                    .toLowerCase()}-flag.png`}
+                  className="f1-c-image max-w-14 rounded object-cover"
+                />
+                <h2 className="f1-heading tracking-normal text-fs-20px text-[1.5625rem] ml-4 leading-none normal-case font-bold non-italic f1-heading__body font-titillium">
+                  <div className="ml-normal">{nextRace?.circuit.name}</div>
+                </h2>
+              </div>
+            </legend>
+
+            <div className="grid grid-cols-12 gap-normal">
+              <div className="col-span-12 lg:col-span-7">
+                <img
+                  alt="Saudi_Arabia_Circuit.png"
+                  src={circuitImage}
+                  className="f1-c-image w-full h-auto object-cover"
+                ></img>
+              </div>
+              <div className="col-span-12 lg:col-span-5">
+                <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-3">
+                  <div className="col-span-3 laptop:col-span-2 desktop:col-span-3">
+                    <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-2">
+                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                          Country
+                        </span>
+                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                          {nextRace?.competition.location.country}
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                            {" "}
+                          </span>
+                        </h2>
+                      </div>
+                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                          Status
+                        </span>
+                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                          {nextRace?.status}
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                            {" "}
+                          </span>
+                        </h2>
+                      </div>
+
+                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                          Number of Laps
+                        </span>
+                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                          {nextRace?.laps.total}
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                            {" "}
+                          </span>
+                        </h2>
+                      </div>
+
+                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                          Race Distance
+                        </span>
+                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                          {nextRace?.distance}
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                            {" "}
+                            km
+                          </span>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div className="my-4 w-full relative overflow-hidden w-full flex items-center h-48 lg:h-96 before:block before:absolute before:w-full before:bg-carbonBlack/50 before:h-full">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+              <h1 className="font-formula font-bold text-left text-white text-32 tablet:text-62 text-center mb-1.5 uppercase">
+                {nextRace?.competition.location.country}
+              </h1>
+              <img
+                className="max-w-28 tablet:max-w-44 m-auto"
+                src={`https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/year%20icon/${new Date().getFullYear()}.png`}
+                alt="Singapore"
+              />
+              <span className="text-center mb-1.5 uppercase bg-black text-white rounded-2xl py-1 px-2.5 !font-formula text-xs inline-block mt-3">
+                20 - 22 Sep
+              </span>
+            </div>
+            <img
+              src={`https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/${nextRace?.competition.location.country
+                .replace(/\s+/g, "-")
+                .toLowerCase()}`}
+            ></img>
+          </div>
+
+          {/* <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full bg-brand-carbonBlack pt-2">
             <div className="h-full flex flex-col gap-xs justify-center items-center w-[32rem] mx-auto p-4">
               <div className="flex flex-col items-center gap-xs transition duration-500 text-center group-hover:text-white p-4">
                 <img
@@ -113,19 +219,19 @@ export default function Index({}: Props) {
                   draggable="false"
                 />
                 <div className="flex min-h-6 items-center mt-4">
-                  <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-grey-60">
+                  <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-f1NavbarFont text-grey-60">
                     {nextRace?.competition.location.country}
                   </span>
                 </div>
               </div>
 
               <div className="flex flex-col items-center gap-xs text-center pb-4">
-                <span className="f1-heading tracking-normal text-fs-18px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-brand-white max-w-[70%]">
+                <span className="f1-heading tracking-normal text-fs-18px leading-none uppercase font-bold non-italic f1-heading__body font-f1NavbarFont text-brand-white max-w-[70%]">
                   <Link href="/">
                     {`FORMULA 1 QATAR AIRWAYS ${nextRace?.competition.name} 2024`}
                   </Link>
                 </span>
-                <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-formulaOne text-grey-60 pb-xs pt-2">
+                <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-f1NavbarFont text-grey-60 pb-xs pt-2">
                   {nextRace?.date
                     ? new Date(nextRace.date).toISOString().split("T")[0]
                     : "Date not available"}
@@ -146,7 +252,7 @@ export default function Index({}: Props) {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
           <div
             className="mx-auto container mt-6 relative before:absolute before:top-0 before:left-0 before:bg-driverStandingHome before:bg-center before:bg-cover before:w-full before:h-64 before:h-80 bg-grey-20 react-tabs__tab-panel--selected"
             style={{
@@ -262,17 +368,15 @@ export default function Index({}: Props) {
                     className="flex flex-row justify-between rounded-xxs items-center p-4 border-b bg-white text-black font-normal normal-case text-fs-14px hover:bg-grey-80  hover:text-white transition-colors"
                   >
                     <div className="leftEnd flex flex-row space-x-5">
-                      <span className="f1-heading tracking-normal text-fs-14px leading-tight normal-case non-italic f1-heading__body font-formulaOne">
+                      <span className="f1-heading tracking-normal text-fs-14px leading-tight normal-case non-italic f1-heading__body font-f1NavbarFont">
                         {driver.position}
                       </span>
 
                       <div className="font-f1NavbarFont">
-                        <span className="font-normal tablet:inline">
-                          {firstName}
-                        </span>
+                        <span className="font-normal inline">{firstName}</span>
                         &nbsp;<span className="uppercase">{lastName}</span>
                       </div>
-                      <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__body text-fs-17px text-grey-70 tablet:inline-block px-xs">
+                      <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__body text-fs-17px text-grey-70 inline-block px-xs">
                         <small>{driver.team.name}</small>
                       </span>
                     </div>

@@ -1,4 +1,5 @@
 import SoccerBanner from "@/src/components/soccer/SoccerBanner";
+import TopBar from "@/src/components/TopBar";
 import { fetchStandings } from "@/src/services/soccer/soccerService";
 import { TeamStanding } from "@/src/types/soccer/standingTypes";
 import { useEffect, useState } from "react";
@@ -23,7 +24,10 @@ const StandingsPage = () => {
   }, []);
   return (
     <div className="">
-      <SoccerBanner title="Standings"></SoccerBanner>
+      <TopBar></TopBar>
+      <div className="mt-5">
+        <SoccerBanner title="Standings"></SoccerBanner>
+      </div>
       <div className="container mx-auto">
         <div className="wrapper col-12 league-table__table-header mt-6">
           <div className="league-table__comp-logo-container js-table-logo">
