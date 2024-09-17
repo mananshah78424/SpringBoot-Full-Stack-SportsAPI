@@ -1,5 +1,6 @@
 package com.mysportswebsite.all_sports.Email;
 
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
@@ -22,9 +23,8 @@ public class EmailService {
     // Atomic counter for generating unique numeric IDs
     private static final AtomicLong idCounter = new AtomicLong();
 
-    // Method to generate a unique numeric ID
     private String generateUniqueId() {
-        return String.valueOf(idCounter.incrementAndGet()); // Increment and return as a string
+        return UUID.randomUUID().toString(); // Generate a random UUID
     }
 
     public void saveDetails(String email, String sport) {
@@ -33,7 +33,7 @@ public class EmailService {
 
         // Construct the item to be inserted
         Map<String, AttributeValue> item = new HashMap<>();
-        item.put("id", new AttributeValue().withN(uniqueId)); // Use .withN() for numbers
+        item.put("id", new AttributeValue().withS(uniqueId)); // Use .withN() for numbers
         item.put("email", new AttributeValue().withS(email));
         item.put("sport", new AttributeValue().withS(sport));
 
