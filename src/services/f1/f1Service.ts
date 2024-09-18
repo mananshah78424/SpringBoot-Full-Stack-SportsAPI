@@ -90,3 +90,16 @@ export const fetchDrivers = async (
     throw error;
   }
 };
+
+//Sending Email
+export const subscribeUserF1 = async (email: string): Promise<any> => {
+  try {
+    const response = await axios.post<any>(
+      `${API_BASE_URL}/email?email=${email}&sport=f1`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error subscribing users ");
+    throw error;
+  }
+};

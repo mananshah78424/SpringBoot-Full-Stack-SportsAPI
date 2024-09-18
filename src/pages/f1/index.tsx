@@ -4,6 +4,7 @@ import Loading from "@/src/components/Loading";
 import {
   fetchDriverRankings,
   fetchFixtures,
+  subscribeUserF1,
 } from "@/src/services/f1/f1Service";
 import { DriverRanking } from "@/src/types/f1/driverStandingTypes";
 import { Race, RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
@@ -26,6 +27,7 @@ export default function Index({}: Props) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false); // Added loading state
   const [circuitImage, setCircuitImage] = useState<string>();
+  const [email, setEmail] = useState<string>();
   const season = 2024;
   var circuitCountry;
 
@@ -90,7 +92,12 @@ export default function Index({}: Props) {
 
     fetchData();
   }, [season]);
-
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (email) {
+      const data = await subscribeUserF1(email);
+    }
+  };
   if (loading) {
     return (
       <Layout>
@@ -104,87 +111,109 @@ export default function Index({}: Props) {
       <div className="bg-grey-20">
         <div className="container mx-auto pt-16">
           <h1 className="font-f1NavbarFont text-[5rem] mb-4">Next Race</h1>
-          <fieldset className="border-t-thick border-r-thick rounded-tr-l f1-utils-inner-padding-tr--half relative border-primary pt-normal pr-normal">
-            <legend className="mr-l px-normal">
-              <div className="flex items-center">
-                <img
-                  alt="saudi-arabia-flag.png"
-                  src={`https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Flags%2016x9/${nextRace?.competition.location.country
-                    .replace(/\s+/g, "-")
-                    .toLowerCase()}-flag.png`}
-                  className="f1-c-image max-w-14 rounded object-cover"
-                />
-                <h2 className="f1-heading tracking-normal text-fs-20px text-[1.5625rem] ml-4 leading-none normal-case font-bold non-italic f1-heading__body font-titillium">
-                  <div className="ml-normal">{nextRace?.circuit.name}</div>
-                </h2>
-              </div>
-            </legend>
+          {nextRace && (
+            <fieldset className="border-t-thick border-r-thick rounded-tr-l f1-utils-inner-padding-tr--half relative border-primary pt-normal pr-normal">
+              <legend className="mr-l px-normal">
+                <div className="flex items-center">
+                  {nextRace ? (
+                    <img
+                      alt=""
+                      src={`https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Flags%2016x9/${nextRace?.competition.location.country
+                        .replace(/\s+/g, "-")
+                        .toLowerCase()}-flag.png`}
+                      className="f1-c-image max-w-14 rounded object-cover"
+                    />
+                  ) : (
+                    <img
+                      alt=""
+                      src={
+                        "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1000/content/dam/fom-website/2018-redesign-assets/Flags%2016x9/united-states-of-america-flag"
+                      }
+                      className="f1-c-image max-w-14 rounded object-cover"
+                    />
+                  )}
+                  <h2 className="f1-heading tracking-normal text-fs-20px text-[1.5625rem] ml-4 leading-none normal-case font-bold non-italic f1-heading__body font-titillium">
+                    <div className="ml-normal">{nextRace?.circuit.name}</div>
+                  </h2>
+                </div>
+              </legend>
 
-            <div className="grid grid-cols-12 gap-normal">
-              <div className="col-span-12 lg:col-span-7">
-                <img
-                  alt="Saudi_Arabia_Circuit.png"
-                  src={circuitImage}
-                  className="f1-c-image w-full h-auto object-cover"
-                ></img>
-              </div>
-              <div className="col-span-12 lg:col-span-5">
-                <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-3">
-                  <div className="col-span-3 laptop:col-span-2 desktop:col-span-3">
-                    <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-2">
-                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
-                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
-                          Country
-                        </span>
-                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
-                          {nextRace?.competition.location.country}
-                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
-                            {" "}
+              <div className="grid grid-cols-12 gap-normal">
+                <div className="col-span-12 lg:col-span-7">
+                  {nextRace ? (
+                    <img
+                      alt=""
+                      src={circuitImage}
+                      className="f1-c-image w-full h-auto object-cover"
+                    ></img>
+                  ) : (
+                    <img
+                      alt=""
+                      src={
+                        "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Las%20Vegas"
+                      }
+                      className="f1-c-image w-full h-auto object-cover"
+                    ></img>
+                  )}
+                </div>
+                <div className="col-span-12 lg:col-span-5">
+                  <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-3">
+                    <div className="col-span-3 laptop:col-span-2 desktop:col-span-3">
+                      <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-2">
+                        <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                            Country
                           </span>
-                        </h2>
-                      </div>
-                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
-                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
-                          Status
-                        </span>
-                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
-                          {nextRace?.status}
-                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
-                            {" "}
+                          <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                            {nextRace?.competition.location.country}
+                            <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                              {" "}
+                            </span>
+                          </h2>
+                        </div>
+                        <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                            Status
                           </span>
-                        </h2>
-                      </div>
+                          <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                            {nextRace?.status}
+                            <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                              {" "}
+                            </span>
+                          </h2>
+                        </div>
 
-                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
-                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
-                          Number of Laps
-                        </span>
-                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
-                          {nextRace?.laps.total}
-                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
-                            {" "}
+                        <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                            Number of Laps
                           </span>
-                        </h2>
-                      </div>
+                          <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                            {nextRace?.laps.total}
+                            <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                              {" "}
+                            </span>
+                          </h2>
+                        </div>
 
-                      <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
-                        <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
-                          Race Distance
-                        </span>
-                        <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
-                          {nextRace?.distance}
-                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
-                            {" "}
-                            km
+                        <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
+                          <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
+                            Race Distance
                           </span>
-                        </h2>
+                          <h2 className="f1-heading tracking-normal text-fs-22px text-fs-32px leading-tight normal-case font-bold non-italic f1-heading__body font-f1NavbarFont">
+                            {nextRace?.distance}
+                            <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px pl-xxs">
+                              {" "}
+                              km
+                            </span>
+                          </h2>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </fieldset>
+            </fieldset>
+          )}
 
           <div className="my-4 w-full relative overflow-hidden w-full flex items-center h-48 lg:h-96 before:block before:absolute before:w-full before:bg-carbonBlack/50 before:h-full">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
@@ -200,11 +229,15 @@ export default function Index({}: Props) {
                 20 - 22 Sep
               </span>
             </div>
-            <img
-              src={`https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/${nextRace?.competition.location.country
-                .replace(/\s+/g, "-")
-                .toLowerCase()}`}
-            ></img>
+            {nextRace ? (
+              <img
+                src={`https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/${nextRace?.competition.location.country
+                  .replace(/\s+/g, "-")
+                  .toLowerCase()}`}
+              ></img>
+            ) : (
+              <img src="https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Las%20Vegas"></img>
+            )}
           </div>
 
           {/* <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full bg-brand-carbonBlack pt-2">
@@ -390,6 +423,73 @@ export default function Index({}: Props) {
                   </div>
                 );
               })}
+          </div>
+        </div>
+
+        <div className="bg-carbonBlack pb-20">
+          <div className="container mx-auto ">
+            <h1 className="font-F1Black uppercase text-2xl sm:text-O4xl mb-2 pt-4 sm:mb-6 flex items-center justify-center text-[white]">
+              STREAM F1 YOUR WAY
+            </h1>
+            <div className="subscribe-content mt-4 bg-white flex flex-col w-full justify-center items-center">
+              <div className="flex flex-row">
+                <div className="w-1/3 flex flex-col justify-center p-[3rem] border-r border-r-1">
+                  <div className="title flex flex-col items-center justify-center">
+                    <h1> Get Live Updates on F1</h1>
+                    <p className="text-center mt-3">
+                      F1 live and on demand. Stream practice sessions,
+                      qualifying and the races, ad free, anywhere, any time.
+                    </p>
+                  </div>
+                  <div className="image-box mt-3">
+                    <img src="https://media.formula1.com/f_auto,c_limit,w_1080,q_auto/proposition-page/Images/promo1"></img>
+                  </div>
+                </div>
+                <div className="w-1/3 flex flex-col justify-center p-[3rem] border-r border-r-1">
+                  <div className="title flex flex-col items-center justify-center">
+                    <h1> Get Live Updates on F1</h1>
+                    <p className="text-center mt-3">
+                      F1 live and on demand. Stream practice sessions,
+                      qualifying and the races, ad free, anywhere, any time.
+                    </p>
+                  </div>
+                  <div className="image-box mt-3">
+                    <img src="https://media.formula1.com/f_auto,c_limit,w_1080,q_auto/proposition-page/Images/promo1"></img>
+                  </div>
+                </div>
+                <div className="w-1/3 flex flex-col justify-center p-[3rem] border-r border-r-1">
+                  <div className="title flex flex-col items-center justify-center">
+                    <h1> Get Live Updates on F1</h1>
+                    <p className="text-center mt-3">
+                      F1 live and on demand. Stream practice sessions,
+                      qualifying and the races, ad free, anywhere, any time.
+                    </p>
+                  </div>
+                  <div className="image-box mt-3">
+                    <img src="https://media.formula1.com/f_auto,c_limit,w_1080,q_auto/proposition-page/Images/promo1"></img>
+                  </div>
+                </div>
+              </div>
+              <div className="container mx-auto pb-10">
+                <form
+                  className="flex flex-col items-center justify-center w-full space-y-4"
+                  onSubmit={handleSubmit}
+                >
+                  <input
+                    id="email"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter your email to subscribe!"
+                    className="w-96 text-center"
+                  />
+                  <div>
+                    <button type="submit">Register</button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

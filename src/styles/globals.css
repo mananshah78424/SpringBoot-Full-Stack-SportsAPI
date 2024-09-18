@@ -23,3 +23,12 @@ body {
   font-family: "Titillium";
   src: url("/fonts/Titillium.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: F1Black;
+  font-display: auto;
+  src: url("/fonts/Formula1-Black.c6e2547e.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

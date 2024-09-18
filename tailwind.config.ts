@@ -21,9 +21,13 @@ const config: Config = {
         archivo: ["ArchivoBlack", "sans-serif"],
         f1NavbarFont: ["FormulaNavbarFont", "sans-serif"],
         titillium: ["Titillium", "sans-serif"],
+        F1Black: ["F1Black"],
       },
       fontSize: {
         "fs-14px": ".875rem",
+      },
+      backgroundColor: {
+        carbonBlack: "rgb(21, 21, 30)", // Correctly defining the color
       },
     },
   },
