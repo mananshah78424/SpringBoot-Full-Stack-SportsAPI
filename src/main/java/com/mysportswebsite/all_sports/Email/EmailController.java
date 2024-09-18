@@ -2,13 +2,11 @@ package com.mysportswebsite.all_sports.Email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("http://localhost:3000")
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/f1")
 public class EmailController {
     @Autowired
     private EmailService emailService;
