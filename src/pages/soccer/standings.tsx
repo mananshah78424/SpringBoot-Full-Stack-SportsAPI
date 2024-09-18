@@ -1,5 +1,4 @@
 import SoccerBanner from "@/src/components/soccer/SoccerBanner";
-import TopBar from "@/src/components/TopBar";
 import { fetchStandings } from "@/src/services/soccer/soccerService";
 import { TeamStanding } from "@/src/types/soccer/standingTypes";
 import { useEffect, useState } from "react";
@@ -24,7 +23,7 @@ const StandingsPage = () => {
   }, []);
   return (
     <div className="">
-      <TopBar></TopBar>
+      {/* <TopBar></TopBar> */}
       <div className="mt-5">
         <SoccerBanner title="Standings"></SoccerBanner>
       </div>

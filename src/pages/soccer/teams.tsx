@@ -1,5 +1,4 @@
 import SoccerBanner from "@/src/components/soccer/SoccerBanner";
-import TopBar from "@/src/components/TopBar";
 import { fetchTeams } from "@/src/services/soccer/soccerService";
 import { TeamResponse } from "@/src/types/soccer/teamsTypes";
 
@@ -10,7 +9,7 @@ interface FetchTeamsPage {
 const Teams: React.FC<FetchTeamsPage> = ({ teams }) => {
   return (
     <div>
-      <TopBar></TopBar>
+      {/* <TopBar></TopBar> */}
       <div className="mt-5">
         <SoccerBanner title="Teams" />
       </div>

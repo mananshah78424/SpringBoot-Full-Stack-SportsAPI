@@ -1,12 +1,11 @@
 import SoccerBanner from "@/src/components/soccer/SoccerBanner";
-import TopBar from "@/src/components/TopBar";
 import "../../styles/soccer.css";
 type Props = {};
 
 const index = (props: Props) => {
   return (
     <div className="">
-      <TopBar></TopBar>
+      {/* <TopBar></TopBar> */}
       <div className="mt-5">
         <SoccerBanner title=""></SoccerBanner>
       </div>
