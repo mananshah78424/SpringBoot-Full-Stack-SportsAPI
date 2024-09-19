@@ -21,7 +21,7 @@ const CircuitsPage: React.FC<CircuitsPageProps> = ({ circuits, error }) => {
   return (
     <Layout>
       <div className="flex flex-col mx-auto px-4 sm:px-6 lg:px-8 mt-5">
-        <div className="min-h-screen mt-4">
+        <div className="min-h-screen mt-4 pb-10">
           <div className="f1-option-bar container">
             <F1PageHeading
               title="Circuits"

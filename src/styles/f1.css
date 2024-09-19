@@ -440,7 +440,6 @@ a {
 .f1-utils-flex-container {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
 }
 
 .py-xl {

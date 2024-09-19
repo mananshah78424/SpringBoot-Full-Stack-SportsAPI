@@ -29,6 +29,12 @@ const config: Config = {
       backgroundColor: {
         carbonBlack: "rgb(21, 21, 30)", // Correctly defining the color
       },
+      borderColor: {
+        "brand-primary": "rgba(224, 4, 0)",
+      },
+      borderWidth: {
+        thick: "0.625rem",
+      },
     },
   },
   plugins: [],

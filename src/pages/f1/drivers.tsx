@@ -48,7 +48,7 @@ const DriverCard: React.FC = () => {
   return (
     <Layout>
       <div className="flex flex-col mx-auto px-4 sm:px-6 lg:px-8 mt-5">
-        <div className="min-h-screen mt-4">
+        <div className="min-h-screen mt-4 pb-10">
           <div className="f1-option-bar container">
             <div className="f1-option-bar container mt-6 text-[50px] font-thin">
               <F1PageHeading title={`F1 DRIVERS ${season}`}></F1PageHeading>

@@ -1,4 +1,5 @@
 import standingBg from "@/public/images/standing-bg.png";
+import Footer from "@/src/components/f1/f1Footer";
 import Layout from "@/src/components/Layout";
 import Loading from "@/src/components/Loading";
 import {
@@ -31,63 +32,100 @@ export default function Index({}: Props) {
   const season = 2024;
   var circuitCountry;
 
+  // Caching function: Save data to localStorage with an expiry time
+  const saveToCache = (key: string, data: any, ttl: number) => {
+    const expiry = new Date().getTime() + ttl;
+    localStorage.setItem(key, JSON.stringify({ data, expiry }));
+  };
+
+  // Retrieve data from cache if not expired
+  const getFromCache = (key: string) => {
+    const cached = localStorage.getItem(key);
+    if (cached) {
+      const { data, expiry } = JSON.parse(cached);
+      if (expiry > new Date().getTime()) {
+        return data;
+      }
+    }
+    return null;
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true); // Set loading to true before fetching
         setError(null);
-        const result = await fetchDriverRankings(season);
-        if (result?.response) {
-          setDrivers(result.response);
-          const topThreeDrivers = result.response.slice(0, 3);
-          console.log(topThreeDrivers);
-          const topTenDrivers = result.response.slice(0, 10);
-          setTopTenDrivers(topTenDrivers);
 
-          setTopThreeDrivers(topThreeDrivers);
+        // Check cache for drivers and fixtures
+        const cachedDrivers = getFromCache("f1_drivers");
+        const cachedFixtures = getFromCache("f1_fixtures");
+        const cachedTop3Drivers = getFromCache("top_3_f1_drivers");
+        const cachedTop10Drivers = getFromCache("top_10_f1_drivers");
+
+        // Load drivers from cache or fetch from API
+        if (cachedDrivers) {
+          console.log("Found drivers in the cache, hence not calling API!");
+          setDrivers(cachedDrivers);
+          setTopThreeDrivers(cachedTop3Drivers);
+          setTopTenDrivers(cachedTop10Drivers);
+        } else {
+          const result = await fetchDriverRankings(season);
+          if (result?.response) {
+            setDrivers(result.response);
+            const topThreeDrivers = result.response.slice(0, 3);
+            const topTenDrivers = result.response.slice(0, 10);
+            setTopThreeDrivers(topThreeDrivers);
+            setTopTenDrivers(topTenDrivers);
+
+            // Save drivers and top drivers to cache
+            saveToCache("f1_drivers", result.response, 1000 * 60 * 60); // Cache for 1 hour
+            saveToCache("top_3_f1_drivers", topThreeDrivers, 1000 * 60 * 60);
+            saveToCache("top_10_f1_drivers", topTenDrivers, 1000 * 60 * 60);
+          }
+        }
+
+        // Load fixtures from cache or fetch from API
+        if (cachedFixtures) {
+          console.log("Found fixtures in the cache, hence not calling API!");
+          setFixtures(cachedFixtures);
+          const nextRace = getNextRace(cachedFixtures);
+          setNextRace(nextRace);
+          updateCircuitImage(nextRace);
+        } else {
+          const fixturesData = await fetchFixtures(season, RaceType.RACE);
+          setFixtures(fixturesData);
+          saveToCache("f1_fixtures", fixturesData, 1000 * 60 * 60); // Cache for 1 hour
+
+          const nextRace = getNextRace(fixturesData);
+          setNextRace(nextRace);
+          updateCircuitImage(nextRace);
         }
       } catch (err) {
-        setError("Error fetching driver rankings");
+        setError("Error fetching F1 data");
       } finally {
-        // Fetch fixtures after driver rankings
-        const getFixtures = async () => {
-          if (season) {
-            setError(null);
-            try {
-              const data = await fetchFixtures(season, RaceType.RACE);
-              const scheduledRaces = data.response.filter(
-                (race) => race.status === "Scheduled"
-              );
-
-              const nextRace = scheduledRaces.reduce(
-                (closestRace, currentRace) => {
-                  const closestRaceDate = new Date(closestRace.date);
-                  const currentRaceDate = new Date(currentRace.date);
-                  return currentRaceDate < closestRaceDate
-                    ? currentRace
-                    : closestRace;
-                }
-              );
-              console.log("Next race is", nextRace);
-              circuitCountry = nextRace?.competition?.location?.country
-                ? nextRace.competition.location.country.replace(/\s+/g, "_")
-                : null;
-              setCircuitImage(
-                `https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Circuit maps 16x9/${circuitCountry}_Circuit`
-              );
-              console.log("CircuitImage is", circuitImage);
-
-              setNextRace(nextRace);
-            } catch (error) {
-              setError("Failed to fetch race fixtures");
-            } finally {
-              setLoading(false); // Set loading to false after fetching
-            }
-          }
-        };
-
-        getFixtures();
+        setLoading(false); // Set loading to false after fetching
       }
+    };
+
+    // Helper function to get the next scheduled race
+    const getNextRace = (fixturesData: RaceResponse) => {
+      const scheduledRaces = fixturesData.response.filter(
+        (race) => race.status === "Scheduled"
+      );
+      return scheduledRaces.reduce((closestRace, currentRace) => {
+        const closestRaceDate = new Date(closestRace.date);
+        const currentRaceDate = new Date(currentRace.date);
+        return currentRaceDate < closestRaceDate ? currentRace : closestRace;
+      });
+    };
+
+    // Helper function to set circuit image
+    const updateCircuitImage = (nextRace: Race) => {
+      circuitCountry = nextRace?.competition?.location?.country
+        ? nextRace.competition.location.country.replace(/\s+/g, "_")
+        : null;
+      setCircuitImage(
+        `https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Circuit maps 16x9/${circuitCountry}_Circuit`
+      );
     };
 
     fetchData();
@@ -108,11 +146,15 @@ export default function Index({}: Props) {
 
   return (
     <Layout>
-      <div className="bg-grey-20">
-        <div className="container mx-auto pt-16">
-          <h1 className="font-f1NavbarFont text-[5rem] mb-4">Next Race</h1>
+      <div className="bg-grey-20 w-[100vh] lg:w-full">
+        <div className="container mx-auto pt-16  ">
+          <div className="border-brand-primary border-t-thick lg:border-none ">
+            <h1 className="font-f1NavbarFont sm:ml-10 md:ml-10 text-[2rem] lg:text-[5rem] mb-4 mt-3">
+              Next Race
+            </h1>
+          </div>
           {nextRace && (
-            <fieldset className="border-t-thick border-r-thick rounded-tr-l f1-utils-inner-padding-tr--half relative border-primary pt-normal pr-normal">
+            <fieldset className="border-t-thick border-r-thick rounded-tr-l f1-utils-inner-padding-tr--half relative border-primary pt-normal pr-normal ml-4">
               <legend className="mr-l px-normal">
                 <div className="flex items-center">
                   {nextRace ? (
@@ -132,14 +174,16 @@ export default function Index({}: Props) {
                       className="f1-c-image max-w-14 rounded object-cover"
                     />
                   )}
-                  <h2 className="f1-heading tracking-normal text-fs-20px text-[1.5625rem] ml-4 leading-none normal-case font-bold non-italic f1-heading__body font-titillium">
+                  <h2 className="f1-heading tracking-normal text-fs-20px text-[1.5625rem] ml-4 leading-none normal-case font-bold non-italic f1-heading__body font-titillium hidden lg:block ml-4 lg:ml-0">
                     <div className="ml-normal">{nextRace?.circuit.name}</div>
                   </h2>
                 </div>
               </legend>
-
-              <div className="grid grid-cols-12 gap-normal">
-                <div className="col-span-12 lg:col-span-7">
+              <h2 className="f1-heading tracking-normal text-fs-20px text-[1.5625rem] ml-4 leading-none normal-case font-bold non-italic f1-heading__body font-titillium  lg:hidden ml-4 lg:ml-0">
+                <div className="ml-normal">{nextRace?.circuit.name}</div>
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-normal">
+                <div className="col-span-1 lg:col-span-7">
                   {nextRace ? (
                     <img
                       alt=""
@@ -156,10 +200,10 @@ export default function Index({}: Props) {
                     ></img>
                   )}
                 </div>
-                <div className="col-span-12 lg:col-span-5">
-                  <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-3">
+                <div className="col-span-1 lg:col-span-5">
+                  <div className="grid gap-normal f1-grid grid-cols-1 lg:grid-cols-3">
                     <div className="col-span-3 laptop:col-span-2 desktop:col-span-3">
-                      <div className="grid gap-normal f1-grid grid-cols-1 grid-cols-2">
+                      <div className="grid gap-normal f1-grid grid-cols-1 lg:grid-cols-2 mt-10">
                         <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
                           <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
                             Country
@@ -215,7 +259,7 @@ export default function Index({}: Props) {
             </fieldset>
           )}
 
-          <div className="my-4 w-full relative overflow-hidden w-full flex items-center h-48 lg:h-96 before:block before:absolute before:w-full before:bg-carbonBlack/50 before:h-full">
+          <div className="my-4 w-full relative overflow-hidden w-full flex items-center mt-10 lg:h-96 before:block before:absolute before:w-full before:bg-carbonBlack/50 before:h-full">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
               <h1 className="font-formula font-bold text-left text-white text-32 tablet:text-62 text-center mb-1.5 uppercase">
                 {nextRace?.competition.location.country}
@@ -240,52 +284,6 @@ export default function Index({}: Props) {
             )}
           </div>
 
-          {/* <div className="container mx-auto w-full bg-red p-6 mt-10 text-black h-full bg-brand-carbonBlack pt-2">
-            <div className="h-full flex flex-col gap-xs justify-center items-center w-[32rem] mx-auto p-4">
-              <div className="flex flex-col items-center gap-xs transition duration-500 text-center group-hover:text-white p-4">
-                <img
-                  alt="Azerbaijan"
-                  src={`https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Flags%2016x9/${nextRace?.competition.location.country
-                    .replace(/\s+/g, "-")
-                    .toLowerCase()}-flag.png`}
-                  className="f1-c-image h-8 rounded-xxs inline"
-                  draggable="false"
-                />
-                <div className="flex min-h-6 items-center mt-4">
-                  <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-f1NavbarFont text-grey-60">
-                    {nextRace?.competition.location.country}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center gap-xs text-center pb-4">
-                <span className="f1-heading tracking-normal text-fs-18px leading-none uppercase font-bold non-italic f1-heading__body font-f1NavbarFont text-brand-white max-w-[70%]">
-                  <Link href="/">
-                    {`FORMULA 1 QATAR AIRWAYS ${nextRace?.competition.name} 2024`}
-                  </Link>
-                </span>
-                <span className="f1-heading tracking-normal text-fs-12px leading-none uppercase font-bold non-italic f1-heading__body font-f1NavbarFont text-grey-60 pb-xs pt-2">
-                  {nextRace?.date
-                    ? new Date(nextRace.date).toISOString().split("T")[0]
-                    : "Date not available"}
-                </span>
-              </div>
-              <div className="w-full p-4 flex justify-center items-center mb-3">
-                <img className="h-[10rem]" src={nextRace?.circuit.image}></img>
-              </div>
-              <div className="pb-xs">
-                <Link
-                  className="grid grid-flow-col auto-cols-max rounded-5 cursor-pointer items-center transition-colors duration-200 font-titillium font-[600] w-full min-w-max laptop:w-auto laptop:text-center laptop:auto-cols-auto focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[3px] focus-visible:outline-carbonBlack disabled:pointer-events-none disabled:opacity-75 disabled:cursor-default text-12 px-[15px] gap-[8px] h-[39px] bg-tranparent text-white uppercase border-[1px] shadow-innerBlack transition-shadow duration-200 laptop:!shadow-white laptop:hover:shadow-inner border-brand-white focus-visible:!outline-brand-white"
-                  data-event="homeRaceCalenderCardViewSchedule"
-                  href="/f1/fixtures"
-                >
-                  <span className="font-titillium leading-none  text-12">
-                    View Schedule
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </div> */}
           <div
             className="mx-auto container mt-6 relative before:absolute before:top-0 before:left-0 before:bg-driverStandingHome before:bg-center before:bg-cover before:w-full before:h-64 before:h-80 bg-grey-20 react-tabs__tab-panel--selected"
             style={{
@@ -293,11 +291,11 @@ export default function Index({}: Props) {
             }}
           >
             <div className="f1-container container relative f1-utils-flex-container items-center py-xl ">
-              <h2 className="f1-heading-wide text-branding-white tracking-normal font-normal non-italic text-[5rem] leading-tight normal-case text-center px-xs font-f1NavbarFont">
+              <h2 className="f1-heading-wide text-branding-white tracking-normal font-normal non-italic text-[2rem] lg:text-[5rem] leading-tight normal-case text-center px-xs font-f1NavbarFont">
                 Driver Standings
               </h2>
-              <div className="grid gap-normal w-full sm:pt-[5rem] lg:pt-[16rem] px-36">
-                <div className="grid grid-cols-[5fr_5fr_5fr] items-end gap-s">
+              <div className="grid gap-normal w-full sm:pt-[5rem] lg:pt-[16rem] px-36 mt-[16rem] lg:mt-0">
+                <div className="grid rid-cols-[2fr_2fr_2fr] lg:grid-cols-[5fr_5fr_5fr] items-end gap-s">
                   {topThreeDrivers &&
                     topThreeDrivers.map((driver, index) => {
                       const [firstName, lastName] =
@@ -322,7 +320,10 @@ export default function Index({}: Props) {
                       )}/${nameForlink}/${imageNameForlink}`;
                       console.log(imageLink);
 
-                      const driverClass = index === 1 ? "col-start-2" : "";
+                      const driverClass =
+                        index === 0
+                          ? "block mt-[16rem] lg:mt-0 sm:block"
+                          : "hidden lg:block";
                       return (
                         <Link
                           key={index}
@@ -391,7 +392,7 @@ export default function Index({}: Props) {
               </div>
             </div>
           </div>
-          <div className="mx-auto container mt-4 text-white pb-10 px-[9rem]">
+          <div className="mx-auto container mt-4 text-white pb-10 pr-[0.9375rem] pl-[1.875rem] lg:px-[9rem] tracking-normal">
             {topTenDrivers &&
               topTenDrivers.map((driver, index) => {
                 const [firstName, lastName] = driver.driver.name.split(" ");
@@ -400,16 +401,18 @@ export default function Index({}: Props) {
                     key={index}
                     className="flex flex-row justify-between rounded-xxs items-center p-4 border-b bg-white text-black font-normal normal-case text-fs-14px hover:bg-grey-80  hover:text-white transition-colors"
                   >
-                    <div className="leftEnd flex flex-row space-x-5">
+                    <div className="leftEnd flex flex-row flex-1 space-x-5">
                       <span className="f1-heading tracking-normal text-fs-14px leading-tight normal-case non-italic f1-heading__body font-f1NavbarFont">
                         {driver.position}
                       </span>
 
-                      <div className="font-f1NavbarFont">
-                        <span className="font-normal inline">{firstName}</span>
-                        &nbsp;<span className="uppercase">{lastName}</span>
+                      <div className="font-f1NavbarFont flex flex-row space-x-2 w-[20%]">
+                        <span className="font-normal inline hidden lg:block">
+                          {firstName}
+                        </span>
+                        <span className="uppercase">{lastName}</span>
                       </div>
-                      <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__body text-fs-17px text-grey-70 inline-block px-xs">
+                      <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__body text-fs-17px text-grey-70 hidden lg:block inline-block px-xs">
                         <small>{driver.team.name}</small>
                       </span>
                     </div>
@@ -492,6 +495,7 @@ export default function Index({}: Props) {
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     </Layout>
   );
