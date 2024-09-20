@@ -15,7 +15,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "pl-banner": "url('/images/Banners/Pl-Banner.webp')",
+        "pl-banner": "url('/images/Banners/Staidum-Banner.jpg')",
       },
       fontFamily: {
         archivo: ["ArchivoBlack", "sans-serif"],
