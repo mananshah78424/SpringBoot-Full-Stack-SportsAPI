@@ -412,6 +412,19 @@ a {
 }
 
 /* Indexpage */
+
+.border-38383f {
+  --tw-border-opacity: 1;
+  border-color: rgb(56 56 63 / var(--tw-border-opacity));
+}
+.text-32 {
+  font-size: 2rem;
+  line-height: 2.25rem;
+  letter-spacing: 0.2px;
+}
+.rounded-tr-10 {
+  border-top-right-radius: 0.625rem;
+}
 .text-fs-32px {
   font-size: 2rem;
 }
@@ -626,7 +639,7 @@ a {
   background-color: rgb(21 21 30 / var(--tw-bg-opacity));
 }
 .fill-white {
-  filter: invert(1) brightness(100%);
+  filter: inver brightness(100%);
 }
 
 .transition-colors {

@@ -147,7 +147,72 @@ export default function Index({}: Props) {
   return (
     <Layout>
       <div className="bg-grey-20 w-[100vh] lg:w-full">
+        <section className="w-full bg-black py-[30px]">
+          <section className="mx-auto max-w-full max-w-[480px] tablet:max-w-[768px] max-w-[986px] lg:max-w-[1320px] px-[10px] lg:px-[10px] lg:px-[10px] overflow-hidden w-full">
+            <div className="grid grid-cols-none gap-4 text-white !grid-cols-12">
+              <div className=" col-span-12 col-span-7 lg:col-span-9">
+                <div className="flex items-center lg:pt-2">
+                  <span className="font-titillium leading-none  text-12 !font-f1NavbarFont font-semibold mr-1.5">
+                    20 - 22 September
+                  </span>
+                </div>
+
+                <div className="flex mt-3 gap-x-4">
+                  <div className="border-t border-r rounded-tr-10 pt-2 pr-2 overflow-hidden border-38383f hover:border-none group-hover:border-none transition-colors duration-300">
+                    <img
+                      alt="F1 live race circuit"
+                      loading="lazy"
+                      width="75"
+                      height="42"
+                      decoding="async"
+                      data-nimg="1"
+                      className="w-[40px] lg:w-[75px]"
+                      sizes="100vw"
+                      src={nextRace?.circuit.image}
+                    />
+                  </div>
+                  <div className="relative flex grow pr-2 transition-none pt-3 lg:pt-5">
+                    <a
+                      className="grid grid-flow-col auto-cols-max rounded-5 cursor-pointer items-center transition-colors duration-200 font-titillium font-[600] w-full min-w-max lg:w-auto lg:text-center lg:auto-cols-auto focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[3px] focus-visible:outline-carbonBlack disabled:pointer-events-none disabled:opacity-75 disabled:cursor-default  !font-f1NavbarFont text-16 md:text-25 lg:text-32 lg:leading-8 uppercase group !min-w-min !min-w-max !text-left focus-visible:!outline-brand-white"
+                      data-path="https://www.formula1.com/en/racing/2024/singapore"
+                      data-event="eventTrackerClickEvents"
+                      data-click-text="Singapore"
+                      data-event-type="Practice 1"
+                      href={`https://www.formula1.com/en/racing/2024/${nextRace?.competition.location.country}`}
+                    >
+                      <span className="absolute h-auto w-full border-t top-0 border-38383f group-hover:border-yellow group-focus-visible:border-yellow pointer-events-none"></span>
+                      <span className="inline-block max-w-40 max-w-max md:max-w-60 lg:max-w-max">
+                        {nextRace?.competition.location.country}
+                      </span>
+                      <img
+                        width="100"
+                        height="26"
+                        src="https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/year%20icon/2024.png"
+                        alt=""
+                        className="ml-3 w-[54px]  lg:w-[100px]"
+                      />
+                      <span
+                        aria-hidden="true"
+                        className="font-icomoon font-light m-auto leading-none text-24 text-undefined icon-chevron-right !text-16 lg:!text-24 group-hover:text-yellow group-focus-visible:text-yellow pl-0 tablet:pl-1"
+                      ></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className=" bg-gray3PatternVideo bg-30 rounded-xs md:rounded-none md:bg-none col-span-12 md:col-span-5 lg:col-span-3 md:bg-none">
+                <div className="grid grid-cols-none gap-0 max-w-[102px] mx-auto">
+                  <span className="font-f1NavbarFont text-[2rem]">
+                    NEXT RACE
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
         <div className="container mx-auto pt-16  ">
+          <div className="h-[550px]">
+            <span className="relative flex justify-center items-center main-banner h-full bg-f1-main-banner bg-cover bg-left w-full bg-no-repeat before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[280px] before:h-[215px] before:lg:h-[550px] before:lg:h-[450px] before:bg-carbonBlack/50"></span>
+          </div>
           <div className="border-brand-primary border-t-thick lg:border-none ">
             <h1 className="font-f1NavbarFont sm:ml-10 md:ml-10 text-[2rem] lg:text-[5rem] mb-4 mt-3">
               Next Race
@@ -202,7 +267,7 @@ export default function Index({}: Props) {
                 </div>
                 <div className="col-span-1 lg:col-span-5">
                   <div className="grid gap-normal f1-grid grid-cols-1 lg:grid-cols-3">
-                    <div className="col-span-3 laptop:col-span-2 desktop:col-span-3">
+                    <div className="col-span-3 lg:col-span-2 lg:col-span-3">
                       <div className="grid gap-normal f1-grid grid-cols-1 lg:grid-cols-2 mt-10">
                         <div className="border-r-double border-b-double rounded-br-s f1-utils-inner-padding-br--half border-gray20">
                           <span className="f1-text font-titillium tracking-normal font-normal non-italic normal-case leading-snug f1-text__micro text-fs-15px">
@@ -269,9 +334,7 @@ export default function Index({}: Props) {
                 src={`https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/year%20icon/${new Date().getFullYear()}.png`}
                 alt="Singapore"
               />
-              <span className="text-center mb-1.5 uppercase bg-black text-white rounded-2xl py-1 px-2.5 !font-formula text-xs inline-block mt-3">
-                20 - 22 Sep
-              </span>
+              <span className="text-center mb-1.5 uppercase bg-black text-white rounded-2xl py-1 px-2.5 !font-formula text-xs inline-block mt-3"></span>
             </div>
             {nextRace ? (
               <img
@@ -428,7 +491,6 @@ export default function Index({}: Props) {
               })}
           </div>
         </div>
-
         <div className="bg-carbonBlack pb-20">
           <div className="container mx-auto ">
             <h1 className="font-F1Black uppercase text-2xl sm:text-O4xl mb-2 pt-4 sm:mb-6 flex items-center justify-center text-[white]">

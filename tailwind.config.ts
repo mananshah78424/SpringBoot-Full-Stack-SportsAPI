@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      spacing: {
+        "30px": "30px",
+      },
       colors: {
         "grey-80": "rgb(56, 56, 63)",
       },
@@ -16,6 +19,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "pl-banner": "url('/images/Banners/Staidum-Banner.jpg')",
+        "f1-main-banner": "url('/images/f1/ferrari-630145_1280.jpg')",
       },
       fontFamily: {
         archivo: ["ArchivoBlack", "sans-serif"],
@@ -25,6 +29,7 @@ const config: Config = {
       },
       fontSize: {
         "fs-14px": ".875rem",
+        "32": "2rem",
       },
       backgroundColor: {
         carbonBlack: "rgb(21, 21, 30)", // Correctly defining the color

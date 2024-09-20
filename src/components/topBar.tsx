@@ -4,11 +4,11 @@ type Props = {};
 
 const TopBar = (props: Props) => {
   return (
-    <div className="container mx-auto mt-4 flex flex-row justify-between !font-f1NavbarFont">
+    <div className="fixed top-0 w-full z-50 bg-white flex flex-row justify-between !font-f1NavbarFont">
       <Link href={"/"}>
-        <p className="flex-1"> Home </p>
+        <p className="flex-1 pl-[2rem]"> Home </p>
       </Link>
-      <div className="flex flex-row justify-between space-x-4">
+      <div className="flex flex-row justify-between space-x-4 pr-[2rem]">
         <Link href={"/soccer"}>
           <p>Soccer</p>
         </Link>
