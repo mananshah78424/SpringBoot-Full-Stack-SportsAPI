@@ -36,33 +36,38 @@ const Index = (props: Props) => {
       </div>
       {isClient && (
         <div className="max-w-screen-xl mx-[auto] h-screen w-full text-black mt-10 space-y-[5rem] px-[40px]">
-          <div className="w-full lg:h-[40%] cursor-pointer">
-            <Link href="/f1">
-              <div className="sport-heading-text h-full flex flex-row justify-between">
-                <div className="flex flex-1 flex-col items-start justify-center ml-[10rem]">
-                  <h1 className="lg:text-[3.625rem] font-black font-archivo">
-                    Formula 1
-                  </h1>
-                  <p>F1 IS BACK. AND IT’S ALL TO DRIVE FOR.</p>
-                  <div className="flex flex-row space-x-8 mt-4">
-                    <Link href="/f1">Home</Link>
-                    <Link href="/f1/drivers">Drivers</Link>
-                    <Link href="/f1/rankings">Rankings</Link>
-                  </div>
-                </div>
-                <div className="image relative w-[165px] h-[32px] lg:w-[600px] lg:h-full">
-                  <Image
-                    src="https://media.formula1.com/image/upload/t_16by9Centre/f_auto/q_auto/v1682606473/Teams_1920x1080.jpg"
-                    alt="F1 image"
-                    fill
-                    className="h-full w-full object-fill"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                </div>
-              </div>
-            </Link>
-          </div>
-
+          <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
+            <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
+              Formula 1
+            </h1>
+            <div className="font-formula text-left text-carbonBlack text-12 lg:text-[1.475rem] absolute text-white font-f1NavbarFont font-black mt-[10rem]">
+              <ul className="list-none flex flex-row space-x-8">
+                <Link href={"/f1/rankings"}>
+                  <li>Rankings</li>
+                </Link>
+                <Link href={"/f1/circuits"}>
+                  <li>Circuits</li>
+                </Link>
+                <Link href={"/f1/calender"}>
+                  <li>Fixtures</li>
+                </Link>
+                <Link href={"/f1/drivers"}>
+                  <li>Drivers</li>
+                </Link>
+              </ul>
+            </div>
+            <img
+              alt="F1 Image Drivver"
+              width="1024"
+              height="1024"
+              decoding="async"
+              data-nimg="1"
+              className="w-full"
+              sizes="100vw"
+              src="https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Tag%20collections/Teams/Red%20Bull"
+              pinger-seen="true"
+            ></img>
+          </section>
           <div className="w-full lg:h-[40%]">
             <div className="sport-heading-text h-full flex flex-row justify-between">
               <div className="flex flex-1 flex-col items-start justify-center ml-[10rem] order-2">
