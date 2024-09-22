@@ -5,8 +5,12 @@ import Loading from "@/src/components/Loading";
 import {
   fetchDriverRankings,
   fetchFixtures,
+  fetchFixturesWithComepeitionId,
+  fetchFixturesWithNext,
   subscribeUserF1,
 } from "@/src/services/f1/f1Service";
+import { getRaceDates } from "@/src/services/f1/getDates";
+import { checkIfRaceIsToday } from "@/src/services/f1/pushEmails";
 import { DriverRanking } from "@/src/types/f1/driverStandingTypes";
 import { Race, RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
 import Link from "next/link";
@@ -24,11 +28,16 @@ export default function Index({}: Props) {
     null
   );
   const [fixtures, setFixtures] = useState<RaceResponse | null>(null);
+  const [firstQualifyingFixtures, setFirstQualifyingFixtures] =
+    useState<RaceResponse | null>(null);
   const [nextRace, setNextRace] = useState<Race | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false); // Added loading state
   const [circuitImage, setCircuitImage] = useState<string>();
   const [email, setEmail] = useState<string>();
+  const [raceDate, setRaceDate] = useState<string>();
+  const [raceMonth, setRaceMonth] = useState<string>();
+
   const season = 2024;
   var circuitCountry;
 
@@ -52,16 +61,14 @@ export default function Index({}: Props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true); // Set loading to true before fetching
+        setLoading(true);
         setError(null);
 
-        // Check cache for drivers and fixtures
         const cachedDrivers = getFromCache("f1_drivers");
         const cachedFixtures = getFromCache("f1_fixtures");
         const cachedTop3Drivers = getFromCache("top_3_f1_drivers");
         const cachedTop10Drivers = getFromCache("top_10_f1_drivers");
 
-        // Load drivers from cache or fetch from API
         if (cachedDrivers) {
           console.log("Found drivers in the cache, hence not calling API!");
           setDrivers(cachedDrivers);
@@ -75,28 +82,59 @@ export default function Index({}: Props) {
             const topTenDrivers = result.response.slice(0, 10);
             setTopThreeDrivers(topThreeDrivers);
             setTopTenDrivers(topTenDrivers);
-
-            // Save drivers and top drivers to cache
             saveToCache("f1_drivers", result.response, 1000 * 60 * 60); // Cache for 1 hour
             saveToCache("top_3_f1_drivers", topThreeDrivers, 1000 * 60 * 60);
             saveToCache("top_10_f1_drivers", topTenDrivers, 1000 * 60 * 60);
           }
         }
 
-        // Load fixtures from cache or fetch from API
         if (cachedFixtures) {
           console.log("Found fixtures in the cache, hence not calling API!");
           setFixtures(cachedFixtures);
           const nextRace = getNextRace(cachedFixtures);
+          const checkIfTodayRace = checkIfRaceIsToday(nextRace);
+
+          const raceResponse = await fetchFixturesWithNext(
+            season,
+            RaceType.RACE
+          );
+          const id = raceResponse.response[0].competition.id;
+          const firstQualiResponse = await fetchFixturesWithComepeitionId(
+            season,
+            id
+          );
+          console.log("firstQualiResponse", firstQualiResponse);
+
+          const firstQualifyingRaceDate = await getRaceDates(
+            firstQualiResponse
+          );
+          const raceRaceDate = await getRaceDates(raceResponse);
+          const monthValue = await getRaceDates(raceResponse, "month");
+          setRaceDate(
+            `${firstQualifyingRaceDate} - ${raceRaceDate} ${monthValue}`
+          );
+
           setNextRace(nextRace);
           updateCircuitImage(nextRace);
         } else {
-          const fixturesData = await fetchFixtures(season, RaceType.RACE);
-          setFixtures(fixturesData);
-          saveToCache("f1_fixtures", fixturesData, 1000 * 60 * 60); // Cache for 1 hour
+          const raceFixturesData = await fetchFixtures(season, RaceType.RACE);
+          const firstQualifyingData = await fetchFixtures(
+            season,
+            RaceType.FIRST_QUALIFYING
+          );
+          setFixtures(raceFixturesData);
+          setFirstQualifyingFixtures(firstQualifyingData);
+          saveToCache("f1_fixtures", raceFixturesData, 1000 * 60 * 60); // Cache for 1 hour
 
-          const nextRace = getNextRace(fixturesData);
+          const nextRace = getNextRace(raceFixturesData);
+          const firstQualifying = getNextRace(firstQualifyingData);
+          console.log("Next Race is", nextRace);
+          console.log("Next Qualifying is", firstQualifying);
+
           setNextRace(nextRace);
+          // setNextFirstQualifyingRace(firstQualifying);
+
+          const checkIfTodayRace = checkIfRaceIsToday(nextRace);
           updateCircuitImage(nextRace);
         }
       } catch (err) {
@@ -153,7 +191,7 @@ export default function Index({}: Props) {
               <div className=" col-span-12 col-span-7 lg:col-span-9">
                 <div className="flex items-center lg:pt-2">
                   <span className="font-titillium leading-none  text-12 !font-f1NavbarFont font-semibold mr-1.5">
-                    20 - 22 September
+                    {raceDate}
                   </span>
                 </div>
 
@@ -381,7 +419,6 @@ export default function Index({}: Props) {
                         0,
                         1
                       )}/${nameForlink}/${imageNameForlink}`;
-                      console.log(imageLink);
 
                       const driverClass =
                         index === 0

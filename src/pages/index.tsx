@@ -6,7 +6,6 @@ type Props = {};
 const Index = (props: Props) => {
   const [isClient, setIsClient] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -14,7 +13,7 @@ const Index = (props: Props) => {
   return (
     <div className="h-screen h-full indexpage">
       {isVisible && (
-        <div className="fixed top-4 right-4 w-[70%] lg:w-160 bg-red-500 text-white p-4 rounded-lg shadow-lg flex items-center justify-between z-10">
+        <div className="fixed top-4 right-4 w-[70%] lg:w-160 bg-red-500 text-white p-4 rounded-lg shadow-lg flex items-center justify-between z-50">
           <span className="mr-4 text-[0.575rem] lg:text-[1rem]">
             {
               "The backend is hosted on Render, so it may take 1-2 minutes for the server to start. Please refresh in 1-2 minuts, if the content or APIs do not load at first."
@@ -52,7 +51,7 @@ const Index = (props: Props) => {
                   <Link href={"/f1/circuits"}>
                     <li>Circuits</li>
                   </Link>
-                  <Link href={"/f1/calender"}>
+                  <Link href={"/f1/fixtures"}>
                     <li>Fixtures</li>
                   </Link>
                   <Link href={"/f1/drivers"}>

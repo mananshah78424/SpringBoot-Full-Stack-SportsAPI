@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import "../../styles/f1.css";
-import TopBar from "../TopBar";
+import MainBar from "../MainNavBar";
 
 const F1Navbar: React.FC = () => {
   return (
     <div className="pt-[86px]">
-      <TopBar></TopBar>
+      <MainBar></MainBar>
       <div className="w-full hidden fixed top-6 left-0 z-40 nav-primary lg:block bg-primary pt-[70px] pb-[20px] lg:py-0 px-[10px] lg:h-[70px]">
         <nav className="m-auto w-full grid grid-cols-globalNavMobile lg:grid-cols-globalNavDesktop max-w-[1320px] h-full lg:px-[10px]">
           <nav className="f1-logo h-full">

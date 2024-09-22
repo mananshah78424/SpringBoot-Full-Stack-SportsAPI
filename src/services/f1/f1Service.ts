@@ -63,6 +63,8 @@ export const fetchFixtures = async (
   raceType?: RaceType
 ): Promise<RaceResponse> => {
   try {
+    console.log(raceType);
+
     const response = await axios.get<RaceResponse>(
       `${API_BASE_URL}/races?season=${season}${
         raceType ? `&type=${raceType}` : ""
@@ -75,6 +77,39 @@ export const fetchFixtures = async (
   }
 };
 
+export const fetchFixturesWithNext = async (
+  season: number,
+  raceType?: RaceType
+): Promise<RaceResponse> => {
+  try {
+    console.log(raceType);
+
+    const response = await axios.get<RaceResponse>(
+      `${API_BASE_URL}/races?season=${season}&next=1&timezone=America/Los_Angeles${
+        raceType ? `&type=${raceType}` : ""
+      }`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching race fixtures");
+    throw error;
+  }
+};
+
+export const fetchFixturesWithComepeitionId = async (
+  season: number,
+  id?: number
+): Promise<RaceResponse> => {
+  try {
+    const response = await axios.get<RaceResponse>(
+      `${API_BASE_URL}/races?season=${season}&competition=${id}&timezone=America/Los_Angeles`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching race fixtures");
+    throw error;
+  }
+};
 //Fetch Drivers
 export const fetchDrivers = async (
   search?: String,

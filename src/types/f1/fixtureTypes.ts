@@ -18,6 +18,7 @@ export interface Race {
 }
 
 export interface Competition {
+  id: number;
   name: string;
   location: Location;
 }

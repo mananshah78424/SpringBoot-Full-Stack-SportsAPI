@@ -2,7 +2,7 @@ import Link from "next/link";
 
 type Props = {};
 
-const TopBar = (props: Props) => {
+const MainBar = (props: Props) => {
   return (
     <div className="fixed top-0 w-full z-50 bg-white flex flex-row justify-between !font-f1NavbarFont">
       <Link href={"/"}>
@@ -20,4 +20,4 @@ const TopBar = (props: Props) => {
   );
 };
 
-export default TopBar;
+export default MainBar;
