@@ -5,12 +5,10 @@ import Loading from "@/src/components/Loading";
 import {
   fetchDriverRankings,
   fetchFixtures,
-  fetchFixturesWithComepeitionId,
-  fetchFixturesWithNext,
   subscribeUserF1,
 } from "@/src/services/f1/f1Service";
-import { getRaceDates } from "@/src/services/f1/getDates";
-import { checkIfRaceIsToday } from "@/src/services/f1/pushEmails";
+import { formatDate, getRaceDates } from "@/src/services/f1/getDates";
+import { getFromCache, saveToCache } from "@/src/services/General/Caching";
 import { DriverRanking } from "@/src/types/f1/driverStandingTypes";
 import { Race, RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
 import Link from "next/link";
@@ -28,9 +26,18 @@ export default function Index({}: Props) {
     null
   );
   const [fixtures, setFixtures] = useState<RaceResponse | null>(null);
+
   const [firstQualifyingFixtures, setFirstQualifyingFixtures] =
     useState<RaceResponse | null>(null);
+
   const [nextRace, setNextRace] = useState<Race | null>(null);
+  const [nextQualifyingRace, setNextQualifyingRace] = useState<Race | null>(
+    null
+  );
+  const [nextQualifyingRaceDate, setNextQualifyingRaceDate] = useState<
+    string | null
+  >(null);
+
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false); // Added loading state
   const [circuitImage, setCircuitImage] = useState<string>();
@@ -41,23 +48,6 @@ export default function Index({}: Props) {
   const season = 2024;
   var circuitCountry;
 
-  // Caching function: Save data to localStorage with an expiry time
-  const saveToCache = (key: string, data: any, ttl: number) => {
-    const expiry = new Date().getTime() + ttl;
-    localStorage.setItem(key, JSON.stringify({ data, expiry }));
-  };
-
-  // Retrieve data from cache if not expired
-  const getFromCache = (key: string) => {
-    const cached = localStorage.getItem(key);
-    if (cached) {
-      const { data, expiry } = JSON.parse(cached);
-      if (expiry > new Date().getTime()) {
-        return data;
-      }
-    }
-    return null;
-  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,14 +65,14 @@ export default function Index({}: Props) {
           setTopThreeDrivers(cachedTop3Drivers);
           setTopTenDrivers(cachedTop10Drivers);
         } else {
-          const result = await fetchDriverRankings(season);
-          if (result?.response) {
-            setDrivers(result.response);
-            const topThreeDrivers = result.response.slice(0, 3);
-            const topTenDrivers = result.response.slice(0, 10);
+          const driverrankings = await fetchDriverRankings(season);
+          if (driverrankings?.response) {
+            setDrivers(driverrankings.response);
+            const topThreeDrivers = driverrankings.response.slice(0, 3);
+            const topTenDrivers = driverrankings.response.slice(0, 10);
             setTopThreeDrivers(topThreeDrivers);
             setTopTenDrivers(topTenDrivers);
-            saveToCache("f1_drivers", result.response, 1000 * 60 * 60); // Cache for 1 hour
+            saveToCache("f1_drivers", driverrankings.response, 1000 * 60 * 60); // Cache for 1 hour
             saveToCache("top_3_f1_drivers", topThreeDrivers, 1000 * 60 * 60);
             saveToCache("top_10_f1_drivers", topTenDrivers, 1000 * 60 * 60);
           }
@@ -91,70 +81,117 @@ export default function Index({}: Props) {
         if (cachedFixtures) {
           console.log("Found fixtures in the cache, hence not calling API!");
           setFixtures(cachedFixtures);
-          const nextRace = getNextRace(cachedFixtures);
-          const checkIfTodayRace = checkIfRaceIsToday(nextRace);
 
-          const raceResponse = await fetchFixturesWithNext(
-            season,
-            RaceType.RACE
-          );
-          const id = raceResponse.response[0].competition.id;
-          const firstQualiResponse = await fetchFixturesWithComepeitionId(
-            season,
-            id
-          );
-          console.log("firstQualiResponse", firstQualiResponse);
+          //Getting Next Race
+          const nextRace = await fetchFixtures(season, RaceType.RACE, null, 1);
+          console.log("Next race is", nextRace);
+          if (nextRace && nextRace.response[0]) {
+            setNextRace(nextRace.response[0]);
+            updateCircuitImage(nextRace.response[0]);
+          } else {
+            setNextRace(null);
+          }
 
-          const firstQualifyingRaceDate = await getRaceDates(
-            firstQualiResponse
+          //Get Next Qualifying Race
+          const nextQualifyingRace = await fetchFixtures(
+            season,
+            RaceType.FIRST_QUALIFYING,
+            null,
+            1
           );
-          const raceRaceDate = await getRaceDates(raceResponse);
-          const monthValue = await getRaceDates(raceResponse, "month");
+
+          if (nextQualifyingRace && nextQualifyingRace.response[0]) {
+            setNextQualifyingRace(nextQualifyingRace.response[0]);
+
+            const raceDate = new Date(nextQualifyingRace.response[0].date);
+            const formattedDate = formatDate(raceDate);
+
+            if (
+              nextQualifyingRaceDate === null ||
+              nextQualifyingRace.response[0].competition.id ===
+                nextRace?.response[0].competition.id
+            ) {
+              setNextQualifyingRaceDate(formattedDate);
+            }
+          } else {
+            // console.log("Setting as null");
+
+            setNextQualifyingRaceDate(null);
+          }
+
+          const dayFromNextRace = await getRaceDates(nextRace);
+          const dayFromNextQualifyingRace = await getRaceDates(
+            nextQualifyingRace
+          );
+          const monthValue = await getRaceDates(nextRace, "month");
           setRaceDate(
-            `${firstQualifyingRaceDate} - ${raceRaceDate} ${monthValue}`
+            `${dayFromNextQualifyingRace} - ${dayFromNextRace} ${monthValue}`
           );
+          // const nextRace = getNextRace(cachedFixtures);
+          // const checkIfTodayRace = checkIfRaceIsToday(nextRace);
 
-          setNextRace(nextRace);
-          updateCircuitImage(nextRace);
+          // const raceResponse = await fetchFixturesWithNext(
+          //   season,
+          //   RaceType.RACE
+          // );
+          // const id = raceResponse.response[0].competition.id;
+          // const firstQualiResponse = await fetchFixturesWithComepeitionId(
+          //   season,
+          //   id
+          // );
+          // console.log("firstQualiResponse", firstQualiResponse);
+
+          // const firstQualifyingRaceDate = await getRaceDates(
+          //   firstQualiResponse
+          // );
+          // const raceRaceDate = await getRaceDates(raceResponse);
+          // const monthValue = await getRaceDates(raceResponse, "month");
+          // setRaceDate(
+          //   `${firstQualifyingRaceDate} - ${raceRaceDate} ${monthValue}`
+          // );
+
+          // setNextRace(nextRace);
         } else {
           const raceFixturesData = await fetchFixtures(season, RaceType.RACE);
-          const firstQualifyingData = await fetchFixtures(
-            season,
-            RaceType.FIRST_QUALIFYING
-          );
+          // const firstQualifyingData = await fetchFixtures(
+          //   season,
+          //   RaceType.FIRST_QUALIFYING
+          // );
+          const nextRace = await fetchFixtures(season, RaceType.RACE, null, 1);
           setFixtures(raceFixturesData);
-          setFirstQualifyingFixtures(firstQualifyingData);
-          saveToCache("f1_fixtures", raceFixturesData, 1000 * 60 * 60); // Cache for 1 hour
+          // setFirstQualifyingFixtures(firstQualifyingData);
+          saveToCache("f1_fixtures", raceFixturesData, 1000 * 60 * 60);
+          if (nextRace) {
+            updateCircuitImage(nextRace?.response[0]);
+          }
 
-          const nextRace = getNextRace(raceFixturesData);
-          const firstQualifying = getNextRace(firstQualifyingData);
-          console.log("Next Race is", nextRace);
-          console.log("Next Qualifying is", firstQualifying);
-
-          setNextRace(nextRace);
-          // setNextFirstQualifyingRace(firstQualifying);
-
-          const checkIfTodayRace = checkIfRaceIsToday(nextRace);
-          updateCircuitImage(nextRace);
+          // const nextRace = getNextRace(raceFixturesData);
+          // const firstQualifying = getNextRace(firstQualifyingData);
+          // console.log("Next Race is", nextRace);
+          // console.log("Next Qualifying is", firstQualifying);
+          // setNextRace(nextRace);
+          // // setNextFirstQualifyingRace(firstQualifying);
+          // const checkIfTodayRace = checkIfRaceIsToday(nextRace);
+          //
         }
       } catch (err) {
         setError("Error fetching F1 data");
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false);
       }
     };
 
-    // Helper function to get the next scheduled race
-    const getNextRace = (fixturesData: RaceResponse) => {
-      const scheduledRaces = fixturesData.response.filter(
-        (race) => race.status === "Scheduled"
-      );
-      return scheduledRaces.reduce((closestRace, currentRace) => {
-        const closestRaceDate = new Date(closestRace.date);
-        const currentRaceDate = new Date(currentRace.date);
-        return currentRaceDate < closestRaceDate ? currentRace : closestRace;
-      });
-    };
+    // // Helper function to get the next scheduled race
+    // const getNextRace = (fixturesData: RaceResponse) => {
+    //   const scheduledRaces = fixturesData.response.filter(
+    //     (race) => race.status === "Scheduled"
+    //   );
+    //   return scheduledRaces.reduce((closestRace, currentRace) => {
+    //     const closestRaceDate = new Date(closestRace.date);
+    //     const currentRaceDate = new Date(currentRace.date);
+    //     return currentRaceDate < closestRaceDate ? currentRace : closestRace;
+    //   });
+    // };
 
     // Helper function to set circuit image
     const updateCircuitImage = (nextRace: Race) => {
@@ -291,7 +328,7 @@ export default function Index({}: Props) {
                     <img
                       alt=""
                       src={circuitImage}
-                      className="f1-c-image w-full h-auto object-cover"
+                      className="f1-c-image w-full mainalt h-auto object-cover"
                     ></img>
                   ) : (
                     <img
@@ -299,7 +336,7 @@ export default function Index({}: Props) {
                       src={
                         "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Las%20Vegas"
                       }
-                      className="f1-c-image w-full h-auto object-cover"
+                      className="f1-c-image w-full alt h-auto object-cover"
                     ></img>
                   )}
                 </div>

@@ -57,19 +57,36 @@ export const fetchTeamsRankings = async (
   }
 };
 
-//Fetch fixtures
 export const fetchFixtures = async (
-  season: number,
-  raceType?: RaceType
-): Promise<RaceResponse> => {
+  season?: number,
+  raceType?: RaceType,
+  competitionId?: number | null,
+  next?: number
+): Promise<RaceResponse | null> => {
+  var response;
+  season = season != null ? season : 2024;
   try {
-    console.log(raceType);
-
-    const response = await axios.get<RaceResponse>(
-      `${API_BASE_URL}/races?season=${season}${
-        raceType ? `&type=${raceType}` : ""
-      }`
-    );
+    if (season && raceType && competitionId && next) {
+      response = await axios.get<RaceResponse>(
+        `${API_BASE_URL}/races?season=${season}&type=${raceType}&next=${next}&competition=${competitionId}&timezone=America/Los_Angeles`
+      );
+    } else if (season && raceType && competitionId) {
+      response = await axios.get<RaceResponse>(
+        `${API_BASE_URL}/races?season=${season}&type=${raceType}&competition=${competitionId}&timezone=America/Los_Angeles`
+      );
+    } else if (season && raceType && next) {
+      response = await axios.get<RaceResponse>(
+        `${API_BASE_URL}/races?season=${season}&type=${raceType}&next=${next}&timezone=America/Los_Angeles`
+      );
+    } else if (season && raceType) {
+      response = await axios.get<RaceResponse>(
+        `${API_BASE_URL}/races?season=${season}&type=${raceType}&timezone=America/Los_Angeles`
+      );
+    } else {
+      response = await axios.get<RaceResponse>(
+        `${API_BASE_URL}/races?season=${season}&timezone=America/Los_Angeles`
+      );
+    }
     return response.data;
   } catch (error) {
     console.error("Error fetching race fixtures");
@@ -77,39 +94,59 @@ export const fetchFixtures = async (
   }
 };
 
-export const fetchFixturesWithNext = async (
-  season: number,
-  raceType?: RaceType
-): Promise<RaceResponse> => {
-  try {
-    console.log(raceType);
+//Fetch fixtures
+// export const fetchFixtures = async (
+//   season: number,
+//   raceType?: RaceType
+// ): Promise<RaceResponse> => {
+//   try {
+//     console.log(raceType);
 
-    const response = await axios.get<RaceResponse>(
-      `${API_BASE_URL}/races?season=${season}&next=1&timezone=America/Los_Angeles${
-        raceType ? `&type=${raceType}` : ""
-      }`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching race fixtures");
-    throw error;
-  }
-};
+//     const response = await axios.get<RaceResponse>(
+//       `${API_BASE_URL}/races?season=${season}${
+//         raceType ? `&type=${raceType}` : ""
+//       }`
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching race fixtures");
+//     throw error;
+//   }
+// };
 
-export const fetchFixturesWithComepeitionId = async (
-  season: number,
-  id?: number
-): Promise<RaceResponse> => {
-  try {
-    const response = await axios.get<RaceResponse>(
-      `${API_BASE_URL}/races?season=${season}&competition=${id}&timezone=America/Los_Angeles`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching race fixtures");
-    throw error;
-  }
-};
+// export const fetchFixturesWithNext = async (
+//   season: number,
+//   raceType?: RaceType
+// ): Promise<RaceResponse> => {
+//   try {
+//     console.log(raceType);
+
+//     const response = await axios.get<RaceResponse>(
+//       `${API_BASE_URL}/races?season=${season}&next=1&timezone=America/Los_Angeles${
+//         raceType ? `&type=${raceType}` : ""
+//       }`
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching race fixtures");
+//     throw error;
+//   }
+// };
+
+// export const fetchFixturesWithComepeitionId = async (
+//   season: number,
+//   id?: number
+// ): Promise<RaceResponse> => {
+//   try {
+//     const response = await axios.get<RaceResponse>(
+//       `${API_BASE_URL}/races?season=${season}&competition=${id}&timezone=America/Los_Angeles`
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching race fixtures");
+//     throw error;
+//   }
+// };
 //Fetch Drivers
 export const fetchDrivers = async (
   search?: String,

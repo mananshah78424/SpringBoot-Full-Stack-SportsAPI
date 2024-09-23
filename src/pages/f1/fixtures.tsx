@@ -1,5 +1,6 @@
 import F1PageHeading from "@/src/components/f1/f1Heading";
 import Layout from "@/src/components/Layout";
+import Loading from "@/src/components/Loading";
 import { fetchFixtures } from "@/src/services/f1/f1Service";
 import { RaceResponse, RaceType } from "@/src/types/f1/fixtureTypes";
 import React, { useEffect, useState } from "react";
@@ -33,7 +34,13 @@ const RacePage: React.FC = () => {
   }, [season, raceType]);
 
   const years = Array.from({ length: 2024 - 1980 + 1 }, (_, i) => 2024 - i);
-
+  if (loading) {
+    return (
+      <Layout>
+        <Loading></Loading>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <div className="flex flex-col mx-auto px-4 sm:px-6 lg:px-8">
