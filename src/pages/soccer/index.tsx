@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import "../../styles/soccer.css";
 type Props = {};
 
-const index = (props: Props) => {
+const Index = (props: Props) => {
   const [articles, setArticles] = useState<Article[]>([]); // Array of articles
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -132,4 +132,4 @@ const index = (props: Props) => {
   );
 };
 
-export default index;
+export default Index;
