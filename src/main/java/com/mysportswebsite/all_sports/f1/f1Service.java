@@ -34,8 +34,11 @@ public class f1Service {
     }
 
     // Races
-    public RaceResponse getRaces(Integer season, Integer next, String timezone, String type) {
+    public RaceResponse getRaces(Integer season, Integer next, String timezone, String type, Integer id) {
         StringBuilder urlBuilder = new StringBuilder("https://v1.formula-1.api-sports.io/races?");
+        if(id!=null){
+            urlBuilder.append("id=").append(id).append("&");
+        }
         if (season != null) {
             urlBuilder.append("season=").append(season).append("&");
         }

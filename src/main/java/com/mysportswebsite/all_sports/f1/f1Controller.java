@@ -54,10 +54,12 @@ public class f1Controller {
             @RequestParam(value = "season", required = false) Integer season,
             @RequestParam(value = "timezone", required = false) String timezone,
             @RequestParam(value = "type", required = false) String type,
-            @RequestParam(value = "next", required = false) Integer next
+            @RequestParam(value = "next", required = false) Integer next,
+            @RequestParam(value = "id", required = false) Integer id
     ){
         season=(season!=null)?season:2024;
-        return f1Service.getRaces(season,next,timezone,type);
+        timezone=(timezone!=null)?timezone:"America/Los_Angeles";
+        return f1Service.getRaces(season,next,timezone,type,id);
     }
 
 

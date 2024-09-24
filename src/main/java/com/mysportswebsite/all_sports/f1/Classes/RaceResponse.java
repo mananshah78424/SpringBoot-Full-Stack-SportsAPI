@@ -35,6 +35,7 @@ public class RaceResponse implements Serializable {
         @Data
         @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Competition implements  Serializable{
+            private Integer id;
             private String name;
             private Location location;
 
