@@ -8,7 +8,6 @@
   background-size: cover;
   padding: 0 0.8rem;
   overflow: hidden;
-  border-bottom: 0.1rem solid #fff;
   padding-bottom: 0;
   font-size: 0;
 }
@@ -118,4 +117,37 @@ ul li {
   line-height: 2rem;
   color: #37003c;
   letter-spacing: -0.4px;
+}
+
+.article-text {
+  color: #37003c;
+  letter-spacing: -0.4px;
+  margin: 0.4rem 0;
+  font-size: 1.2rem;
+  overflow: hidden;
+  max-height: 11.88rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-family: PremierSans-Regular, Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+/* Navbar */
+
+.soccer-navbar {
+  line-height: 4.2rem;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  position: relative;
+  background: #fff;
+}
+
+.subNav li {
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
+  height: 100%;
+}
+
+nav {
+  font-family: PremierSans-Heavy, Arial, Helvetica Neue, Helvetica, sans-serif;
 }

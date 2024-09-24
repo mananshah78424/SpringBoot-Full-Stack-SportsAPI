@@ -159,6 +159,9 @@ export default function Index({}: Props) {
           // );
           const nextRace = await fetchFixtures(season, RaceType.RACE, null, 1);
           setFixtures(raceFixturesData);
+          if (nextRace) {
+            setNextRace(nextRace?.response[0]);
+          }
           // setFirstQualifyingFixtures(firstQualifyingData);
           saveToCache("f1_fixtures", raceFixturesData, 1000 * 60 * 60);
           if (nextRace) {
@@ -401,7 +404,7 @@ export default function Index({}: Props) {
 
           <div className="my-4 w-full relative overflow-hidden w-full flex items-center mt-10 lg:h-96 before:block before:absolute before:w-full before:bg-carbonBlack/50 before:h-full">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-              <h1 className="font-formula font-bold text-left text-white text-32 tablet:text-62 text-center mb-1.5 uppercase">
+              <h1 className=" font-bold text-center font-f1NavbarFont text-white text-32 tablet:text-62 text-center mb-1.5 uppercase">
                 {nextRace?.competition.location.country}
               </h1>
               <img

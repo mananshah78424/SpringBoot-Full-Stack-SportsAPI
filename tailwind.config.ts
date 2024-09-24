@@ -26,6 +26,13 @@ const config: Config = {
         f1NavbarFont: ["FormulaNavbarFont", "sans-serif"],
         titillium: ["Titillium", "sans-serif"],
         F1Black: ["F1Black"],
+        SoccerText: [
+          "PremierSans-Heavy",
+          "Arial",
+          "Helvetica Neue",
+          "Helvetica",
+          "sans-serif",
+        ],
       },
       fontSize: {
         "fs-14px": ".875rem",
