@@ -99,6 +99,12 @@ public class SoccerService {
         return fetchAndParse(url,LeaguesResponse.class);
     }
 
+    // Get Top Player Stats
+    public PlayerStatsResponse getTopPlayerStats(){
+        String url=String.format("https://v3.football.api-sports.io/players/topscorers?season=2024&league=39");
+        return fetchAndParse(url,PlayerStatsResponse.class);
+    }
+
     // General
     private <T> T fetchAndParse(String url, Class<T> responseType) {
         HttpHeaders headers = new HttpHeaders();

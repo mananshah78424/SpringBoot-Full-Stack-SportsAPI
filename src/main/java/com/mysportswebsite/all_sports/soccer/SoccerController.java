@@ -39,6 +39,13 @@ public class SoccerController {
         return soccerService.getStandings(season);
     }
 
+
+    // Top Player Stats
+    @GetMapping("/topplayers")
+    public PlayerStatsResponse getTopPlayers(){
+        return soccerService.getTopPlayerStats();
+    }
+
     // Team Stats
     @GetMapping("/teamstats")
     public TeamStatisticsResponse getStatistics(
