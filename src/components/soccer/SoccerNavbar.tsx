@@ -15,10 +15,10 @@ const SoccerNavbar: React.FC = () => {
       </div>
 
       <nav
-        className="subNav js-sub-nav w-full bg-white p-4 fixed z-40 h-[3rem]"
+        className="subNav js-sub-nav w-full bg-white p-4 fixed z-40 h-[3rem] flex items-center justify-center"
         role="menubar"
       >
-        <ul className="flex flex-wrap justify-start space-x-4 text-[#76766f] pl-[5.5rem] font-bold text-SoccerText">
+        <ul className="flex flex-wrap justify-start space-x-4 text-[#76766f] font-bold text-SoccerText">
           <li data-nav-index="0" className="h-full">
             <Link
               href="/soccer"
