@@ -1,5 +1,4 @@
 import Loading from "@/src/components/Loading";
-import SoccerBanner from "@/src/components/soccer/SoccerBanner";
 import SoccerNavbar from "@/src/components/soccer/SoccerNavbar";
 import { getFromCache, saveToCache } from "@/src/services/General/Caching";
 import { Article, scrapeNews } from "@/src/services/soccer/newsScarper";
@@ -42,9 +41,9 @@ const Index = (props: Props) => {
   return (
     <div className="">
       <SoccerNavbar></SoccerNavbar>
-      <div className="mt-5">
+      {/* <div className="mt-5">
         <SoccerBanner title=""></SoccerBanner>
-      </div>
+      </div> */}
       <div className="flex flex-row justify-center bg-soccerMainBanner mb-4">
         <div className="container mx-auto">
           <div className="mt-10 pb-10">
@@ -116,7 +115,7 @@ const Index = (props: Props) => {
                           className="w-full object-contain" // Full width within parent container
                           alt={article.title} // Alt attribute for better accessibility
                         />
-                        <h2 className="mt-2 text-black text-left w-full article-text">
+                        <h2 className="mt-2 text-black text-left w-full article-text text-[#37003c]">
                           {article.title}
                         </h2>
                       </div>

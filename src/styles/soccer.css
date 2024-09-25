@@ -120,7 +120,7 @@ ul li {
 }
 
 .article-text {
-  color: #37003c;
+  color: #37003c !important;
   letter-spacing: -0.4px;
   margin: 0.4rem 0;
   font-size: 1.2rem;
@@ -150,4 +150,32 @@ ul li {
 
 nav {
   font-family: PremierSans-Heavy, Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.clubNavigation {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  position: relative;
+  padding: 1.2rem 0 1.2rem 10.5rem;
+}
+.clubNavigation .clubList {
+  display: flex;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 130rem;
+  padding-right: 2.4rem;
+}
+
+.clubNavigation .clubSitesHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 8.5rem;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  font-family: PremierSans-Heavy, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #76766f;
 }

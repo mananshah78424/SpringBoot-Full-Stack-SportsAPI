@@ -1,4 +1,5 @@
 import SoccerBanner from "@/src/components/soccer/SoccerBanner";
+import SoccerNavbar from "@/src/components/soccer/SoccerNavbar";
 import { fetchStandings } from "@/src/services/soccer/soccerService";
 import { TeamStanding } from "@/src/types/soccer/standingTypes";
 import { useEffect, useState } from "react";
@@ -23,8 +24,8 @@ const StandingsPage = () => {
   }, []);
   return (
     <div className="">
-      {/* <TopBar></TopBar> */}
-      <div className="mt-5">
+      <SoccerNavbar></SoccerNavbar>
+      <div className="">
         <SoccerBanner title="Standings"></SoccerBanner>
       </div>
       <div className="container mx-auto">
@@ -114,7 +115,10 @@ const StandingsPage = () => {
                     {teamStanding.goalsDiff}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {teamStanding.form}
+                    {teamStanding.form.slice(
+                      teamStanding.form.length - 3,
+                      teamStanding.form.length
+                    )}
                   </td>
                 </tr>
               ))}
