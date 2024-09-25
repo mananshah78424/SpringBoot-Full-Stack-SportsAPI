@@ -167,7 +167,14 @@ export default function Index({}: Props) {
           if (nextRace) {
             updateCircuitImage(nextRace?.response[0]);
           }
-
+          const dayFromNextRace = await getRaceDates(nextRace);
+          const dayFromNextQualifyingRace = await getRaceDates(
+            nextQualifyingRace
+          );
+          const monthValue = await getRaceDates(nextRace, "month");
+          setRaceDate(
+            `${dayFromNextQualifyingRace} - ${dayFromNextRace} ${monthValue}`
+          );
           // const nextRace = getNextRace(raceFixturesData);
           // const firstQualifying = getNextRace(firstQualifyingData);
           // console.log("Next Race is", nextRace);
