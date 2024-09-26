@@ -1,3 +1,4 @@
+import Carousel from "@/src/components/Carousel";
 import Loading from "@/src/components/Loading";
 import SoccerNavbar from "@/src/components/soccer/SoccerNavbar";
 import { getFromCache, saveToCache } from "@/src/services/General/Caching";
@@ -14,6 +15,12 @@ const Index = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [topPlayerStats, setTopPlayerStats] = useState<StatsResponse[]>();
+
+  const images = [
+    "https://images.pexels.com/photos/1884574/pexels-photo-1884574.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://drop-assets.ea.com/images/6KK77Eipo5KeXiaZh8SDwo/76c28d2bea477e5de43734956a216fac/palmer.png?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5&w=1280",
+    "https://img.chelseafc.com/image/upload/f_auto,h_650,c_fill,ar_16:9,q_auto:best/editorial/news/2023/03/06/Stamford_Bridge_stadium_aerial_night_1.jpg",
+  ];
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -79,7 +86,8 @@ const Index = (props: Props) => {
           <div className="mt-10 pb-10">
             <div className="flex flex-row w-full">
               <div className="flex flex-col w-2/3">
-                <span className="relative flex justify-center items-center main-banner lg:h-[550px]  bg-[url('https://drop-assets.ea.com/images/2wkno2XZ6KoqdKyx4no5Yj/ebc5161e1e321070600f06eefa390f93/FC25_UT-Hero_4x3.jpg?im=AspectCrop=(4,3),xPosition=0.5,yPosition=0.5&w=1191')] bg-cover bg-left w-full bg-no-repeat before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[280px] before:h-[215px] before:lg:h-[550px] before:lg:h-[450px] before:bg-carbonBlack/50"></span>
+                <Carousel images={images} height="600px"></Carousel>
+                {/* <span className="relative flex justify-center items-center main-banner lg:h-[550px]  bg-[url('https://drop-assets.ea.com/images/2wkno2XZ6KoqdKyx4no5Yj/ebc5161e1e321070600f06eefa390f93/FC25_UT-Hero_4x3.jpg?im=AspectCrop=(4,3),xPosition=0.5,yPosition=0.5&w=1191')] bg-cover bg-left w-full bg-no-repeat before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[280px] before:h-[215px] before:lg:h-[550px] before:lg:h-[450px] before:bg-carbonBlack/50"></span> */}
                 <p className="text-white text-[20px] mt-2">Feature</p>
                 <h2 className="text-white text-[32px]">
                   Premier League weekend review: What we learned

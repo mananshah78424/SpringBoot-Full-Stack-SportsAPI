@@ -1,9 +1,16 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Carousel from "../components/Carousel";
+import MainBar from "../components/MainNavBar";
 
 type Props = {};
 
 const Index = (props: Props) => {
+  const images = [
+    "https://drop-assets.ea.com/images/2N1pVhNm2IvimaZ5VwWppY/6f5452953164520a0e12add363b794f7/UT-POS_v03_8K_LR_16x9_Jun27_3D.jpg?im=AspectCrop=(16,9),xPosition=0.5114583333333333,yPosition=0.525&w=1280",
+    "https://images.pexels.com/photos/2127038/pexels-photo-2127038.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/1905009/pexels-photo-1905009.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  ];
   const [isClient, setIsClient] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   useEffect(() => {
@@ -12,6 +19,7 @@ const Index = (props: Props) => {
 
   return (
     <div className="h-screen h-full indexpage">
+      <MainBar></MainBar>
       {isVisible && (
         <div className="fixed top-4 right-4 w-[70%] lg:w-160 bg-red-500 text-white p-4 rounded-lg shadow-lg flex items-center justify-between z-50">
           <span className="mr-4 text-[0.575rem] lg:text-[1rem]">
@@ -35,6 +43,10 @@ const Index = (props: Props) => {
             GET LIVE UPDATES ON EVERY SPORT!
           </h1>
         </div>
+      </div>
+
+      <div className="container mx-auto my-4">
+        <Carousel images={images} height="600px"></Carousel>
       </div>
       {isClient && (
         <div className=" mx-[auto] w-full text-black mt-10 space-y-[2rem] lg:space-y-[5rem] px-[40px] pb-20">

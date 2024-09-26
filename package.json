@@ -14,7 +14,8 @@
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
-    "react-spinners": "^0.14.1"
+    "react-spinners": "^0.14.1",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -24,6 +25,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "daisyui": "^4.12.10",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
     "postcss": "^8",

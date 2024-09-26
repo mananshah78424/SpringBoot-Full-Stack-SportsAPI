@@ -15,7 +15,7 @@ const SoccerNavbar: React.FC = () => {
       </div>
 
       <nav
-        className="subNav js-sub-nav w-full bg-white p-4 fixed z-40 h-[3rem] flex items-center justify-center"
+        className="subNav js-sub-nav w-full bg-white p-4 fixed z-40 h-[3rem] flex items-center justify-center font-archivo"
         role="menubar"
       >
         <ul className="flex flex-wrap justify-start space-x-4 text-[#76766f] font-bold text-SoccerText">
