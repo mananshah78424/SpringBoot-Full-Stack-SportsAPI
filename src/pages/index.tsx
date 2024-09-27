@@ -45,6 +45,7 @@ const Index = (props: Props) => {
         </div>
       </div>
 
+      <div className="h-[200px]">Get live sports updates</div>
       <div className="container mx-auto my-4">
         <Carousel images={images} height="600px"></Carousel>
       </div>
