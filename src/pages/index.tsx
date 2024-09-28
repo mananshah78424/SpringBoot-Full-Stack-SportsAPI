@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Carousel from "../components/Carousel";
+import Loading from "../components/Loading";
 import MainBar from "../components/MainNavBar";
+import { Article, scrapeNews } from "../services/f1/getF1News";
 
 type Props = {};
 
@@ -12,13 +13,22 @@ const Index = (props: Props) => {
     "https://images.pexels.com/photos/1905009/pexels-photo-1905009.jpeg?auto=compress&cs=tinysrgb&w=1200",
   ];
   const [isClient, setIsClient] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const [f1News, setF1News] = useState<Article[]>([]);
   useEffect(() => {
+    const getLiveF1news = async () => {
+      try {
+        const response = await scrapeNews();
+        setF1News(response);
+        console.log(response);
+      } catch {}
+    };
+    getLiveF1news();
     setIsClient(true);
   }, []);
 
   return (
-    <div className="h-screen h-full indexpage">
+    <div className="min-h-screen h-full indexpage bg-black">
       <MainBar></MainBar>
       {isVisible && (
         <div className="fixed top-4 right-4 w-[70%] lg:w-160 bg-red-500 text-white p-4 rounded-lg shadow-lg flex items-center justify-between z-50">
@@ -45,49 +55,106 @@ const Index = (props: Props) => {
         </div>
       </div>
 
-      <div className="h-[200px]">Get live sports updates</div>
-      <div className="container mx-auto my-4">
-        <Carousel images={images} height="600px"></Carousel>
-      </div>
-      {isClient && (
-        <div className=" mx-[auto] w-full text-black mt-10 space-y-[2rem] lg:space-y-[5rem] px-[40px] pb-20">
-          <Link href={"/f1"}>
-            <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
-              <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
-                <Link href={"/f1"}>Formula 1</Link>
-              </h1>
-              <div className="font-formula text-left text-carbonBlack text-[0.475rem] lg:text-[1.475rem] absolute text-white font-f1NavbarFont font-black mt-[4rem] lg:mt-[10rem]">
-                <ul className="list-none flex flex-row space-x-2 lg:space-x-8">
-                  <Link href={"/f1/rankings"}>
-                    <li>Rankings</li>
-                  </Link>
-                  <Link href={"/f1/circuits"}>
-                    <li>Circuits</li>
-                  </Link>
-                  <Link href={"/f1/fixtures"}>
-                    <li>Fixtures</li>
-                  </Link>
-                  <Link href={"/f1/drivers"}>
-                    <li>Drivers</li>
-                  </Link>
-                </ul>
-              </div>
-              <img
-                alt="F1 Image Drivver"
-                width="1024"
-                height="1024"
-                decoding="async"
-                data-nimg="1"
-                className="w-full"
-                sizes="100vw"
-                src="https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Tag%20collections/Teams/Red%20Bull"
-                pinger-seen="true"
-              ></img>
-            </section>
-          </Link>
+      <div className="bg-carbonBlack text-white w-full flex flex-col lg:mt-10">
+        <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
+          <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
+            <Link href={"/f1"}>Formula 1</Link>
+          </h1>
+          <div className="font-formula text-left text-carbonBlack text-[0.475rem] lg:text-[1.475rem] absolute text-white font-f1NavbarFont font-black mt-[4rem] lg:mt-[10rem]">
+            <ul className="list-none flex flex-row space-x-2 lg:space-x-8">
+              <Link href={"/f1/rankings"}>
+                <li>Rankings</li>
+              </Link>
+              <Link href={"/f1/circuits"}>
+                <li>Circuits</li>
+              </Link>
+              <Link href={"/f1/fixtures"}>
+                <li>Fixtures</li>
+              </Link>
+              <Link href={"/f1/drivers"}>
+                <li>Drivers</li>
+              </Link>
+            </ul>
+          </div>
+          <img
+            alt="F1 Image Drivver"
+            width="1024"
+            height="1024"
+            decoding="async"
+            data-nimg="1"
+            className="w-full"
+            sizes="100vw"
+            src="https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Tag%20collections/Teams/Red%20Bull"
+            pinger-seen="true"
+          ></img>
+        </section>
+        <div className="w-full flex flex-col lg:flex-row">
+          <div className="w-full lg:w-[50%]">
+            <h1 className="px-[3rem] font-f1NavbarFont text-[2rem]">
+              Formula One News
+            </h1>
+            <div className="flex flex-row flex-wrap  py-[2rem] px-[3rem]">
+              {f1News &&
+                f1News.slice(0, 4).map((news, index) => {
+                  const isLastChild = (index + 1) % 2 === 0; // Adjust according to the number of columns in your layout
+                  return (
+                    <Link href={news.link} key={index} className="">
+                      <section className="w-[300px] mb-[2rem]">
+                        {/* Container for image */}
+                        <div
+                          className={`w-full h-[200px] ${
+                            !isLastChild ? "lg:pr-8" : ""
+                          }`}
+                        >
+                          <img
+                            src={news.imageSrc}
+                            className="w-full h-full object-cover rounded-xl"
+                            alt={news.title}
+                          />
+                        </div>
+                        <p className="text-sm font-400 my-4 lg:pr-8 font-f1NavbarFont">
+                          {news.title}
+                        </p>
+                      </section>
+                    </Link>
+                  );
+                })}
+            </div>
+          </div>
 
+          <div className="w-full lg:!w-[50%] lg:py-[2rem] lg:pr-[4rem] h-full">
+            <div className="container mx-auto my-4 h-full">
+              {f1News ? (
+                f1News.slice(5).map((news, index) => (
+                  <Link href={news.link} key={index}>
+                    <div className="w-full p-4">
+                      {/* Container for image */}
+                      <div className="w-full h-[31rem]">
+                        <img
+                          src={news.imageSrc}
+                          className="w-full h-full lg:object-cover rounded-xl"
+                          alt={news.title}
+                        />
+                      </div>
+                      {/* Container for text */}
+                      <p className="font-400 my-4 pr-8 font-f1NavbarFont text-[1.4rem]">
+                        {news.title}
+                      </p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <Loading></Loading>
+              )}
+            </div>{" "}
+          </div>
+        </div>
+      </div>
+
+      {isClient && (
+        <div className=" w-full text-black mt-10 space-y-[2rem] lg:space-y-[5rem] lg:pb-20">
           <Link href={"/soccer"}>
-            <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
+            <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden lg:mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
               <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
                 Soccer
               </h1>
