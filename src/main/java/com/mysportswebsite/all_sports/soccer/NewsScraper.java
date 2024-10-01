@@ -76,6 +76,71 @@ public class NewsScraper {
         return articles;
     }
 
+
+
+    @GetMapping("/api/soccer/main_home_news")
+    public List<NewsArticle> scrapeMainScreenNews() {
+        List<NewsArticle> articles = new ArrayList<>();
+        WebDriver driver = null;
+
+        try {
+            // Set up WebDriver using WebDriverManager
+            WebDriverManager.chromedriver().setup();
+
+            // Set up Chrome options
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--remote-debugging-port=9222");
+            options.addArguments("--disable-software-rasterizer");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--user-data-dir=/tmp/chrome-user-data");
+
+            // Initialize WebDriver
+            driver = new ChromeDriver(options);
+
+            // Open the target webpage
+            driver.get("https://www.goal.com/en-us/news");
+
+            // Create a WebDriverWait object to wait for elements to load
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            //wait.until(...): Waits until the specified condition is met (the visibility of the elements matching the given CSS selector).
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("card-list-item_bg-for-shadow__7rgUQ")));
+
+            // Use WebDriver to find the elements containing the news articles
+            List<WebElement> articlesElements = driver.findElements(By.className("card-list-item_bg-for-shadow__7rgUQ"));
+            System.out.println(articlesElements.size());
+            for (WebElement element : articlesElements) {
+                // Extract the title
+                String title = element.findElement(By.cssSelector("h3.title")).getText();
+
+                // Extract the link
+                String link = element.findElement(By.cssSelector("a[data-testid='card-title-url']")).getAttribute("href");
+
+                // Extract the image source
+                String imageSrc = element.findElement(By.cssSelector("img")).getAttribute("src");
+
+                // Extract the description/teaser
+                String description = element.findElement(By.cssSelector("p.teaser")).getText();
+
+                // Add the news article to the list
+                articles.add(new NewsArticle(title, link, imageSrc));
+            }
+            return articles;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
+        }
+
+        return articles;
+    }
+
+
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class NewsArticle {

@@ -38,57 +38,25 @@ public class F1NewsScraper {
             options.addArguments("--user-data-dir=/tmp/chrome-user-data");
             driver = new ChromeDriver(options);
 
-            driver.get("https://www.skysports.com/f1");
+            driver.get("https://www.formula1.com/en/latest/all");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("news-list")));
-            List<WebElement> articleElements = driver.findElements(By.className("news-list__item"));
-            System.out.println(articleElements.size());
-            for(WebElement element:articleElements){
-                WebElement imageElement = element.findElement(By.cssSelector("img.news-list__image"));
-                String imageUrl = imageElement.getAttribute("data-src");
-                if (imageUrl == null || imageUrl.isEmpty()) {
-                    // Fallback to src if data-src is empty or not present
-                    imageUrl = imageElement.getAttribute("src");
-                }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.group")));
+            List<WebElement> articlesElements = driver.findElements(By.cssSelector("li.group"));
 
+            for (WebElement element : articlesElements) {
+                // Extract the link (href) from the <a> tag
+                String link = element.findElement(By.tagName("a")).getAttribute("href");
 
+                // Extract the image source from the <img> tag
+                String imageSrc = element.findElement(By.tagName("img")).getAttribute("src");
 
-                WebElement titleElement = element.findElement(By.cssSelector(".news-list__headline-link"));
-                // Debug: Print the inner HTML to check if the element contains the title text
-                String innerHtml = titleElement.getAttribute("innerHTML");
-                System.out.println("Inner HTML: " + innerHtml);
+                // Extract the title from the <p> tag
+                String title = element.findElement(By.tagName("p")).getText();
 
-                // Use JavaScript Executor to get the text content if getText() fails
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                String title = (String) js.executeScript("return arguments[0].innerText;", titleElement);
-
-                // Trim the title to remove any leading/trailing spaces
-                title = title.trim();
-
-
-                // Extract the description
-                WebElement descriptionElement = element.findElement(By.cssSelector(".news-list__snippet"));
-                String description = descriptionElement.getText();
-
-                // Extract the anchor tag (a tag) to get the link for the article
-                WebElement linkElement = element.findElement(By.cssSelector(".news-list__headline-link"));
-                String articleLink = linkElement.getAttribute("href");
-
-                NewsArticle article = new NewsArticle(title,articleLink,imageUrl);
-                articles.add(article);
+                // Add the news article to the list
+                articles.add(new NewsArticle(title, link, imageSrc));
             }
-            //int articleCount = Math.min(articleElements.size(), 6);  // To ensure we don't exceed the list size
-//            for (int i = 0; i < articleCount; i++) {
-//                WebElement articleElement = articleElements.get(i);
-//
-//                // Extracting the title, link, and image
-//                String title = articleElement.findElement(By.className("figcaption p")).getText();
-//                String link = articleElement.findElement(By.className("a")).getAttribute("href");
-//                String imageSrc = articleElement.findElement(By.className("img")).getAttribute("src");
-//
-//                NewsArticle article = new NewsArticle(title, link, imageSrc);
-//                articles.add(article);
-//            }
+            return articles;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -97,7 +65,6 @@ public class F1NewsScraper {
                 driver.quit(); // Ensure the driver is quit after use
             }
         }
-        return articles;
     }
 
 
