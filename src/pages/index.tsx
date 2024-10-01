@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import MainBar from "../components/MainNavBar";
 import { Article, scrapeNews } from "../services/f1/getF1News";
+import { getFromCache, saveToCache } from "../services/General/Caching";
+import { scrapeMainScreenNews } from "../services/soccer/newsScarper";
 
 type Props = {};
 
@@ -15,13 +17,38 @@ const Index = (props: Props) => {
   const [isClient, setIsClient] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [f1News, setF1News] = useState<Article[]>([]);
+  const [soccerNews, setSoccerNews] = useState<Article[]>([]);
+
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const getLiveF1news = async () => {
       try {
-        const response = await scrapeNews();
-        setF1News(response);
-        console.log(response);
-      } catch {}
+        const f1newsFromCache = getFromCache("f1news");
+        const soccerNewsFromCache = getFromCache("soccerNews");
+        if (f1newsFromCache) {
+          setF1News(f1newsFromCache);
+        } else {
+          const f1NewsResponse = await scrapeNews();
+          setF1News(f1NewsResponse);
+          saveToCache("f1news", f1NewsResponse, 1000 * 60 * 60);
+        }
+
+        if (soccerNewsFromCache) {
+          setSoccerNews(soccerNewsFromCache);
+        } else {
+          const soccerNewsResponse = await scrapeMainScreenNews();
+          setSoccerNews(soccerNewsResponse);
+          saveToCache(
+            "soccerNewsFromCache",
+            soccerNewsResponse,
+            1000 * 60 * 60
+          );
+        }
+      } catch {
+      } finally {
+        setLoading(false); // Set loading to false when done
+      }
     };
     getLiveF1news();
     setIsClient(true);
@@ -125,7 +152,7 @@ const Index = (props: Props) => {
           <div className="w-full lg:!w-[50%] lg:py-[2rem] lg:pr-[4rem] h-full">
             <div className="container mx-auto my-4 h-full">
               {f1News ? (
-                f1News.slice(5).map((news, index) => (
+                f1News.slice(5, 6).map((news, index) => (
                   <Link href={news.link} key={index}>
                     <div className="w-full p-4">
                       {/* Container for image */}
@@ -151,44 +178,106 @@ const Index = (props: Props) => {
         </div>
       </div>
 
-      {isClient && (
-        <div className=" w-full text-black mt-10 space-y-[2rem] lg:space-y-[5rem] lg:pb-20">
-          <Link href={"/soccer"}>
-            <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden lg:mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
-              <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
-                Soccer
-              </h1>
-              <div className="font-formula text-left text-carbonBlack text-[0.475rem] lg:text-[1.475rem] absolute text-white font-f1NavbarFont font-black mt-[4rem] lg:mt-[10rem]">
-                <ul className="list-none flex flex-row space-x-8">
-                  <Link href={"/soccer/teams"}>
-                    <li>Teams</li>
-                  </Link>
-                  <Link href={"/soccer/standings"}>
-                    <li>Standings</li>
-                  </Link>
-                  <Link href={"/soccer/fixtures"}>
-                    <li>Fixtures</li>
-                  </Link>
-                  {/* <Link href={"/soccer/drivers"}>
+      <div className="bg-carbonBlack text-white w-full flex flex-col lg:mt-10">
+        <section className="relative max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
+          <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
+            <Link href={"/soccer"}>Soccer </Link>
+          </h1>
+          <div className="font-formula text-left text-carbonBlack text-[0.475rem] lg:text-[1.475rem] absolute text-white font-f1NavbarFont font-black mt-[4rem] lg:mt-[10rem]">
+            <ul className="list-none flex flex-row space-x-8">
+              <Link href={"/soccer/teams"}>
+                <li>Teams</li>
+              </Link>
+              <Link href={"/soccer/standings"}>
+                <li>Standings</li>
+              </Link>
+              <Link href={"/soccer/fixtures"}>
+                <li>Fixtures</li>
+              </Link>
+              {/* <Link href={"/soccer/drivers"}>
                     <li>Drivers</li>
                   </Link> */}
-                </ul>
-              </div>
-              <img
-                alt="F1 Image Drivver"
-                width="1024"
-                height="1024"
-                decoding="async"
-                data-nimg="1"
-                className="w-full"
-                sizes="100vw"
-                src="https://i.pinimg.com/564x/5b/08/2d/5b082d29ce41c33b8bf53e567776f116.jpg"
-                pinger-seen="true"
-              ></img>
-            </section>
-          </Link>
+            </ul>
+          </div>
+          <img
+            alt="F1 Image Drivver"
+            width="1024"
+            height="1024"
+            decoding="async"
+            data-nimg="1"
+            className="w-full"
+            sizes="100vw"
+            src="https://i.pinimg.com/564x/5b/08/2d/5b082d29ce41c33b8bf53e567776f116.jpg"
+            pinger-seen="true"
+          ></img>
+        </section>
+        <div className="w-full flex flex-col lg:flex-row">
+          <div className="w-full lg:w-[50%]">
+            <h1 className="px-[3rem] font-f1NavbarFont text-[2rem]">
+              Soccer News
+            </h1>
+            <div className="flex flex-row flex-wrap  py-[2rem] px-[3rem]">
+              {!loading ? (
+                soccerNews.slice(0, 4).map((news, index) => {
+                  const isLastChild = (index + 1) % 2 === 0; // Adjust according to the number of columns in your layout
+                  return (
+                    <Link href={news.link} key={index} className="">
+                      <section className="w-[300px] mb-[2rem]">
+                        {/* Container for image */}
+                        <div
+                          className={`w-full h-[200px] ${
+                            !isLastChild ? "lg:pr-8" : ""
+                          }`}
+                        >
+                          <img
+                            src={news.imageSrc}
+                            className="w-full h-full object-cover rounded-xl"
+                            alt={news.title}
+                          />
+                        </div>
+                        <p className="text-sm font-400 my-4 lg:pr-8 font-f1NavbarFont">
+                          {news.title}
+                        </p>
+                      </section>
+                    </Link>
+                  );
+                })
+              ) : (
+                <section className="h-[100px] w-[300px] mb-[2rem]">
+                  <Loading />
+                </section>
+              )}
+            </div>
+          </div>
+
+          <div className="w-full lg:!w-[50%] lg:py-[2rem] lg:pr-[4rem] h-full">
+            <div className="container mx-auto my-4 h-full">
+              {soccerNews ? (
+                soccerNews.slice(5, 6).map((news, index) => (
+                  <Link href={news.link} key={index}>
+                    <div className="w-full p-4">
+                      {/* Container for image */}
+                      <div className="w-full h-[31rem]">
+                        <img
+                          src={news.imageSrc}
+                          className="w-full h-full lg:object-cover rounded-xl"
+                          alt={news.title}
+                        />
+                      </div>
+                      {/* Container for text */}
+                      <p className="font-400 my-4 pr-8 font-f1NavbarFont text-[1.4rem]">
+                        {news.title}
+                      </p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <Loading></Loading>
+              )}
+            </div>{" "}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

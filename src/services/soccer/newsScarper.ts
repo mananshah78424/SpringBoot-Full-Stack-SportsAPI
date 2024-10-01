@@ -20,3 +20,14 @@ export const scrapeNews = async (): Promise<Article[]> => {
     throw error;
   }
 };
+
+export const scrapeMainScreenNews = async (): Promise<Article[]> => {
+  try {
+    const articles = await axios.get<Article[]>(
+      `${API_BASE_URL}/main_home_news`
+    );
+    return articles.data;
+  } catch (error) {
+    throw error;
+  }
+};
