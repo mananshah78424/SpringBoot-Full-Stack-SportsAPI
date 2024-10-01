@@ -105,14 +105,16 @@ public class NewsScraper {
             driver.get("https://www.goal.com/en-us/news");
 
             // Create a WebDriverWait object to wait for elements to load
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             //wait.until(...): Waits until the specified condition is met (the visibility of the elements matching the given CSS selector).
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("card-list-item_bg-for-shadow__7rgUQ")));
             System.out.println("Found the class name");
             // Use WebDriver to find the elements containing the news articles
             List<WebElement> articlesElements = driver.findElements(By.className("card-list-item_bg-for-shadow__7rgUQ"));
             System.out.println("Size of elements found is " + articlesElements.size());
-            for (WebElement element : articlesElements) {
+            int limit = Math.min(10, articlesElements.size());
+            for (int i = 0; i < limit; i++) {
+                WebElement element = articlesElements.get(i);
                 // Extract the title
                 String title = element.findElement(By.cssSelector("h3.title")).getText();
 
