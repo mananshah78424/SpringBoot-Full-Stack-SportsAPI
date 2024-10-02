@@ -83,7 +83,7 @@ const Index = (props: Props) => {
       </div>
 
       <div className="bg-carbonBlack text-white w-full flex flex-col lg:mt-10">
-        <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
+        <section className="relative mx-auto max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[570px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[570px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
           <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
             <Link href={"/f1"}>Formula 1</Link>
           </h1>
@@ -179,7 +179,7 @@ const Index = (props: Props) => {
       </div>
 
       <div className="bg-carbonBlack text-white w-full flex flex-col lg:mt-10">
-        <section className="relative max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[470px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[470px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
+        <section className="relative max-w-full px-[10px] flex place-items-center place-content-center !max-w-none !p-0 h-[180px] lg:h-[570px] overflow-hidden mb-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[180px] before:mobile:h-[215px] before:lg:h-[570px] before:desktopWide:h-[450px] before:bg-carbonBlack/50">
           <h1 className="font-formula text-left text-carbonBlack text-32 lg:text-[3.875rem] absolute text-white font-f1NavbarFont font-black">
             <Link href={"/soccer"}>Soccer </Link>
           </h1>
@@ -207,7 +207,7 @@ const Index = (props: Props) => {
             data-nimg="1"
             className="w-full"
             sizes="100vw"
-            src="https://i.pinimg.com/564x/5b/08/2d/5b082d29ce41c33b8bf53e567776f116.jpg"
+            src="https://i.pinimg.com/564x/ae/3b/04/ae3b04323e82e3097101abbcd2590616.jpg"
             pinger-seen="true"
           ></img>
         </section>

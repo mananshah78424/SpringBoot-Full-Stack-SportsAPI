@@ -15,14 +15,14 @@ const SoccerNavbar: React.FC = () => {
       </div>
 
       <nav
-        className="subNav js-sub-nav w-full bg-white p-4 fixed z-40 h-[3rem] flex items-center justify-center font-archivo"
+        className="subNav js-sub-nav w-full bg-white p-4 fixed z-40 h-[3rem] flex items-center justify-center font-PremierSans tracking-[5px]"
         role="menubar"
       >
-        <ul className="flex flex-wrap justify-start space-x-4 text-[#76766f] font-bold text-SoccerText">
+        <ul className="flex flex-wrap justify-start space-x-4 text-[#76766f]  text-PremierSans">
           <li data-nav-index="0" className="h-full">
             <Link
               href="/soccer"
-              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 text-SoccerText h-full flex items-center px-2 text-[0.9rem]"
+              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 text-PremierSans h-full flex items-center px-2 text-[1.2rem] tracking-[2px] font-normal"
               data-link-index="0"
               role="menuitem"
             >
@@ -32,7 +32,7 @@ const SoccerNavbar: React.FC = () => {
           <li data-nav-index="0" className="h-full">
             <Link
               href="/soccer/teams"
-              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 h-full flex items-center px-2 text-[0.9rem]"
+              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 h-full flex items-center px-2 text-[1.2rem]"
               data-link-index="0"
               role="menuitem"
             >
@@ -42,7 +42,7 @@ const SoccerNavbar: React.FC = () => {
           <li data-nav-index="0" className="h-full">
             <Link
               href="/soccer/fixtures"
-              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 h-full flex items-center px-2 text-[0.9rem]"
+              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 h-full flex items-center px-2 text-[1.2rem]"
               data-link-index="0"
               role="menuitem"
             >
@@ -52,7 +52,7 @@ const SoccerNavbar: React.FC = () => {
           <li data-nav-index="0" className="h-full">
             <Link
               href="/soccer/standings"
-              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 h-full flex items-center px-2 text-[0.9rem]"
+              className="text-[#76766f] hover:text-gray-400 active:text-yellow-500 h-full flex items-center px-2 text-[1.2rem]"
               data-link-index="0"
               role="menuitem"
             >

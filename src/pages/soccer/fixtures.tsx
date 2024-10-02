@@ -1,4 +1,6 @@
+import Loading from "@/src/components/Loading";
 import SoccerBanner from "@/src/components/soccer/SoccerBanner";
+import SoccerNavbar from "@/src/components/soccer/SoccerNavbar";
 import { fetchFixtures } from "@/src/services/soccer/soccerService";
 import { Response } from "@/src/types/soccer/fixtureTypes";
 import { useCallback, useEffect, useState } from "react";
@@ -81,8 +83,8 @@ const Fixtures = () => {
     }).format(date);
   };
 
-  if (loading && allFixtures.length === 0) {
-    return <div>Loading fixtures...</div>;
+  if (loading) {
+    return <Loading></Loading>;
   }
 
   if (error) {
@@ -91,24 +93,25 @@ const Fixtures = () => {
 
   return (
     <div>
+      <SoccerNavbar></SoccerNavbar>
       <SoccerBanner title="Upcoming fixtures" />
       <div className="container mx-auto">
         {Object.keys(groupedFixtures).map((date) => {
           return (
             <div key={date}>
-              <h3 className="text-[1.2rem] text-[#37003c] font-bold my-4 ">
+              <h3 className="text-[1.2rem] text-[#37003c] font-bold my-7 ">
                 {formatDate(date)}
               </h3>
               <div className="mt-4">
                 {groupedFixtures[date].map((fixture) => (
                   <div
                     key={fixture.fixture.id}
-                    className="flex flex-row justify-between items-center mb-4"
+                    className="flex flex-row items-center mb-4"
                   >
-                    <div className="team-fixture flex flex-row items-center w-full justify-between">
+                    <div className="team-fixture flex flex-row items-center w-full">
                       {/* Home Team */}
-                      <div className="flex items-center justify-end w-1/2">
-                        <p className="text-right mr-2">
+                      <div className="flex items-center space-between">
+                        <p className="mr-2 w-[7rem]">
                           {fixture.teams.home.name}
                         </p>
                         <img
@@ -119,7 +122,7 @@ const Fixtures = () => {
                       </div>
 
                       {/* Fixture Time */}
-                      <div className="time-fixture mx-4 text-center">
+                      <div className="time-fixture mx-4 text-center border p-2">
                         {new Date(fixture.fixture.date).toLocaleTimeString(
                           "en-US",
                           {
@@ -143,7 +146,7 @@ const Fixtures = () => {
                     </div>
 
                     {/* Stadium Name */}
-                    <span className="match-fixture__stadium-name text-center">
+                    <span className="match-fixture__stadium-name w-[30%] text-right">
                       <span className="match-fixture__stadium-icon">
                         <svg
                           className="svg"
