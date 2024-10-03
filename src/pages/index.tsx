@@ -212,7 +212,7 @@ const Index = (props: Props) => {
           ></img>
         </section>
         <div className="w-full flex flex-col lg:flex-row">
-          <div className="w-full lg:w-[50%]">
+          <div className="w-full lg:w-[50%] min-w-[50%]">
             <h1 className="px-[3rem] font-f1NavbarFont text-[2rem]">
               Soccer News
             </h1>
