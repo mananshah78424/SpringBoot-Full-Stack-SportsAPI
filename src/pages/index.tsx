@@ -7,7 +7,7 @@ import { getFromCache, saveToCache } from "../services/General/Caching";
 import { scrapeMainScreenNews } from "../services/soccer/newsScarper";
 
 type Props = {};
-
+const index = 0;
 const Index = (props: Props) => {
   const images = [
     "https://drop-assets.ea.com/images/2N1pVhNm2IvimaZ5VwWppY/6f5452953164520a0e12add363b794f7/UT-POS_v03_8K_LR_16x9_Jun27_3D.jpg?im=AspectCrop=(16,9),xPosition=0.5114583333333333,yPosition=0.525&w=1280",
